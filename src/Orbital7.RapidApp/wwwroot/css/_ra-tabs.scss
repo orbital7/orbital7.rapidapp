@@ -1,0 +1,43 @@
+﻿$ra-tab-header-height: 50px;
+
+.ra-tabs-header {
+    border-left: 1px solid $ra-color-content-border;
+    border-right: 1px solid $ra-color-content-border;
+    border-top: 1px solid $ra-color-content-border;
+    background-color: $ra-color-datagrid-row;
+    height: $ra-tab-header-height;
+    width: 100%;
+    font-weight: 1.1em;
+}
+
+.ra-tab-header {
+    text-transform: uppercase;
+    color: #9E9E9E;
+    border-bottom: 1px solid $ra-color-content-border;
+    text-align: center;
+}
+
+.ra-tab-header:hover {
+    color: $ra-color-nav-hover;
+    border-bottom: 2px solid $ra-color-nav-hover;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ra-tab-header-selected {
+    text-transform: uppercase;
+    color: $ra-color-nav-selectable;
+    border-bottom: 3px solid $ra-color-nav-selectable;
+    font-weight: bold;
+    text-align: center;
+}
+
+.ra-tabs-content {
+    background: white;
+    border-left: 1px solid $ra-color-content-border;
+    border-right: 1px solid $ra-color-content-border;
+    border-bottom: 1px solid $ra-color-content-border;
+    padding: $layout-body-margin;
+    overflow: auto;
+    height: calc(100% - #{$ra-tab-header-height});
+}

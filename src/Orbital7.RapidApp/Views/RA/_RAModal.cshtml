@@ -1,0 +1,36 @@
+﻿<div id="ra-dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ra-dialog-title">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="ra-dialog-cancelbutton-corner"
+                        type="button"
+                        class="close"
+                        onclick="closeModalDialog(event);"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="ra-dialog-title">TITLE</h4>
+                <input type="hidden" id="ra-dialog-returnaction" />
+            </div>
+            <div class="modal-body" id="ra-dialog-body">
+                BODY
+            </div>
+            <div class="modal-footer">
+                <span id="ra-dialog-processing">Processing...</span>
+                <button type="button"
+                        class="btn btn-default"
+                        id="ra-dialog-cancelbutton"
+                        onclick="closeModalDialog(event);">
+                    CANCEL
+                </button>
+                <button type="button"
+                        class="btn btn-primary"
+                        id="ra-dialog-actionbutton"
+                        ontouchend="submitModalDialog(event); event.preventDefault();"
+                        onmouseup="submitModalDialog(event);">
+                    ACTION
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

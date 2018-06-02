@@ -1,0 +1,71 @@
+﻿@model Orbital7.RapidApp.Models.RAContentFrameModel
+
+<div id="@this.Model.ContainerId"
+     class="@this.Model.ContainerClass"
+     style="@this.Model.ContainerStyle">
+
+    <div id="@this.Model.ToolbarId">
+        @if (this.Model.ShowToolbar)
+        {
+            @using (Html.RABeginToolbar())
+            {
+                @if (this.Model.ShowPrintButton)
+                {
+                    @Html.RAToolbarButton("Print", new
+                    {
+                        ontouchend = this.Model.PrintFunctionName + ";event.preventDefault();",
+                        onmouseup = this.Model.PrintFunctionName + ";"
+                    })
+                }
+            }
+        }
+    </div>
+
+    <iframe id="@this.Model.FrameId"
+            name="@this.Model.FrameId"
+            frameborder="0"
+            class="@this.Model.FrameClass"
+            style="width: 100%; @this.Model.FrameStyle"
+            src="@this.Model.ContentUrl"></iframe>
+
+    <div id="@this.Model.LoadingId" class="tempMe" style="width: 100%; height: 100%;" />
+
+</div>
+
+<script>
+
+    function @this.Model.PrintFunctionName {
+
+        var frame = window.frames["@this.Model.FrameId"];
+        frame.focus();
+        frame.print();
+    }
+
+    $(document).ready(function () {
+
+        var toolbar = $("#@this.Model.ToolbarId");
+        var frame = $("#@this.Model.FrameId");
+        var loading = $("#@this.Model.LoadingId");
+
+        showLoading(loading, @this.Model.ShowLoadingFullHeight.Totruefalse());
+        frame.hide();
+        toolbar.hide();
+
+        frame.on("load", function ()
+        {
+            loading.html("").hide();
+
+            var height = 'calc(100% - ' + toolbar.outerHeight() + 'px)';
+            frame.css("height", height);
+            frame.show();
+            toolbar.show();
+
+            @if (this.Model.PrintFrameOnLoad)
+            {
+                <text>@this.Model.PrintFunctionName;</text>
+            }
+        });
+
+    });
+
+</script>

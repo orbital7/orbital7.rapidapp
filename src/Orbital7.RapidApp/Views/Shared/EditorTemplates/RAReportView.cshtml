@@ -1,0 +1,49 @@
+﻿@using Orbital7.Extensions.Reporting
+@model Orbital7.RapidApp.Models.RAReportView
+
+@using (Html.RABeginToolbar(toolbarStyle: "margin-bottom: 0px !important;"))
+{
+    @Html.RAToolbarButton("Print", new { @onclick = "printReportFrame();" })
+    @Html.RAToolbarButton("Download as Pdf", null, this.Model.ReportPdfDownloadUrl)
+
+    @if (this.Model.ReportNativeType != ReportNativeType.Pdf)
+    {
+        @Html.RAToolbarButton("Download as " + this.Model.ReportNativeType.ToDisplayString(), 
+            null, this.Model.ReportNativeDownloadUrl)
+    }
+}
+
+<div id="ra-report-frame-loading"
+     class="ra-fullheight"
+     data-fullheight-offset="-24">Generating report...</div>
+
+<iframe id="ra-report-frame"
+        name="ra-report-frame"
+        frameborder="0"
+        class="ra-fullheight"
+        data-fullheight-offset="-33"
+        src="@this.Model.ReportPdfInlineDisplayUrl"></iframe>
+
+<script>
+
+    function printReportFrame() {
+
+        var frame = window.frames["ra-report-frame"];
+        frame.focus();
+        frame.print();
+    }
+
+    $(document).ready(function () {
+
+        $("#ra-report-frame").hide();
+        $("#ra-report-frame").on("load", function () {
+            $("#ra-report-frame-loading").hide();
+            $("#ra-report-frame").show();
+            setTimeout(resizeAll, 100);
+        });
+
+    });
+
+    resizeAll();
+
+</script>

@@ -1,0 +1,51 @@
+﻿.ra-propertyblock-display {
+    margin-bottom: 12px;
+}
+
+.ra-propertyblock-field-label {
+    font-weight: bold;
+    margin-bottom: 1px;
+    font-size: 0.75em;
+    text-transform: uppercase;
+}
+
+.ra-propertyblock-field-value {
+    
+}
+
+.ra-propertyblock-editor {
+    margin-bottom: 12px;
+}
+
+.ra-propertyblock-field-editor {
+    margin-top: 3px;
+    /*max-width: 350px;*/
+}
+
+.ra-validation-error {
+    font-weight: bold;
+    font-size: 0.7em;
+    color: red;
+}
+
+.ra-description-info {
+    font-style: italic;
+    font-size: 0.7em;
+}
+
+table.ra-propertyblock-table tr td {
+    padding-right: 40px;
+    vertical-align: top;
+    max-width: 400px;
+    padding-top: 10px;
+}
+
+table.ra-propertyblock-table tr th {
+    padding-right: 40px;
+    vertical-align: top;
+    border-bottom: 1px solid $ra-color-text;
+    color: $ra-color-nav-selectable;
+    padding-bottom: 5px;
+    font-size: 1.6em;
+    font-weight: normal;
+}
