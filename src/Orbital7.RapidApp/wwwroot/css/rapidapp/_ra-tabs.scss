@@ -37,7 +37,7 @@
     border-left: 1px solid $ra-color-content-border;
     border-right: 1px solid $ra-color-content-border;
     border-bottom: 1px solid $ra-color-content-border;
-    padding: $layout-body-margin;
+    padding: $ra-layout-body-margin;
     overflow: auto;
     height: calc(100% - #{$ra-tab-header-height});
 }

@@ -1,6 +1,6 @@
 ﻿.align-center {
-    text-align: center; 
-    margin: auto;
+    text-align: center !important;
+    margin: auto !important;
 }
 
 .align-right {
@@ -148,3 +148,11 @@
     text-align: center;
     vertical-align: middle;
 }
+
+/*.btn span.glyphicon {
+    opacity: 0;
+}
+
+.btn.active span.glyphicon {
+    opacity: 1;
+}*/
