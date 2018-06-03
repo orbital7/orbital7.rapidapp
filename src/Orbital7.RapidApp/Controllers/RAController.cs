@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Orbital7.RapidApp.Models;
 
-namespace Orbital7.RapidApp.Models.Controllers
+namespace Orbital7.RapidApp.Controllers
 {
     [AllowAnonymous]
     public class RAController : Controller
