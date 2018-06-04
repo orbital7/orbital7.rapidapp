@@ -42,8 +42,12 @@ namespace Microsoft.AspNetCore.Mvc
             return content;
         }
 
-        private static void AppendDashboardItemCell(HtmlContentBuilder content, string mainClass, string text, 
-            string url, DashboardState state)
+        private static void AppendDashboardItemCell(
+            HtmlContentBuilder content, 
+            string mainClass, 
+            string text, 
+            string url, 
+            DashboardState state)
         {
             content.AppendFormat("<td class='ra-dashboard-cell-value-{0} ra-dashboard-cell-{1} {2}'",
                     mainClass, state.ToString().ToLower(), !String.IsNullOrEmpty(url) ? "clickable" : null);

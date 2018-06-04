@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Orbital7.RapidApp.Models
 {
-    public abstract class TableRowItemBase
+    public abstract class RATableRowItemBase
     {
         public Guid Index { get; set; }
 
@@ -17,12 +17,12 @@ namespace Orbital7.RapidApp.Models
 
         public string IndexedHtmlFieldPrefix => this.HtmlFieldPrefix + "[" + this.Index + "]";
 
-        public TableRowItemBase()
+        public RATableRowItemBase()
         {
             this.Index = Guid.NewGuid();
         }
 
-        public TableRowItemBase(string htmlFieldPrefix)
+        public RATableRowItemBase(string htmlFieldPrefix)
             : this()
         {
             this.HtmlFieldPrefix = htmlFieldPrefix.Replace(".", "_");

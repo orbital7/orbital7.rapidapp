@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 using Orbital7.RapidApp.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,37 +14,48 @@ namespace Microsoft.AspNetCore.Mvc
 {
     public static partial class RAHtmlHelperExtensions
     {
-        public static IHtmlContent RADynamicTable<TModel, TTableRowItem>(this IHtmlHelper<TModel> htmlHelper, 
-            IList<TTableRowItem> tableRowItems, string ajaxCreateRowUrl, string AddRowLinkText)
-            where TTableRowItem : TableRowItemBase
+        public static IHtmlContent RADynamicTable<TModel, TTableRowItem>(
+            this IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, IList<TTableRowItem>>> tableRowItemsExpression,
+            string ajaxAddRowUrl,
+            string addRowLinkText,
+            string tableHeaderHtml = null)
+            where TTableRowItem : RATableRowItemBase
         {
             var content = new HtmlContentBuilder();
             string tableId = Guid.NewGuid().ToString().Replace("-", "");
 
             content.AppendFormat("<table id=\"{0}\" class=\"ra-dynamictable\">", tableId);
+            if (!String.IsNullOrEmpty(tableHeaderHtml))
+                content.AppendHtml(tableHeaderHtml);
             content.AppendHtml("<tbody class=\"ra-dynamictable-body\">");
 
-            foreach (var rowItem in tableRowItems)
+            var modelExplorer = htmlHelper.GetModelExplorer(tableRowItemsExpression);
+            foreach (var rowItem in (IList<TTableRowItem>)modelExplorer.Model)
                 content.AppendHtml(htmlHelper.EditorFor(x => rowItem));
+
+            var completeAjaxAddRowUrl = ajaxAddRowUrl += "&htmlFieldPrefix=" +
+                ExpressionHelper.GetExpressionText(tableRowItemsExpression);
 
             content.AppendHtml("</tbody>");
             content.AppendHtml("</table>");
             content.AppendHtml("<div>");
             content.AppendHtml("<a class=\"ra-glyphbutton ra-glyphbutton-green\" ");
             content.AppendFormat("ontouchend=\"addDynamicTableRow('{0}', '{1}'); event.preventDefault();\" ", 
-                tableId, ajaxCreateRowUrl);
+                tableId, completeAjaxAddRowUrl);
             content.AppendFormat("onmouseup=\"addDynamicTableRow('{0}', '{1}');\" ",
-                tableId, ajaxCreateRowUrl);
+                tableId, completeAjaxAddRowUrl);
             content.AppendHtml("><span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span>");
-            content.AppendFormat("<span class=\"ra-glyphbutton-text\">{0}</span>", AddRowLinkText);
+            content.AppendFormat("<span class=\"ra-glyphbutton-text\">{0}</span>", addRowLinkText);
             content.AppendHtml("</a>");
             content.AppendHtml("</div>");
 
             return content;
         }
 
-        public static TagCloser RABeginDynamicTableRow<TModel>(this IHtmlHelper<TModel> htmlHelper)
-            where TModel : TableRowItemBase
+        public static TagCloser RABeginDynamicTableRow<TModel>(
+            this IHtmlHelper<TModel> htmlHelper)
+            where TModel : RATableRowItemBase
         {
             var model = htmlHelper.ViewData.Model;
             string existingHtmlPrefixField = htmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix;

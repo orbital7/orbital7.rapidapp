@@ -12,7 +12,7 @@ namespace Microsoft.AspNetCore.Mvc
     {
         public static IHtmlContent RAStaticTable<TModel, TTableRowItem>(this IHtmlHelper<TModel> htmlHelper,
             IList<TTableRowItem> dynamicTableRowItems, string ajaxCreateRowUrl, string AddRowLinkText)
-            where TTableRowItem : TableRowItemBase
+            where TTableRowItem : RATableRowItemBase
         {
             var content = new HtmlContentBuilder();
             content.AppendHtml("<table class=\"ra-statictable\">");
@@ -28,7 +28,7 @@ namespace Microsoft.AspNetCore.Mvc
         }
 
         public static TagCloser RABeginStaticTableRow<TModel>(this IHtmlHelper<TModel> htmlHelper)
-            where TModel : TableRowItemBase
+            where TModel : RATableRowItemBase
         {
             var model = htmlHelper.ViewData.Model;
             string existingHtmlPrefixField = htmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix;
