@@ -73,6 +73,36 @@ namespace Microsoft.AspNetCore.Mvc
             return tagBuilder;
         }
 
+        public static IHtmlContent RADisplayValueFor<TModel, TProperty>(
+            this IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            string valueNull = "-", 
+            string valueUrl = null)
+        {
+            var content = new HtmlContentBuilder();
+
+            var modelExplorer = htmlHelper.GetModelExplorer(expression);
+            content.AppendHtml(htmlHelper.GetValueDisplayHtml(modelExplorer.Model, 
+                valueNull, valueUrl, null, modelExplorer.Metadata.PropertyName));
+
+            return content;
+        }
+
+        public static IHtmlContent RADisplayValue<TModel>(
+            this IHtmlHelper<TModel> htmlHelper,
+            object value,
+            string valueNull = "-",
+            string valueUrl = null,
+            string fieldName = null)
+        {
+            var content = new HtmlContentBuilder();
+
+            content.AppendHtml(htmlHelper.GetValueDisplayHtml(value,
+                valueNull, valueUrl, null, fieldName));
+
+            return content;
+        }
+
         private static string GetValueDisplayHtml<TModel>(this IHtmlHelper<TModel> htmlHelper, object value,
             string valueNull = "-", string valueUrl = null, string valueOverride = null, string fieldName = null)
         {

@@ -14,13 +14,18 @@ namespace Microsoft.AspNetCore.Mvc
     public static partial class RAHtmlHelperExtensions
     {
         // Data grid source: https://codepen.io/daveoncode/pen/LNomBE
-        public static TagCloser RABeginDataGrid(this IHtmlHelper htmlHelper, bool fullHeight = true, bool sortable = true)
+        public static TagCloser RABeginDataGrid(
+            this IHtmlHelper htmlHelper, 
+            bool fullHeight = true, 
+            bool sortable = true,
+            int fullHeightBottomOffset = 2)
         {
             var tableId = Guid.NewGuid().ToString().Replace("-", "");
 
             var content = new HtmlContentBuilder();
             content.AppendHtml("<div class='ra-datagrid-wrapper'>");
-            content.AppendFormat("<div class='ra-datagrid-container {0}' data-fullheight-offset='2'>", fullHeight ? "ra-fullheight" : "");
+            content.AppendFormat("<div class='ra-datagrid-container {0}' data-fullheight-offset='{1}'>", 
+                fullHeight ? "ra-fullheight" : "", fullHeightBottomOffset);
             content.AppendFormat("<table id='{0}' class='ra-datagrid-table {1}'>", tableId, sortable ? "sort" : null);
 
             htmlHelper.ViewContext.Writer.Write(content);

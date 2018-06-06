@@ -19,24 +19,26 @@ namespace Microsoft.AspNetCore.Mvc
             Expression<Func<TModel, IList<TTableRowItem>>> tableRowItemsExpression,
             string ajaxAddRowUrl,
             string addRowLinkText,
-            string tableHeaderHtml = null)
+            string tHeadInnerHtml = null)
             where TTableRowItem : RATableRowItemBase
         {
             var content = new HtmlContentBuilder();
             string tableId = Guid.NewGuid().ToString().Replace("-", "");
 
             content.AppendFormat("<table id=\"{0}\" class=\"ra-dynamictable\">", tableId);
-            if (!String.IsNullOrEmpty(tableHeaderHtml))
-                content.AppendHtml(tableHeaderHtml);
+            if (!String.IsNullOrEmpty(tHeadInnerHtml))
+                content.AppendHtml("<thead>" + tHeadInnerHtml + "</thead>");
             content.AppendHtml("<tbody class=\"ra-dynamictable-body\">");
 
+            var htmlFieldPrefix = ExpressionHelper.GetExpressionText(tableRowItemsExpression);
             var modelExplorer = htmlHelper.GetModelExplorer(tableRowItemsExpression);
             foreach (var rowItem in (IList<TTableRowItem>)modelExplorer.Model)
+            {
+                rowItem.HtmlFieldPrefix = htmlFieldPrefix;
                 content.AppendHtml(htmlHelper.EditorFor(x => rowItem));
+            }
 
-            var completeAjaxAddRowUrl = ajaxAddRowUrl += "&htmlFieldPrefix=" +
-                ExpressionHelper.GetExpressionText(tableRowItemsExpression);
-
+            var completeAjaxAddRowUrl = ajaxAddRowUrl += "&htmlFieldPrefix=" + htmlFieldPrefix;
             content.AppendHtml("</tbody>");
             content.AppendHtml("</table>");
             content.AppendHtml("<div>");
