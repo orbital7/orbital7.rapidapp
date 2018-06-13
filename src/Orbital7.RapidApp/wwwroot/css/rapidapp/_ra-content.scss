@@ -149,10 +149,13 @@
     vertical-align: middle;
 }
 
-/*.btn span.glyphicon {
-    opacity: 0;
+.ra-div-disabled {
+    position: absolute;
+    z-index: 500;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: darkgray;
+    opacity: 0.5;
 }
-
-.btn.active span.glyphicon {
-    opacity: 1;
-}*/

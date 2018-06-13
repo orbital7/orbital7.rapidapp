@@ -1,4 +1,10 @@
-﻿function showTouchDialog(e, source, contentUrl) {
+﻿var _raOnCloseTouchDialog = onCloseTouchDialog;
+
+function onCloseTouchDialog() {
+    
+}
+
+function showTouchDialog(e, source, contentUrl) {
     
     e.stopPropagation();
     
@@ -23,7 +29,7 @@
         bgTop.css("height", offset.top - 100 - 10 + "px");
         bgMiddle.css("left", offset.left - 10 + "px");
         bgMiddle.css("top", offset.top - 10 + "px");
-        bgMiddle.css("height", height + 15 + "px");
+        bgMiddle.css("height", height + 20 + "px");
         bgBottom.css("top", offset.top + height + 5 + "px");
 
         var width = touchInputFieldValue.width();
@@ -56,6 +62,9 @@
 
 function closeTouchDialog() {
 
+    _raOnCloseTouchDialog();
+    _raOnCloseTouchDialog = onCloseTouchDialog;
+
     var touchInputField = $(".ra-touchinput-field-selected");
     if (touchInputField.length > 0) {
         
@@ -75,30 +84,30 @@ function closeTouchDialog() {
 function updateTouchInputField(primaryValueId, primaryValue, primaryDisplayValueId, primaryDisplayValue,
     secondaryValueId, secondaryValue, secondaryDisplayValueId, secondaryDisplayValue,
     imageUrlId, imageUrl, postEditUpdateScript) {
-    
+
     var primaryValueElement = $("#" + primaryValueId);
     var displayElement = primaryValueElement.closest(".ra-touchinput-field-value");
     var primaryType = displayElement.attr("data-touchinput-type-primary");
-    
+
     var secondaryValueElement = $("#" + secondaryValueId);
     var secondaryType = displayElement.attr("data-touchinput-type-secondary");
-    
+
     // Record the primary value.
     primaryValueElement.val(getTouchInputFieldValue(primaryType, primaryValue));
     if (primaryDisplayValueId)
         $("#" + primaryDisplayValueId).val(primaryDisplayValue);
-    
+
     // Record the secondary value.
     if (secondaryValueId) {
         secondaryValueElement.val(getTouchInputFieldValue(secondaryType, secondaryValue));
         if (secondaryDisplayValueId)
             $("#" + secondaryDisplayValueId).val(secondaryDisplayValue);
     }
-    
+
     // Update the display element.
     displayElement.removeClass("ra-touchinput-field-value-content");
     displayElement.removeClass("ra-touchinput-field-value-contentempty");
-    
+
     // Find the specific value cells and then update by type.
     var leftCell = displayElement.find(".ra-touchinput-field-value-table-cell-left");
     var rightCell = displayElement.find(".ra-touchinput-field-value-table-cell-right");
@@ -116,9 +125,9 @@ function updateTouchInputField(primaryValueId, primaryValue, primaryDisplayValue
     }
 
     // Set the image.
+    var imageCell = displayElement.find(".ra-touchinput-field-value-table-cell-image");
+    imageCell.removeClass("ra-touchinput-field-value-table-cell-image-content");
     if (imageUrl || imageUrlId) {
-        var imageCell = displayElement.find(".ra-touchinput-field-value-table-cell-image");
-        imageCell.removeClass("ra-touchinput-field-value-table-cell-image-content");
         if (imageUrl) {
             imageCell.html("<img class='ra-touchinput-image' src='" + imageUrl + "' />");
             imageCell.addClass("ra-touchinput-field-value-table-cell-image-content");
@@ -126,6 +135,9 @@ function updateTouchInputField(primaryValueId, primaryValue, primaryDisplayValue
         if (imageUrlId) {
             $("#" + imageUrlId).val(imageUrl);
         }
+    }
+    else {
+        imageCell.html("");
     }
 
     // Execute the post-edit update script if specified.

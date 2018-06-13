@@ -45,3 +45,12 @@ input {
 input[readonly] {
     background-color: white;
 }
+
+.validation-summary-errors {
+    color: red;
+    font-weight: bold;
+}
+
+.validation-summary-errors::before {
+    content: "ERROR(S): "
+}

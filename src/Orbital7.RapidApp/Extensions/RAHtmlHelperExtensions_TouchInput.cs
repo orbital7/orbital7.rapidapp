@@ -183,10 +183,31 @@ namespace Microsoft.AspNetCore.Mvc
             var imageUrlModelExplorer = imageUrlExpression != null ?
                 htmlHelper.GetModelExplorer(imageUrlExpression) : null;
 
+            var primaryValueId = htmlHelper.IdFor(primaryValueExpression);
+            var primaryDisplayValueId = primaryDisplayValueExpression != null ? 
+                htmlHelper.IdFor(primaryDisplayValueExpression) : "";
+            var secondaryValueId = secondaryValueExpression != null ?
+                htmlHelper.IdFor(secondaryValueExpression) : "";
+            var secondaryDisplayValueId = secondaryDisplayValueExpression != null ? 
+                htmlHelper.IdFor(secondaryDisplayValueExpression) : "";
+            var imageUrlId = imageUrlExpression != null ? htmlHelper.IdFor(imageUrlExpression) : "";
+
             var content = new HtmlContentBuilder();
-            content.AppendTouchInputHtmlStart(GetTouchInputType(primaryValueModelExplorer), GetTouchInputType(secondaryValueModelExplorer), touchDialogValueEditUrl,
-                leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle, imageUrlExpression != null, readOnly);
+            content.AppendTouchInputHtmlStart(
+                GetTouchInputType(primaryValueModelExplorer), 
+                GetTouchInputType(secondaryValueModelExplorer), 
+                touchDialogValueEditUrl,
+                primaryValueId, 
+                secondaryValueId, 
+                imageUrlId, 
+                leftDisplayValueClass, 
+                rightDisplayValueClass, 
+                leftDisplayValueStyle, 
+                rightDisplayValueStyle,
+                !String.IsNullOrEmpty(imageUrlId),
+                readOnly);
             content.AppendHtml(htmlHelper.HiddenFor(primaryValueExpression));
+
             if (primaryDisplayValueExpression != null)
                 content.AppendHtml(htmlHelper.HiddenFor(primaryDisplayValueExpression));
             if (secondaryValueExpression != null)
@@ -195,11 +216,18 @@ namespace Microsoft.AspNetCore.Mvc
                 content.AppendHtml(htmlHelper.HiddenFor(secondaryDisplayValueExpression));
             if (imageUrlExpression != null)
                 content.AppendHtml(htmlHelper.HiddenFor(imageUrlExpression));
-            content.AppendHtml(GetTouchInputHtmlEnd(htmlHelper.IdFor(primaryValueExpression), primaryValueModelExplorer.Model,
-                primaryDisplayValueExpression != null ? htmlHelper.IdFor(primaryDisplayValueExpression) : "", primaryDisplayValueModelExplorer?.Model,
-                secondaryValueExpression != null ? htmlHelper.IdFor(secondaryValueExpression) : "", secondaryValueModelExplorer?.Model,
-                secondaryDisplayValueExpression != null ? htmlHelper.IdFor(secondaryDisplayValueExpression) : "", secondaryDisplayValueModelExplorer?.Model, 
-                imageUrlExpression != null ? htmlHelper.IdFor(imageUrlExpression) : "", imageUrlModelExplorer?.Model));
+
+            content.AppendHtml(GetTouchInputHtmlEnd(
+                primaryValueId, 
+                primaryValueModelExplorer.Model,
+                primaryDisplayValueId, 
+                primaryDisplayValueModelExplorer?.Model,
+                secondaryValueId, 
+                secondaryValueModelExplorer?.Model,
+                secondaryDisplayValueId, 
+                secondaryDisplayValueModelExplorer?.Model, 
+                imageUrlId, 
+                imageUrlModelExplorer?.Model));
 
             return content;
         }
@@ -351,38 +379,66 @@ namespace Microsoft.AspNetCore.Mvc
         {
             var modelExplorer = htmlHelper.GetModelExplorer(valueExpression);
             var valueId = htmlHelper.IdFor(valueExpression);
+            var imageUrlId = imageUrlExpression != null ? htmlHelper.IdFor(imageUrlExpression) : null;
 
             var content = new HtmlContentBuilder();
-            content.AppendTouchInputHtmlStart(type, null, touchDialogValueEditUrl?.Replace("{0}", valueId).Replace("{1}", postEditUpdateScript),
-                leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle, 
-                imageUrlExpression != null || !String.IsNullOrEmpty(staticImageUrl), isReadOnly);
+
+            content.AppendTouchInputHtmlStart(
+                type, 
+                null, 
+                touchDialogValueEditUrl?.Replace("{0}", valueId).Replace("{1}", postEditUpdateScript),
+                null,
+                valueId,
+                imageUrlId,
+                leftDisplayValueClass, 
+                rightDisplayValueClass, 
+                leftDisplayValueStyle, 
+                rightDisplayValueStyle, 
+                imageUrlExpression != null || !String.IsNullOrEmpty(staticImageUrl), 
+                isReadOnly);
+
             content.AppendHtml(htmlHelper.HiddenFor(valueExpression));
             if (imageUrlExpression != null)
                 content.AppendHtml(htmlHelper.HiddenFor(imageUrlExpression));
-            content.AppendHtml(GetTouchInputHtmlEnd(valueId, modelExplorer.Model,
-                imageUrlId: imageUrlExpression != null ? htmlHelper.IdFor(imageUrlExpression) : null,
+
+            content.AppendHtml(GetTouchInputHtmlEnd(
+                valueId, 
+                modelExplorer.Model,
+                imageUrlId: imageUrlId,
                 imageUrl: imageUrlExpression != null ? htmlHelper.GetModelExplorer(imageUrlExpression).Model.ToString() : staticImageUrl));
 
             return content;
         }
 
-        private static void AppendTouchInputHtmlStart(this HtmlContentBuilder content, string touchInputTypePrimary, string touchInputTypeSecondary,
-            string touchDialogValueEditUrl, string leftDisplayValueClass, string rightDisplayValueClass, 
-            string leftDisplayValueStyle, string rightDisplayValueStyle, bool hasImage, bool isReadOnly)
+        private static void AppendTouchInputHtmlStart(
+            this HtmlContentBuilder content, 
+            string touchInputTypePrimary, 
+            string touchInputTypeSecondary,
+            string touchDialogValueEditUrl, 
+            string leftValueId,
+            string rightValueId,
+            string imageUrlId,
+            string leftDisplayValueClass, 
+            string rightDisplayValueClass, 
+            string leftDisplayValueStyle, 
+            string rightDisplayValueStyle, 
+            bool hasImage,
+            bool isReadOnly)
         {
             content.AppendHtml("<div class='ra-touchinput ra-touchinput-field' ");
             if (!String.IsNullOrEmpty(touchDialogValueEditUrl) || !isReadOnly)
-                content.AppendFormat("ontouchstart='showTouchDialog(event, this, \"{0}\");' onmousedown='showTouchDialog(event, this, \"{0}\");'", touchDialogValueEditUrl, touchDialogValueEditUrl);
+                content.AppendFormat("ontouchstart='showTouchDialog(event, this, \"{0}\");' onmousedown='showTouchDialog(event, this, \"{0}\");'", 
+                    touchDialogValueEditUrl, touchDialogValueEditUrl);
             content.AppendHtml(">");
             content.AppendFormat("<div class='ra-touchinput-field-value {0}' data-touchinput-type-primary='{1}' data-touchinput-type-secondary='{2}'>", 
                 isReadOnly ? "ra-touchinput-field-value-readonly" : "", touchInputTypePrimary, touchInputTypeSecondary);
             content.AppendHtml("<table class='ra-touchinput-field-value-table'><tr>");
             if (hasImage)
-                content.AppendHtml("<td class='ra-touchinput-field-value-table-cell-image'></td>");
-            content.AppendFormat("<td class='ra-touchinput-field-value-table-cell-left {0}' style='{1}'></td>", 
-                leftDisplayValueClass, leftDisplayValueStyle);
-            content.AppendFormat("<td class='ra-touchinput-field-value-table-cell-right {0}' style='{1}'></td>", 
-                rightDisplayValueClass, rightDisplayValueStyle);
+                content.AppendFormat("<td id='{0}_ImageCell' class='ra-touchinput-field-value-table-cell-image'></td>", imageUrlId);
+            content.AppendFormat("<td id='{0}_LeftCell' class='ra-touchinput-field-value-table-cell-left {1}' style='{2}'></td>", 
+                leftValueId, leftDisplayValueClass, leftDisplayValueStyle);
+            content.AppendFormat("<td id='{0}_RightCell' class='ra-touchinput-field-value-table-cell-right {1}' style='{2}'></td>", 
+                rightValueId, rightDisplayValueClass, rightDisplayValueStyle);
             content.AppendHtml("</tr></table>");
         }
 

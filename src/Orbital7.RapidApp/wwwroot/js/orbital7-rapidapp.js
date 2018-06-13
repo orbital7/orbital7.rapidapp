@@ -49,6 +49,16 @@ function removeDynamicTableRow(source) {
 
 }
 
+function divDisable(target) {
+    var x = $(target)
+    if (x.find(".ra-div-disabled").length === 0)
+        x.prepend("<div class='ra-div-disabled'>&nbsp;</div>");
+}
+
+function divEnable(target) {
+    $(target).find(".ra-div-disabled").remove();
+}
+
 function bsEnable(target) {
 
     $(target).removeAttr("disabled").removeClass("disabled");
@@ -449,9 +459,13 @@ function updateAjaxContentSection(contentKey, updatedContentUrl) {
 
 }
 
-function updateAjaxDropdown(dropDownId, url, optionLabel) {
+function updateAjaxDropdowns(dropdownsSelector, url, optionLabel) {
 
-    var dropDown = $("#" + dropDownId);
+    var dropdowns = $(dropdownsSelector);
+
+    dropdowns.each(function () {
+        $(this).html("<option value=''>Loading...</option>");
+    });
 
     $.ajax({
         url: url,
@@ -467,14 +481,19 @@ function updateAjaxDropdown(dropDownId, url, optionLabel) {
                 options += "<option value='" + item.item1 + "'>" + item.item2 + "</option>";
             });
 
-            var selected = dropDown.val();
-            dropDown.html(options);
+            dropdowns.each(function () {
 
-            if (selected)
-                dropDown.val(selected).attr("selected", true).siblings("option").removeAttr("selected");
+                var dropdown = $(this);
+                var selected = dropdown.val();
+                dropdown.html(options);
+
+                if (selected)
+                    dropdown.val(selected).attr("selected", true).siblings("option").removeAttr("selected");
+            });
+            
         },
         error: function (xhr) {
-            alert("Error updating dropdown content");
+            alert("Error updating dropdowns content");
         }
     });
 }
