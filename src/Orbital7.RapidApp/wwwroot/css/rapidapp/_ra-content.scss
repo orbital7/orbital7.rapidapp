@@ -157,5 +157,14 @@
     right: 0px;
     bottom: 0px;
     background-color: darkgray;
-    opacity: 0.5;
+    opacity: 0.3;
+}
+
+.scroll-wrapper {
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+}
+
+.scroll-wrapper iframe {
+    
 }

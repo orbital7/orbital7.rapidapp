@@ -11,9 +11,9 @@ namespace Orbital7.RapidApp.Models
 
         public int SelectedIndex { get; private set; } = -1;
 
-        public List<TabItem> Items { get; private set; }
+        public List<RATabItem> Items { get; private set; }
         
-        public RATabsView(List<TabItem> items)
+        public RATabsView(List<RATabItem> items)
         {
             this.Id = Guid.NewGuid().ToString().Replace("-", "");
 
@@ -52,7 +52,7 @@ namespace Orbital7.RapidApp.Models
                 this.SelectedIndex = index;
         }
 
-        public string GetClassName(TabItem item)
+        public string GetClassName(RATabItem item)
         {
             string className = String.Empty;
 

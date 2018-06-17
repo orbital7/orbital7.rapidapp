@@ -14,7 +14,7 @@ namespace Orbital7.RapidApp.Models
             get { return this.Id + "_Header"; }
         }
 
-        public RASubTabsView(string subTabsName, List<TabItem> items) 
+        public RASubTabsView(string subTabsName, List<RATabItem> items) 
             : base(items)
         {
             this.SubTabsName = subTabsName;

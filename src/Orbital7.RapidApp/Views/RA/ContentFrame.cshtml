@@ -13,8 +13,7 @@
                 {
                     @Html.RAToolbarButton("Print", new
                     {
-                        ontouchend = this.Model.PrintFunctionName + ";event.preventDefault();",
-                        onmouseup = this.Model.PrintFunctionName + ";"
+                        onclick = this.Model.PrintFunctionName + ";"
                     })
                 }
             }
@@ -54,6 +53,9 @@
         frame.on("load", function ()
         {
             loading.html("").hide();
+
+            if (isIPad())
+                $("#@this.Model.ContainerId").addClass("scroll-wrapper");
 
             var height = 'calc(100% - ' + toolbar.outerHeight() + 'px)';
             frame.css("height", height);

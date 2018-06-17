@@ -35,11 +35,17 @@ namespace Microsoft.AspNetCore.Mvc
             return new TagCloser(htmlHelper, closingTags);
         }
 
-        public static TagCloser RABeginDataGridSelectableRow(this IHtmlHelper htmlHelper, IIdObject idObject, bool canSelect = true)
+        public static TagCloser RABeginDataGridSelectableRow(
+            this IHtmlHelper htmlHelper, 
+            IIdObject idObject, 
+            bool canSelect = true,
+            string idOverride = null)
         {
+            var id = !String.IsNullOrEmpty(idOverride) ? idOverride : idObject.Id.ToString();
+
             var content = new HtmlContentBuilder();
             content.AppendFormat("<tr class='{0}' data-row-id='{1}' data-row-name='{2}' onmouseup='{3}'", 
-                canSelect ? "ra-datagrid-row-selectable" : "", idObject.Id, idObject.ToString(), 
+                canSelect ? "ra-datagrid-row-selectable" : "", id, idObject.ToString(), 
                 canSelect ? "selectDataGridRow(this);" : "");
             content.AppendHtml(">");
             htmlHelper.ViewContext.Writer.Write(content);

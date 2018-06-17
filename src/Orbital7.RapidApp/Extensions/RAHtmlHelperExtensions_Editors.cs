@@ -89,8 +89,8 @@ namespace Microsoft.AspNetCore.Mvc
                 attributes.AddOrAppendToExisting("class", "ra-behavior-datepicker");
                 if (isToolbar)
                 {
-                    attributes.AddOrAppendToExisting("class", "ra-toolbar-datepicker");
-                    //attributes.AddIfMissing("readonly", "true");
+                    attributes.AddOrAppendToExisting("class", "ra-toolbar-datepicker clickable");
+                    attributes.AddIfMissing("readonly", "true");
                 }
                 content.AppendHtml(htmlHelper.TextBoxFor(expression, value, attributes));
             }

@@ -81,9 +81,18 @@ function closeTouchDialog() {
     $("#ra-touchdialog-container").hide();
 }
 
-function updateTouchInputField(primaryValueId, primaryValue, primaryDisplayValueId, primaryDisplayValue,
-    secondaryValueId, secondaryValue, secondaryDisplayValueId, secondaryDisplayValue,
-    imageUrlId, imageUrl, postEditUpdateScript) {
+function updateTouchInputField(
+    primaryValueId,
+    primaryValue,
+    primaryDisplayValueId,
+    primaryDisplayValue,
+    secondaryValueId,
+    secondaryValue,
+    secondaryDisplayValueId,
+    secondaryDisplayValue,
+    imageUrlId,
+    imageUrl,
+    postEditUpdateScript) {
 
     var primaryValueElement = $("#" + primaryValueId);
     var displayElement = primaryValueElement.closest(".ra-touchinput-field-value");
@@ -124,10 +133,14 @@ function updateTouchInputField(primaryValueId, primaryValue, primaryDisplayValue
         setTouchInputFieldCell(secondaryType, secondaryValue, secondaryDisplayValue, displayElement, rightCell, false);
     }
 
-    // Set the image.
+    // Clear the image.
     var imageCell = displayElement.find(".ra-touchinput-field-value-table-cell-image");
     imageCell.removeClass("ra-touchinput-field-value-table-cell-image-content");
+    imageCell.html("");
+
+    // Set the image.
     if (imageUrl || imageUrlId) {
+        
         if (imageUrl) {
             imageCell.html("<img class='ra-touchinput-image' src='" + imageUrl + "' />");
             imageCell.addClass("ra-touchinput-field-value-table-cell-image-content");
@@ -135,9 +148,6 @@ function updateTouchInputField(primaryValueId, primaryValue, primaryDisplayValue
         if (imageUrlId) {
             $("#" + imageUrlId).val(imageUrl);
         }
-    }
-    else {
-        imageCell.html("");
     }
 
     // Execute the post-edit update script if specified.

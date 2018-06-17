@@ -433,8 +433,7 @@ namespace Microsoft.AspNetCore.Mvc
             content.AppendFormat("<div class='ra-touchinput-field-value {0}' data-touchinput-type-primary='{1}' data-touchinput-type-secondary='{2}'>", 
                 isReadOnly ? "ra-touchinput-field-value-readonly" : "", touchInputTypePrimary, touchInputTypeSecondary);
             content.AppendHtml("<table class='ra-touchinput-field-value-table'><tr>");
-            if (hasImage)
-                content.AppendFormat("<td id='{0}_ImageCell' class='ra-touchinput-field-value-table-cell-image'></td>", imageUrlId);
+            content.AppendFormat("<td id='{0}_ImageCell' class='ra-touchinput-field-value-table-cell-image'></td>", imageUrlId);
             content.AppendFormat("<td id='{0}_LeftCell' class='ra-touchinput-field-value-table-cell-left {1}' style='{2}'></td>", 
                 leftValueId, leftDisplayValueClass, leftDisplayValueStyle);
             content.AppendFormat("<td id='{0}_RightCell' class='ra-touchinput-field-value-table-cell-right {1}' style='{2}'></td>", 

@@ -126,3 +126,7 @@ function newWindowTo(url) {
         return formData;
     };
 })(jQuery);
+
+function isIPad() {
+    return navigator.userAgent.match(/iPad/i) != null;
+}

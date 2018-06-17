@@ -1,6 +1,6 @@
 ﻿<div id="ra-dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ra-dialog-title">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div id="ra-dialog-modal-content" class="modal-content">
             <div class="modal-header">
                 <button id="ra-dialog-cancelbutton-corner"
                         type="button"
@@ -16,15 +16,17 @@
                 BODY
             </div>
             <div class="modal-footer">
-                <span id="ra-dialog-processing">Processing...</span>
+                <span id="ra-dialog-processing">
+                    <img src="/images/spinners/ra-spinner-sm.gif" /> Processing...
+                </span>
                 <button type="button"
-                        class="btn btn-default"
+                        class="btn btn-default btn-lg"
                         id="ra-dialog-cancelbutton"
                         onclick="closeModalDialog(event);">
                     CANCEL
                 </button>
                 <button type="button"
-                        class="btn btn-primary"
+                        class="btn btn-primary btn-lg"
                         id="ra-dialog-actionbutton"
                         ontouchend="submitModalDialog(event); event.preventDefault();"
                         onmouseup="submitModalDialog(event);">

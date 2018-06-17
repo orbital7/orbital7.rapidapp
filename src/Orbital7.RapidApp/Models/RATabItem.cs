@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Orbital7.RapidApp.Models
 {
-    public class TabItem
+    public class RATabItem
     {
         public string Name { get; set; }
 
@@ -17,7 +17,7 @@ namespace Orbital7.RapidApp.Models
 
         public int WidthPercent { get; set; }
 
-        public TabItem(string name, string partialViewUrl, bool isVisible = true)
+        public RATabItem(string name, string partialViewUrl, bool isVisible = true)
         {
             this.Name = name;
             this.PartialViewUrl = partialViewUrl;
