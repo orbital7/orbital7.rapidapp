@@ -120,13 +120,10 @@ function updateTouchInputField(
     // Find the specific value cells and then update by type.
     var leftCell = displayElement.find(".ra-touchinput-field-value-table-cell-left");
     var rightCell = displayElement.find(".ra-touchinput-field-value-table-cell-right");
-    if (primaryType === "currency") {
-        setTouchInputFieldCell(primaryType, primaryValue, primaryDisplayValue, displayElement, rightCell, true);
+    if (primaryType === "currency" || primaryType === "integer" || primaryType === "double") {
+        setTouchInputFieldCell(primaryType, primaryValue, primaryDisplayValue, displayElement, rightCell, false, 
+            displayElement.attr("data-touchinput-minvalue"), displayElement.attr("data-touchinput-maxvalue"));
         setTouchInputFieldCell(secondaryType, secondaryValue, secondaryDisplayValue, displayElement, leftCell, false);
-    }
-    else if (primaryType === "integer") {
-        setTouchInputFieldCell(primaryType, primaryValue, primaryDisplayValue, displayElement, leftCell, false);
-        setTouchInputFieldCell(secondaryType, secondaryValue, secondaryDisplayValue, displayElement, rightCell, false);
     }
     else {
         setTouchInputFieldCell(primaryType, primaryValue, primaryDisplayValue, displayElement, leftCell, true);
@@ -162,7 +159,34 @@ function getTouchInputFieldValue(type, value) {
         return value;
 }
 
-function setTouchInputFieldCell(type, value, displayValue, displayElement, cellElement, setPlaceHolder) {
+function getCurrentValue(value, minValue, maxValue) {
+
+    var valueNumber = Number(value);
+
+    if (minValue) {
+        var minValueNumber = Number(minValue);
+        if (valueNumber < minValueNumber)
+            valueNumber = minValueNumber;
+    }
+
+    if (maxValue) {
+        var maxValueNumber = Number(maxValue);
+        if (valueNumber > maxValueNumber)
+            valueNumber = maxValueNumber;
+    }
+
+    return valueNumber;
+}
+
+function setTouchInputFieldCell(
+    type,
+    value,
+    displayValue,
+    displayElement,
+    cellElement,
+    setPlaceHolder,
+    minValue,
+    maxValue) {
     
     if (type === "pin") {
         
@@ -182,8 +206,8 @@ function setTouchInputFieldCell(type, value, displayValue, displayElement, cellE
         }
     }
     else if (type === "currency") {
-        
-        var curValue = Number(value);
+
+        var curValue = getCurrentValue(value, minValue, maxValue);
         if (curValue !== 0) {
             displayElement.addClass("ra-touchinput-field-value-content");
             cellElement.html(curValue.toUSCurrency());
@@ -193,16 +217,16 @@ function setTouchInputFieldCell(type, value, displayValue, displayElement, cellE
             cellElement.html(curValue.toUSCurrency());
         }
     }
-    else if (type === "integer") {
+    else if (type === "integer" || type === "double") {
 
-        var curValue = Number(value);
+        var curValue = getCurrentValue(value, minValue, maxValue);
         if (curValue !== 0) {
             displayElement.addClass("ra-touchinput-field-value-content");
             cellElement.html(curValue);
         }
         else {
             displayElement.addClass("ra-touchinput-field-value-contentempty");
-            cellElement.html("");
+            cellElement.html(curValue);
         }
     }
     else if (type === "select") {

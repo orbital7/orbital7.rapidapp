@@ -16,6 +16,10 @@ namespace Microsoft.AspNetCore.Mvc
 
         public const string TOUCH_DIALOG_EDIT_URL_CURRENCY = @"/RATouch/RADialogTouchPad?valueId={0}&mode=Currency&postEditUpdateScript={1}";
 
+        public const string TOUCH_DIALOG_EDIT_URL_INTEGER = @"/RATouch/RADialogTouchPad?valueId={0}&mode=Integer&postEditUpdateScript={1}";
+
+        public const string TOUCH_DIALOG_EDIT_URL_DOUBLE = @"/RATouch/RADialogTouchPad?valueId={0}&mode=Double&postEditUpdateScript={1}";
+
         public const string TOUCH_DIALOG_EDIT_URL_PHONENUMBER = @"/RATouch/RADialogTouchPad?valueId={0}&mode=PhoneNumber&postEditUpdateScript={1}";
 
         public static IHtmlContent RATouchPadFor<TModel, TProperty>(this IHtmlHelper<TModel> htmlHelper,
@@ -200,12 +204,16 @@ namespace Microsoft.AspNetCore.Mvc
                 primaryValueId, 
                 secondaryValueId, 
                 imageUrlId, 
+                null, 
+                null,
                 leftDisplayValueClass, 
                 rightDisplayValueClass, 
                 leftDisplayValueStyle, 
                 rightDisplayValueStyle,
                 !String.IsNullOrEmpty(imageUrlId),
-                readOnly);
+                readOnly,
+                null,
+                null);
             content.AppendHtml(htmlHelper.HiddenFor(primaryValueExpression));
 
             if (primaryDisplayValueExpression != null)
@@ -258,7 +266,7 @@ namespace Microsoft.AspNetCore.Mvc
             string staticImageUrl = null)
         {
             return htmlHelper.TouchInputNumericFor<TModel, object, TProperty>(null, expression, touchDialogValueEditUrl, 
-                "pin", leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle, 
+                "pin", null, null, leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle, 
                 postEditUpdateScript, staticImageUrl);
         }
 
@@ -273,8 +281,42 @@ namespace Microsoft.AspNetCore.Mvc
             string staticImageUrl = null)
         {
             return htmlHelper.TouchInputNumericFor<TModel, object, TProperty>(null, expression, touchDialogValueEditUrl, 
-                "currency", leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle, 
+                "currency", null, null, leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle, 
                 postEditUpdateScript, staticImageUrl);
+        }
+
+        public static IHtmlContent RATouchInputIntegerFor<TModel, TProperty>(this IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            string touchDialogValueEditUrl = TOUCH_DIALOG_EDIT_URL_INTEGER,
+            string leftDisplayValueClass = null,
+            string rightDisplayValueClass = null,
+            string leftDisplayValueStyle = null,
+            string rightDisplayValueStyle = null,
+            string postEditUpdateScript = null,
+            string staticImageUrl = null)
+        {
+            return htmlHelper.TouchInputNumericFor<TModel, object, TProperty>(null, expression, touchDialogValueEditUrl,
+                "integer", null, null, leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle,
+                postEditUpdateScript, staticImageUrl);
+        }
+
+        public static IHtmlContent RATouchInputDoubleFor<TModel, TProperty>(this IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            string touchDialogValueEditUrl = TOUCH_DIALOG_EDIT_URL_DOUBLE,
+            string touchInputClass = null,
+            string touchInputStyle = null,
+            string leftDisplayValueClass = null,
+            string rightDisplayValueClass = null,
+            string leftDisplayValueStyle = null,
+            string rightDisplayValueStyle = null,
+            string postEditUpdateScript = null,
+            string staticImageUrl = null,
+            double? minValue = null,
+            double? maxValue = null)
+        {
+            return htmlHelper.TouchInputNumericFor<TModel, object, TProperty>(null, expression, touchDialogValueEditUrl,
+                "double", touchInputClass, touchInputStyle, leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle,
+                postEditUpdateScript, staticImageUrl, false, minValue, maxValue);
         }
 
         public static IHtmlContent RATouchInputPhoneNumberFor<TModel, TProperty>(this IHtmlHelper<TModel> htmlHelper,
@@ -288,7 +330,7 @@ namespace Microsoft.AspNetCore.Mvc
             string staticImageUrl = null)
         {
             return htmlHelper.TouchInputNumericFor<TModel, object, TProperty>(null, expression, touchDialogValueEditUrl,
-                "phone", leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle,
+                "phone", null, null, leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle,
                 postEditUpdateScript, staticImageUrl);
         }
 
@@ -300,7 +342,20 @@ namespace Microsoft.AspNetCore.Mvc
             string rightDisplayValueStyle = null,
             string staticImageUrl = null)
         {
-            return htmlHelper.TouchInputNumericFor<TModel, object, TProperty>(null, expression, null, "integer",
+            return htmlHelper.TouchInputNumericFor<TModel, object, TProperty>(null, expression, null, "integer", null, null,
+                leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle,
+                rightDisplayValueStyle, null, staticImageUrl, isReadOnly: true);
+        }
+
+        public static IHtmlContent RATouchInputDoubleReadOnlyFor<TModel, TProperty>(this IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            string leftDisplayValueClass = null,
+            string rightDisplayValueClass = null,
+            string leftDisplayValueStyle = null,
+            string rightDisplayValueStyle = null,
+            string staticImageUrl = null)
+        {
+            return htmlHelper.TouchInputNumericFor<TModel, object, TProperty>(null, expression, null, "double", null, null,
                 leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle,
                 rightDisplayValueStyle, null, staticImageUrl, isReadOnly: true);
         }
@@ -313,7 +368,7 @@ namespace Microsoft.AspNetCore.Mvc
             string rightDisplayValueStyle = null,
             string staticImageUrl = null)
         {
-            return htmlHelper.TouchInputNumericFor<TModel, object, TProperty>(null, expression, null, "currency", 
+            return htmlHelper.TouchInputNumericFor<TModel, object, TProperty>(null, expression, null, "currency", null, null, 
                 leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, 
                 rightDisplayValueStyle, null, staticImageUrl, isReadOnly: true);
         }
@@ -330,7 +385,7 @@ namespace Microsoft.AspNetCore.Mvc
             string postEditUpdateScript = null)
         {
             return htmlHelper.TouchInputNumericFor<TModel, TProperty1, TProperty2>(imageUrlExpression, valueExpression, 
-                touchDialogValueEditUrl, "pin", leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, 
+                touchDialogValueEditUrl, "pin", null, null, leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, 
                 rightDisplayValueStyle, displayLabel, postEditUpdateScript);
         }
 
@@ -346,7 +401,7 @@ namespace Microsoft.AspNetCore.Mvc
             string postEditUpdateScript = null)
         {
             return htmlHelper.TouchInputNumericFor<TModel, TProperty1, TProperty2>(imageUrlExpression, valueExpression, 
-                touchDialogValueEditUrl, "currency", leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, 
+                touchDialogValueEditUrl, "currency", null, null, leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, 
                 rightDisplayValueStyle, displayLabel, postEditUpdateScript);
         }
 
@@ -360,7 +415,7 @@ namespace Microsoft.AspNetCore.Mvc
             string displayLabel = null)
         {
             return htmlHelper.TouchInputNumericFor<TModel, TProperty1, TProperty2>(imageUrlExpression, valueExpression, 
-                null, "currency", leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle, 
+                null, "currency", null, null, leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle, 
                 displayLabel, isReadOnly: true);
         }
 
@@ -369,13 +424,17 @@ namespace Microsoft.AspNetCore.Mvc
             Expression<Func<TModel, TProperty2>> valueExpression, 
             string touchDialogValueEditUrl, 
             string type,
+            string touchInputClass = null,
+            string touchInputStyle = null,
             string leftDisplayValueClass = null,
             string rightDisplayValueClass = null,
             string leftDisplayValueStyle = null,
             string rightDisplayValueStyle = null,
             string postEditUpdateScript = null, 
             string staticImageUrl = null,
-            bool isReadOnly = false)
+            bool isReadOnly = false,
+            double? minValue = null,
+            double? maxValue = null)
         {
             var modelExplorer = htmlHelper.GetModelExplorer(valueExpression);
             var valueId = htmlHelper.IdFor(valueExpression);
@@ -390,12 +449,16 @@ namespace Microsoft.AspNetCore.Mvc
                 null,
                 valueId,
                 imageUrlId,
+                touchInputClass,
+                touchInputStyle,
                 leftDisplayValueClass, 
                 rightDisplayValueClass, 
                 leftDisplayValueStyle, 
                 rightDisplayValueStyle, 
                 imageUrlExpression != null || !String.IsNullOrEmpty(staticImageUrl), 
-                isReadOnly);
+                isReadOnly,
+                minValue,
+                maxValue);
 
             content.AppendHtml(htmlHelper.HiddenFor(valueExpression));
             if (imageUrlExpression != null)
@@ -418,20 +481,28 @@ namespace Microsoft.AspNetCore.Mvc
             string leftValueId,
             string rightValueId,
             string imageUrlId,
+            string touchInputClass,
+            string touchInputStyle,
             string leftDisplayValueClass, 
             string rightDisplayValueClass, 
             string leftDisplayValueStyle, 
             string rightDisplayValueStyle, 
             bool hasImage,
-            bool isReadOnly)
+            bool isReadOnly,
+            double? minValue,
+            double? maxValue)
         {
-            content.AppendHtml("<div class='ra-touchinput ra-touchinput-field' ");
+            content.AppendFormat("<div class='ra-touchinput ra-touchinput-field {0}' style='{1}'", touchInputClass, touchInputStyle);
             if (!String.IsNullOrEmpty(touchDialogValueEditUrl) || !isReadOnly)
                 content.AppendFormat("ontouchstart='showTouchDialog(event, this, \"{0}\");' onmousedown='showTouchDialog(event, this, \"{0}\");'", 
                     touchDialogValueEditUrl, touchDialogValueEditUrl);
             content.AppendHtml(">");
-            content.AppendFormat("<div class='ra-touchinput-field-value {0}' data-touchinput-type-primary='{1}' data-touchinput-type-secondary='{2}'>", 
-                isReadOnly ? "ra-touchinput-field-value-readonly" : "", touchInputTypePrimary, touchInputTypeSecondary);
+            content.AppendFormat("<div class='ra-touchinput-field-value {0}' data-touchinput-type-primary='{1}' data-touchinput-type-secondary='{2}' {3} {4}>", 
+                isReadOnly ? "ra-touchinput-field-value-readonly" : "", 
+                touchInputTypePrimary, 
+                touchInputTypeSecondary,
+                minValue.HasValue ? "data-touchinput-minvalue=" + minValue.Value : "",
+                maxValue.HasValue ? "data-touchinput-maxvalue=" + maxValue.Value : "");
             content.AppendHtml("<table class='ra-touchinput-field-value-table'><tr>");
             content.AppendFormat("<td id='{0}_ImageCell' class='ra-touchinput-field-value-table-cell-image'></td>", imageUrlId);
             content.AppendFormat("<td id='{0}_LeftCell' class='ra-touchinput-field-value-table-cell-left {1}' style='{2}'></td>", 

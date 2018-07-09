@@ -13,7 +13,9 @@ namespace Orbital7.RapidApp.Models
 
         Integer,
 
-        PhoneNumber
+        PhoneNumber,
+
+        Double,
     }
 
     public class RATouchPadModel

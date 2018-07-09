@@ -18,6 +18,7 @@ namespace Microsoft.AspNetCore.Mvc
             this IHtmlHelper htmlHelper, 
             bool fullHeight = true, 
             bool sortable = true,
+            bool updateRowColors = true,
             int fullHeightBottomOffset = 2)
         {
             var tableId = Guid.NewGuid().ToString().Replace("-", "");
@@ -30,8 +31,8 @@ namespace Microsoft.AspNetCore.Mvc
 
             htmlHelper.ViewContext.Writer.Write(content);
             var sortCommand = String.Format("new Tablesort(document.getElementById('{0}'));", tableId);
-            var closingTags = String.Format("</table></div></div><script>{0}setupDataGrid();resizeAll();</script>", 
-                sortable ? sortCommand : null);
+            var closingTags = String.Format("</table></div></div><script>{0}setupDataGrid('{1}');resizeAll();</script>", 
+                sortable ? sortCommand : null, updateRowColors.Totruefalse());
             return new TagCloser(htmlHelper, closingTags);
         }
 
@@ -80,21 +81,24 @@ namespace Microsoft.AspNetCore.Mvc
 
         private static string GetSortMethod(ModelExplorer modelExplorer)
         {
-            if (modelExplorer.ModelType == typeof(double) ||
-                modelExplorer.ModelType == typeof(double?) ||
-                modelExplorer.ModelType == typeof(decimal) ||
-                modelExplorer.ModelType == typeof(decimal?) ||
-                modelExplorer.ModelType == typeof(int) ||
-                modelExplorer.ModelType == typeof(int?) ||
-                modelExplorer.ModelType == typeof(short) ||
-                modelExplorer.ModelType == typeof(short?))
+            if (modelExplorer != null && modelExplorer.ModelType != null)
             {
-                return "number";
-            }
-            else if (modelExplorer.ModelType == typeof(DateTime) ||
-                modelExplorer.ModelType == typeof(DateTime?))
-            {
-                return "date";
+                if (modelExplorer.ModelType == typeof(double) ||
+                    modelExplorer.ModelType == typeof(double?) ||
+                    modelExplorer.ModelType == typeof(decimal) ||
+                    modelExplorer.ModelType == typeof(decimal?) ||
+                    modelExplorer.ModelType == typeof(int) ||
+                    modelExplorer.ModelType == typeof(int?) ||
+                    modelExplorer.ModelType == typeof(short) ||
+                    modelExplorer.ModelType == typeof(short?))
+                {
+                    return "number";
+                }
+                else if (modelExplorer.ModelType == typeof(DateTime) ||
+                    modelExplorer.ModelType == typeof(DateTime?))
+                {
+                    return "date";
+                }
             }
 
             return null;

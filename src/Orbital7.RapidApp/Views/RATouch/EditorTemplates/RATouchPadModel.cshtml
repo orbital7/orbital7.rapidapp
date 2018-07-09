@@ -82,7 +82,7 @@
                     ontouchend="handleTouchEnd(this); handleKey(this); event.preventDefault();"
                     onmouseup="handleTouchEnd(this); handleKey(this);">0</td>
             }
-            else if (this.Model.Mode == TouchPadMode.Currency)
+            else if (this.Model.Mode == TouchPadMode.Currency || this.Model.Mode == TouchPadMode.Double)
             {
                 <td class="ra-touchpad-cell"
                     ontouchstart="handleTouchStart(this);"

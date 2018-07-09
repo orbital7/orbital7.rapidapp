@@ -123,6 +123,46 @@
     margin-left: 40px;
 }
 
+.right-padding-xs {
+    padding-right: 5px;
+}
+
+.right-padding-sm {
+    padding-right: 10px;
+}
+
+.right-padding-med {
+    padding-right: 20px;
+}
+
+.right-padding-lg {
+    padding-right: 30px;
+}
+
+.right-padding-xl {
+    padding-right: 40px;
+}
+
+.right-margin-xs {
+    margin-right: 5px;
+}
+
+.right-margin-sm {
+    margin-right: 10px;
+}
+
+.right-margin-med {
+    margin-right: 20px;
+}
+
+.right-margin-lg {
+    margin-right: 30px;
+}
+
+.right-margin-xl {
+    margin-right: 40px;
+}
+
 .clickable {
     cursor: pointer;
 }
@@ -138,6 +178,11 @@
 .font-bold {
     font-weight: bold;
 }
+
+.font-italic {
+    font-style: italic;
+}
+
 
 .ra-loading-table {
     height: 100%;

@@ -130,7 +130,7 @@ function resizeAll() {
     });
 }
 
-function setupDataGrid() {
+function setupDataGrid(updateRowColors) {
 
     $(".ra-datagrid-wrapper").each(function () {
 
@@ -141,7 +141,8 @@ function setupDataGrid() {
             table.attr("data-width-set", true);
         }
 
-        updateDataGridRowColors(table);
+        if (updateRowColors === "true")
+            updateDataGridRowColors(table);
     });
 }
 

@@ -12,6 +12,7 @@
     <PackageProjectUrl>https://github.com/orbital7/orbital7.rapidapp</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/orbital7/orbital7.rapidapp/blob/master/LICENSE</PackageLicenseUrl>
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/15078943</PackageIconUrl>
+    <Configurations>Debug;Release;Release - Production;Release_Production</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,12 +23,20 @@
     <OutputPath>..\..\bin\Release\</OutputPath>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Production|AnyCPU'">
+    <OutputPath>..\..\bin\Release\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release - Production|AnyCPU'">
+    <OutputPath>..\..\bin\Release\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="2.1.0" />
-    <PackageReference Include="Orbital7.Extensions" Version="2.1.0" />
+    <PackageReference Include="Orbital7.Extensions" Version="2.1.1" />
     <PackageReference Include="Orbital7.Extensions.AspNetCore" Version="2.1.0" />
     <PackageReference Include="Orbital7.Extensions.Attributes" Version="2.1.0" />
   </ItemGroup>

@@ -21,18 +21,78 @@ namespace Microsoft.AspNetCore.Mvc
 
     public static partial class RAHtmlHelperExtensions
     {
-        public static IHtmlContent RAEditorFor<TModel, TProperty>(this IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, TProperty>> expression, object htmlAttributes = null, SelectList selectList = null, 
-            RAEditorType? editorTypeOverride = null, string selectListOptionLabel = null)
+        public static IHtmlContent RACheckBoxFor<TModel>(
+            this IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, bool>> expression,
+            string label,
+            object htmlAttributes = null,
+            string wrapperClass = null,
+            string wrapperStyle = null,
+            string stateClass = "p-primary",
+            string labelClass = null,
+            string labelStyle = null)
+        {
+            var content = new HtmlContentBuilder();
+
+            content.AppendFormat("<div class='pretty p-svg p-curve p-smooth {0}' style='{1}'>",
+                wrapperClass, wrapperStyle);
+            content.AppendHtml(htmlHelper.CheckBoxFor(expression, htmlAttributes));
+            content.AppendFormat("<div class='state {0}'>", stateClass);
+            content.AppendHtml("<svg class='svg svg-icon' viewBox='0 0 20 20'>");
+            content.AppendHtml("<path d='M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z' " +
+                "style='stroke: white;fill:white;'></path>");
+            content.AppendHtml("</svg>");
+            content.AppendFormat("<label class='{0}' style='{1}'>{2}</label>", labelClass, labelStyle, label);
+            content.AppendHtml("</div></div>");
+
+            return content;
+        }
+
+        public static IHtmlContent RARadioButtonFor<TModel, TProperty>(
+            this IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            object value,
+            string label,
+            object htmlAttributes = null,
+            string wrapperClass = null,
+            string wrapperStyle = null,
+            string stateClass = "p-primary-o",
+            string labelClass = null,
+            string labelStyle = null)
+        {
+            var content = new HtmlContentBuilder();
+
+            content.AppendFormat("<div class='pretty p-default p-round p-smooth {0}' style='{1}'>",
+                wrapperClass, wrapperStyle);
+            content.AppendHtml(htmlHelper.RadioButtonFor(expression, value, htmlAttributes));
+            content.AppendFormat("<div class='state {0}'>", stateClass);
+            content.AppendFormat("<label class='{0}' style='{1}'>{2}</label>", labelClass, labelStyle, label);
+            content.AppendHtml("</div></div>");
+
+            return content;
+        }
+
+        public static IHtmlContent RAEditorFor<TModel, TProperty>(
+            this IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression, 
+            object htmlAttributes = null, 
+            SelectList selectList = null, 
+            RAEditorType? editorTypeOverride = null, 
+            string selectListOptionLabel = null)
         {
             var modelExplorer = htmlHelper.GetModelExplorer(expression);
             return htmlHelper.GetEditorFor(expression, modelExplorer, htmlAttributes, selectList, editorTypeOverride, 
                 false, selectListOptionLabel);
         }
 
-        private static IHtmlContent GetEditorFor<TModel, TProperty>(this IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, TProperty>> expression, ModelExplorer modelExplorer, object htmlAttributes = null,
-            SelectList selectList = null, RAEditorType? editorTypeOverride = null, bool isToolbar = false, 
+        private static IHtmlContent GetEditorFor<TModel, TProperty>(
+            this IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression, 
+            ModelExplorer modelExplorer, 
+            object htmlAttributes = null,
+            SelectList selectList = null, 
+            RAEditorType? editorTypeOverride = null, 
+            bool isToolbar = false, 
             string selectListOptionLabel = null)
         {
             var content = new HtmlContentBuilder();
@@ -59,7 +119,11 @@ namespace Microsoft.AspNetCore.Mvc
                 if (editorTypeOverride.HasValue && editorTypeOverride.Value == RAEditorType.RadioButton)
                 {
                     foreach (var item in selectList)
-                        content.AppendHtml(htmlHelper.RadioButtonFor(expression, Enum.Parse(modelExplorer.ModelType, item.Value), attributes));
+                    {
+                        var enumValue = Enum.Parse(modelExplorer.ModelType, item.Value);
+                        content.AppendHtml(htmlHelper.RARadioButtonFor(expression, enumValue,
+                            ((Enum)enumValue).ToDisplayString(), attributes));
+                    }
                 }
                 // Else use a dropdown.
                 else
