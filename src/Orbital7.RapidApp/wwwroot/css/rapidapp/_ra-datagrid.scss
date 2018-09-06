@@ -34,15 +34,7 @@ tr.ra-datagrid-row-selectable {
     cursor: pointer;
 }
 
-tr.ra-datagrid-row-selectable:hover {
-    background-color: $ra-color-datagrid-row-selectable-hover;
-}
-
 tr.ra-datagrid-row-selected {
-    background-color: $ra-color-datagrid-row-selected;
-}
-
-tr.ra-datagrid-row-selected:hover {
     background-color: $ra-color-datagrid-row-selected;
 }
 

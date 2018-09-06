@@ -15,6 +15,10 @@
     display: none;
 }
 
+.top-margin-xs {
+    margin-top: 5px;
+}
+
 .top-margin-sm {
     margin-top: 10px;
 }
@@ -29,6 +33,10 @@
 
 .top-margin-xl {
     margin-top: 25px;
+}
+
+.bottom-margin-xs {
+    margin-bottom: 10px;
 }
 
 .bottom-margin-sm {
@@ -205,11 +213,11 @@
     opacity: 0.3;
 }
 
+.ra-border {
+    border: 1px solid $ra-color-content-border;
+}
+
 .scroll-wrapper {
     -webkit-overflow-scrolling: touch;
     overflow-y: auto;
-}
-
-.scroll-wrapper iframe {
-    
 }

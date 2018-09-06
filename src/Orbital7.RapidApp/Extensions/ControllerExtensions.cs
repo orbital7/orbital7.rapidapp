@@ -26,7 +26,7 @@ namespace Microsoft.AspNetCore.Mvc
             return null;
         }
 
-        public static FileContentResult File(this Controller controller, byte[] fileContents, string contentType, string filename, bool isInLine)
+        public static FileContentResult FileResult(this Controller controller, byte[] fileContents, string contentType, string filename, bool isInLine)
         {
             if (isInLine)
             {
@@ -37,11 +37,6 @@ namespace Microsoft.AspNetCore.Mvc
             {
                 return controller.File(fileContents, contentType, filename);
             }
-        }
-
-        public static FileContentResult FileInline(this Controller controller, byte[] fileContents, string contentType, string filename)
-        {
-            return controller.File(fileContents, contentType, filename, true);
         }
 
         public static void HandleException(this Controller controller, string prefix, Exception ex)

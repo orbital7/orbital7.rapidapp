@@ -15,5 +15,7 @@ namespace Orbital7.RapidApp.Models
         public string ReportPdfDownloadUrl { get; set; }
 
         public string ReportPdfInlineDisplayUrl { get; set; }
+
+        public string ReportCsvDownloadUrl { get; set; }
     }
 }

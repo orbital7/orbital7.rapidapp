@@ -8,8 +8,14 @@
 
     @if (this.Model.ReportNativeType != ReportNativeType.Pdf)
     {
-        @Html.RAToolbarButton("Download as " + this.Model.ReportNativeType.ToDisplayString(), 
+        @Html.RAToolbarButton("Download as " + this.Model.ReportNativeType.ToDisplayString(),
             null, this.Model.ReportNativeDownloadUrl)
+    }
+
+    @if (this.Model.ReportNativeType == ReportNativeType.ExcelSpreadsheet)
+    {
+        @Html.RAToolbarButton("Download as CSV",
+            null, this.Model.ReportCsvDownloadUrl)
     }
 }
 

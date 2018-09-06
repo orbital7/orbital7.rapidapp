@@ -1,7 +1,9 @@
 ﻿var _raFullHeightBottomOffset = 30;
-var _raBeforeSubmitModalDialog = beforeSubmitModalDialog;
-var _raBeforeCloseModalDialog = beforeCloseModalDialog;
+var _raBeforeModalDialogSubmit = beforeModalDialogSubmit;
+var _raBeforeModalDialogClose = beforeModalDialogClose;
+var _raAfterModalDialogClosedSuccess = afterModalDialogClosedSuccess;
 var _raOnModalDialogContentUnload = onModalDialogContentUnload;
+var _raModalDialogSubmitSuccess = false;
 var _raModalDialogSubmitCancelled = false;
 
 function showLoading(element, fullHeight) {
@@ -237,13 +239,18 @@ function onModalDialogContentUnload() {
 
 }
 
+function afterModalDialogClosedSuccess(success) {
+
+}
+
 function showModalDialog(contentUrl, returnAction, dialogTitle,
     showActionButton, actionButtonCaption, showCancelButton, cancelButtonCaption, source) {
 
     // Ready the dialog.
-    var _raBeforeSubmitModalDialog = beforeSubmitModalDialog;
-    var _raBeforeCloseModalDialog = beforeCloseModalDialog;
-    var _raOnModalDialogContentUnload = onModalDialogContentUnload;
+    _raBeforeModalDialogSubmit = beforeModalDialogSubmit;
+    _raBeforeModalDialogClose = beforeModalDialogClose;
+    _raAfterModalDialogClose = afterModalDialogClosedSuccess;
+    _raOnModalDialogContentUnload = onModalDialogContentUnload;
     var dialog = $("#ra-dialog");
 
     // Set the header.
@@ -311,19 +318,20 @@ function showModalDialog(contentUrl, returnAction, dialogTitle,
     });
 }
 
-function beforeSubmitModalDialog(event) {
+function beforeModalDialogSubmit(event) {
     return true;
 }
 
-function beforeCloseModalDialog(event) {
+function beforeModalDialogClose(event) {
     return true;
 }
 
 function submitModalDialog(event) {
 
-    if (!_raBeforeSubmitModalDialog(event))
+    if (!_raBeforeModalDialogSubmit(event))
         return;
 
+    _raModalDialogSubmitSuccess = false;
     _raModalDialogSubmitCancelled = false;
 
     var dialog = $("#ra-dialog");
@@ -349,10 +357,13 @@ function submitModalDialog(event) {
         url: postUrl,
         success: function (response) {
 
+            _raModalDialogSubmitSuccess = !_raModalDialogSubmitCancelled;
+
             if (response !== "")
                 returnAction = response;
 
-            if (returnAction) {
+            if (returnAction && !_raModalDialogSubmitCancelled) {
+
                 // Url.
                 if (returnAction.startsWith("/") || returnAction.toLowerCase().startsWith("http:") || returnAction.toLowerCase().startsWith("https:")) {
                     navigateTo(returnAction);
@@ -384,7 +395,7 @@ function submitModalDialog(event) {
 
 function closeModalDialog(event) {
 
-    if (!_raBeforeCloseModalDialog(event))
+    if (!_raBeforeModalDialogClose(event))
         return;
 
     _raModalDialogSubmitCancelled = true;
@@ -393,6 +404,12 @@ function closeModalDialog(event) {
 
     _raOnModalDialogContentUnload();
     $("#ra-dialog-body").html("");
+
+    if (_raModalDialogSubmitSuccess) {
+        setTimeout(function () {
+            _raAfterModalDialogClosedSuccess();
+        }, 400);
+    }
 }
 
 function updateDialogBodyHtml(dialog, dialogBody, actionButton, enableActionButton, html, notify) {
@@ -532,20 +549,24 @@ function setResumeValue(area, type, id, value) {
 function setResumeField(area, type, fieldSelector, isCheckbox) {
 
     var field = $(fieldSelector);
-    if (!isCheckbox)
+    if (!isCheckbox) {
         setResumeValue(area, type, fieldSelector, field.val());
-    else
+    }
+    else {
         setResumeValue(area, type, fieldSelector, field.prop("checked"));
+    }
 }
 
 function loadResumeField(area, type, fieldSelector, isCheckBox) {
 
     var value = getResumeValue(resumeArea, type, fieldSelector);
     if (value) {
-        if (!isCheckBox)
+        if (!isCheckBox) {
             $(fieldSelector).val(value);
-        else
+        }
+        else {
             $(fieldSelector).prop("checked", value === 'true');
+        }
     }
 }
 
