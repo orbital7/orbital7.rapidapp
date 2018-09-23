@@ -43,8 +43,6 @@ namespace Microsoft.AspNetCore.Mvc
             content.AppendHtml("</table>");
             content.AppendHtml("<div>");
             content.AppendHtml("<a class=\"ra-glyphbutton ra-glyphbutton-green\" ");
-            content.AppendFormat("ontouchend=\"addDynamicTableRow('{0}', '{1}'); event.preventDefault();\" ", 
-                tableId, completeAjaxAddRowUrl);
             content.AppendFormat("onmouseup=\"addDynamicTableRow('{0}', '{1}');\" ",
                 tableId, completeAjaxAddRowUrl);
             content.AppendHtml("><span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span>");
@@ -70,7 +68,6 @@ namespace Microsoft.AspNetCore.Mvc
             var contentEnd = new HtmlContentBuilder();
             contentEnd.AppendHtml("<td>");
             contentEnd.AppendHtml("<a class=\"ra-glyphbutton ra-glyphbutton-red\" ");
-            contentEnd.AppendHtml("ontouchend=\"removeDynamicTableRow(this); event.preventDefault();\" ");
             contentEnd.AppendHtml("onmouseup=\"removeDynamicTableRow(this);\">");
             contentEnd.AppendHtml("<span class=\"glyphicon glyphicon-remove-sign\" aria-hidden=\"true\"></span>");
             contentEnd.AppendHtml("</a>");

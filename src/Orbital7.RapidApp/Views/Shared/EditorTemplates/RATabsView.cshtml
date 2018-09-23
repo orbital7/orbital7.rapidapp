@@ -28,7 +28,7 @@
     {
         string id = "ra-tab-content-" + item.Index;
         <div id="@id"
-             class="ra-container ra-tab-content"
+             class="ra-parent ra-tab-content"
              data-tab-loaded="false"
              data-tab-contenturl="@item.PartialViewUrl"></div>
     }
@@ -48,10 +48,9 @@
             $(".ra-tab-content").hide();
             var tabContent = $("#ra-tab-content-" + tabIndex);
             tabContent.show();
-            resizeAll();
 
             if (tabContent.attr("data-tab-loaded") === "false") {
-                showLoading(tabContent);
+                raShowLoading(tabContent);
                 $.get({
                     url: tabContent.attr("data-tab-contenturl"),
                     cache: false,

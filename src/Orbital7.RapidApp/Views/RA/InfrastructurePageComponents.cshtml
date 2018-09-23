@@ -2,6 +2,7 @@
     <div class="modal-dialog" role="document">
         <div id="ra-dialog-modal-content" class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title" id="ra-dialog-title">TITLE</h4>
                 <button id="ra-dialog-cancelbutton-corner"
                         type="button"
                         class="close"
@@ -9,7 +10,6 @@
                         aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="ra-dialog-title">TITLE</h4>
                 <input type="hidden" id="ra-dialog-returnaction" />
             </div>
             <div class="modal-body" id="ra-dialog-body">
@@ -17,10 +17,10 @@
             </div>
             <div class="modal-footer">
                 <span id="ra-dialog-processing" style="display: none;">
-                    <img src="/images/spinners/ra-spinner-sm.gif" /> Processing...
+                    <img src="/orbital7-rapidapp/dist/images/spinners/ra-spinner-sm.gif" /> Processing...
                 </span>
                 <button type="button"
-                        class="btn btn-default btn-lg"
+                        class="btn btn-secondary btn-lg"
                         id="ra-dialog-cancelbutton"
                         onclick="closeModalDialog(event);">
                     CANCEL
@@ -28,11 +28,15 @@
                 <button type="button"
                         class="btn btn-primary btn-lg"
                         id="ra-dialog-actionbutton"
-                        ontouchend="submitModalDialog(event); event.preventDefault();"
                         onmouseup="submitModalDialog(event);">
                     ACTION
                 </button>
             </div>
         </div>
     </div>
+</div>
+
+<div class="ra-layout-minimum-size">
+    <div class="ra-layout-minimum-size-title">Display Too Small</div>
+    <div class="ra-layout-minimum-size-message">Please rotate your device or increase your window size</div>
 </div>

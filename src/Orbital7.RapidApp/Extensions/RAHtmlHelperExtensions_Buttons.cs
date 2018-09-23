@@ -10,18 +10,25 @@ namespace Microsoft.AspNetCore.Mvc
 {
     public static partial class RAHtmlHelperExtensions
     {
-        public static IHtmlContent RAShowDialogButton(this IHtmlHelper htmlHelper, string buttonText, string contentUrl,
-            string returnAction = null, object htmlAttributes = null, string dialogTitle = null, bool showActionButton = true,
-            string actionButtonCaption = "Save", bool showCancelButton = true, string cancelButtonCaption = "Cancel")
+        public static IHtmlContent RAShowDialogButton(
+            this IHtmlHelper htmlHelper, 
+            string buttonText, 
+            string contentUrl,
+            string returnAction = null, 
+            object htmlAttributes = null, 
+            string dialogTitle = null, 
+            bool showActionButton = true,
+            string actionButtonCaption = "Save", 
+            bool showCancelButton = true, 
+            string cancelButtonCaption = "Cancel",
+            string buttonClass = "btn-secondary")
         {
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
-            attributes.AddButtonAttributes(buttonText);
-            attributes.Add("ontouchend", htmlHelper.RAShowDialogOnClickScript(contentUrl, returnAction, dialogTitle ?? buttonText,
-                showActionButton, actionButtonCaption, showCancelButton, cancelButtonCaption) + " event.preventDefault();");
+            attributes.AddButtonAttributes(buttonClass);
             attributes.Add("onmouseup", htmlHelper.RAShowDialogOnClickScript(contentUrl, returnAction, dialogTitle ?? buttonText,
                 showActionButton, actionButtonCaption, showCancelButton, cancelButtonCaption));
 
-            return attributes.ToInput();
+            return attributes.ToButton(buttonText);
         }
 
         public static IHtmlContent RAShowDialogLink(this IHtmlHelper htmlHelper, string linkText, string contentUrl,
@@ -30,8 +37,6 @@ namespace Microsoft.AspNetCore.Mvc
         {
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
             attributes.AddOrInsertToExisting("class", "clickable");
-            attributes.Add("ontouchend", htmlHelper.RAShowDialogOnClickScript(contentUrl, returnAction, dialogTitle ?? linkText,
-                showActionButton, actionButtonCaption, showCancelButton, cancelButtonCaption) + " event.preventDefault();");
             attributes.Add("onmouseup", htmlHelper.RAShowDialogOnClickScript(contentUrl, returnAction, dialogTitle ?? linkText,
                 showActionButton, actionButtonCaption, showCancelButton, cancelButtonCaption));
 
@@ -53,11 +58,12 @@ namespace Microsoft.AspNetCore.Mvc
                 cancelButtonCaption);
         }
 
-        private static void AddButtonAttributes(this IDictionary<string, object> attributes, string buttonText)
+        private static void AddButtonAttributes(
+            this IDictionary<string, object> attributes,
+            string buttonClass)
         {
-            attributes.AddOrInsertToExisting("class", "btn");
+            attributes.AddOrInsertToExisting("class", "btn " + buttonClass);
             attributes.Add("type", "button");
-            attributes.Add("value", buttonText);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Routing;
 using Orbital7.Extensions.Attributes;
 using System;
 using System.Collections.Generic;
@@ -135,12 +136,15 @@ namespace Microsoft.AspNetCore.Mvc
             }
             else if (modelExplorer.ModelType == typeof(bool))
             {
-                // Use a flip-switch-formatted checkbox.
-                attributes.Add("data-toggle", "toggle");
-                attributes.Add("data-on", "Yes");
-                attributes.Add("data-off", "No");
-                attributes.Add("data-size", "small");
+                const string TRUE = "Yes";
+                const string FALSE = "No";
+                content.AppendHtml("<div class='form=group'><span class='switch switch-sm'>");
+                attributes.Add("data-checked", TRUE);
+                attributes.Add("data-unchecked", FALSE);
+                attributes.AddOrAppendToExisting("onclick", "raUpdateFlipswitchLabel(this);");
                 content.AppendHtml(htmlHelper.CheckBoxFor(expression as Expression<Func<TModel, bool>>, attributes));
+                content.AppendHtml(htmlHelper.LabelFor(expression, (bool)modelExplorer.Model ? TRUE : FALSE, null));
+                content.AppendHtml("</span></div>");
             }
             else if (modelExplorer.ModelType == typeof(DateTime) || modelExplorer.ModelType == typeof(DateTime?))
             {
@@ -176,6 +180,7 @@ namespace Microsoft.AspNetCore.Mvc
                 }
                 else if (dataTypeAttribute?.DataType == DataType.MultilineText)
                 {
+                    //attributes.AddOrAppendToExisting("class", "ra-container-scrollable-y");   // JVE: Does not appear to work correctly.
                     attributes.AddIfMissing("rows", 4);
                     content.AppendHtml(htmlHelper.TextAreaFor(expression, attributes));
                 }

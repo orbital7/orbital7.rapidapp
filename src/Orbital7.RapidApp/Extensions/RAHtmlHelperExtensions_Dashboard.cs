@@ -54,7 +54,6 @@ namespace Microsoft.AspNetCore.Mvc
 
             if (!String.IsNullOrEmpty(url))
             {
-                content.AppendFormat(" ontouchend='navigateTo(\"{0}\"); event.preventDefault();'", url);
                 content.AppendFormat(" onmouseup='navigateTo(\"{0}\");'", url);
             }
 

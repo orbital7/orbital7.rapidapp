@@ -62,13 +62,11 @@ namespace Microsoft.AspNetCore.Mvc
             return RAFormatAsShortTimeForTimeZone((DateTime?)value);
         }
 
-        private static IHtmlContent ToInput(this IDictionary<string, object> attributes)
+        private static IHtmlContent ToButton(this IDictionary<string, object> attributes, string text)
         {
-            var tagBuilder = new TagBuilder("input")
-            {
-                TagRenderMode = TagRenderMode.SelfClosing
-            };
+            var tagBuilder = new TagBuilder("button");
             tagBuilder.MergeAttributes(attributes);
+            tagBuilder.InnerHtml.AppendHtml(text);
 
             return tagBuilder;
         }
@@ -144,6 +142,10 @@ namespace Microsoft.AspNetCore.Mvc
                     else
                         html = Convert.ToDateTime(html).FormatAsShortDate();
                     html = "<span style='white-space: nowrap;'>" + html + "</span>";
+                }
+                else if (value is TimeSpan)
+                {
+                    html = ((TimeSpan)value).FormatTimeSpan();
                 }
                 else if (value is bool)
                 {

@@ -13,26 +13,30 @@ namespace Microsoft.AspNetCore.Mvc
 {
     public static partial class RAHtmlHelperExtensions
     {
-        // Data grid source: https://codepen.io/daveoncode/pen/LNomBE
         public static TagCloser RABeginDataGrid(
             this IHtmlHelper htmlHelper, 
+            string tableClass = null,
+            string tableStyle = null,
             bool fullHeight = true, 
             bool sortable = true,
-            bool updateRowColors = true,
-            int fullHeightBottomOffset = 2)
+            bool updateRowColors = true)
         {
             var tableId = Guid.NewGuid().ToString().Replace("-", "");
 
             var content = new HtmlContentBuilder();
-            content.AppendHtml("<div class='ra-datagrid-wrapper'>");
-            content.AppendFormat("<div class='ra-datagrid-container {0}' data-fullheight-offset='{1}'>", 
-                fullHeight ? "ra-fullheight" : "", fullHeightBottomOffset);
-            content.AppendFormat("<table id='{0}' class='ra-datagrid-table {1}'>", tableId, sortable ? "sort" : null);
-
+            content.AppendFormat("<table id='{0}' class='ra-datagrid-table {1} {2}' style='{3}'>", 
+                tableId, 
+                sortable ? "sort" : null,
+                tableClass,
+                tableStyle);
             htmlHelper.ViewContext.Writer.Write(content);
+
             var sortCommand = String.Format("new Tablesort(document.getElementById('{0}'));", tableId);
-            var closingTags = String.Format("</table></div></div><script>{0}setupDataGrid('{1}');resizeAll();</script>", 
-                sortable ? sortCommand : null, updateRowColors.Totruefalse());
+            var closingTags = String.Format("</table><script>{0}setupDataGrid('{1}',{2},{3});</script>", 
+                sortable ? sortCommand : null, 
+                tableId, 
+                fullHeight.Totruefalse(),
+                updateRowColors.Totruefalse());
             return new TagCloser(htmlHelper, closingTags);
         }
 
@@ -53,14 +57,20 @@ namespace Microsoft.AspNetCore.Mvc
             return new TagCloser(htmlHelper, "</tr>");
         }
 
-        public static IHtmlContent RADataGridHeadingCell(this IHtmlHelper htmlHelper, string cellValueHtml,
-            string cellClass = null, string cellStyle = null, bool sortable = true, string sortMethod = null, 
+        public static IHtmlContent RADataGridHeadingCell(
+            this IHtmlHelper htmlHelper, 
+            string cellValueHtml = null,
+            string cellClass = null, 
+            string cellStyle = null, 
+            bool sortable = true, 
+            string sortMethod = null, 
             bool isSortDefault = false)
         {
             if (!sortable)
                 sortMethod = "none";
 
-            return new HtmlString(String.Format("<th class='ra-datagrid-cell-header {0}' style='{1}' {2} {3}>{4}<div>{4}</div></th>",
+            return new HtmlString(String.Format("<th class='ra-datagrid-cell-header {0}' " +
+                "style='{1}' {2} {3}>{4}<sup class='ra-datagrid-sortaria' style='visibility: hidden;'>&#9650;</sup></th>",
                 cellClass, 
                 cellStyle, 
                 !String.IsNullOrEmpty(sortMethod) ? "data-sort-method='" + sortMethod + "'" : null, 

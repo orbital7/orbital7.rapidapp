@@ -16,8 +16,8 @@
                     onclick="loadSubTab_@{@this.Model.Id}('@item.Index');">
                     @item.Name
                 </div>
-            }
         }
+    }
 </div>
 
 <div id="@this.Model.Id" class="ra-subtabs-content ra-fullheight">
@@ -25,9 +25,9 @@
     {
         string id = this.Model.SubTabsName + "SubTab" + item.Index;
         <div id="@id"
-             class="ra-container ra-subtab-content"
-             data-tab-loaded="false"
-             data-tab-contenturl="@item.PartialViewUrl"></div>
+                class="ra-parent ra-subtab-content"
+                data-tab-loaded="false"
+                data-tab-contenturl="@item.PartialViewUrl"></div>
     }
 </div>
 
@@ -47,10 +47,9 @@
             subTabs.find(".ra-subtab-content").hide();
             var tabContent = subTabs.find("#@this.Model.SubTabsName" + "SubTab" + tabIndex);
             tabContent.show();
-            resizeAll();
 
             if (tabContent.attr("data-tab-loaded") === "false") {
-                showLoading(tabContent);
+                raShowLoading(tabContent);
                 $.get({
                     url: tabContent.attr("data-tab-contenturl"),
                     cache: false,
@@ -70,8 +69,6 @@
             }
         }
     }
-
-    resizeAll();
 
     @if (this.Model.SelectedIndex >= 0)
     {

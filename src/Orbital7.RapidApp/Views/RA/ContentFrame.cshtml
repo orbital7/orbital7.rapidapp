@@ -2,7 +2,7 @@
 
 <div id="@this.Model.ContainerId"
      class="@this.Model.ContainerClass"
-     style="@this.Model.ContainerStyle">
+     style="position: relative; @this.Model.ContainerStyle">
 
     <div id="@this.Model.ToolbarId">
         @if (this.Model.ShowToolbar)
@@ -20,14 +20,23 @@
         }
     </div>
 
-    <iframe id="@this.Model.FrameId"
-            name="@this.Model.FrameId"
-            frameborder="0"
-            class="@this.Model.FrameClass"
-            style="width: 100%; @this.Model.FrameStyle"
-            src="@this.Model.ContentUrl"></iframe>
+    @{
+        var wrapperId = this.Model.FrameId + "_wrapper";
+    }
 
-    <div id="@this.Model.LoadingId" class="tempMe" style="width: 100%; height: 100%;" />
+    <div id="@wrapperId"
+         class="ra-fullheight ra-container-scrollable-y ra-border ra-background-color-white @this.Model.FrameClass"
+         style="width: 100%; @this.Model.FrameStyle">
+        <iframe id="@this.Model.FrameId"
+                scrolling="no"
+                name="@this.Model.FrameId"
+                frameborder="0"
+                class="ra-background-color-white"
+                style="width: 100%; height: 0px; overflow: hidden;"
+                src="@this.Model.ContentUrl"></iframe>
+    </div>
+
+    <div id="@this.Model.LoadingId" style="width: 100%; height: 100%;" />
 
 </div>
 
@@ -44,28 +53,31 @@
 
         var toolbar = $("#@this.Model.ToolbarId");
         var frame = $("#@this.Model.FrameId");
+        var frameWrapper = $("#@wrapperId");
         var loading = $("#@this.Model.LoadingId");
 
-        showLoading(loading, @this.Model.ShowLoadingFullHeight.Totruefalse());
-        frame.hide();
+        raShowLoading(loading, @this.Model.ShowLoadingFullHeight.Totruefalse());
+        frameWrapper.hide();
         toolbar.hide();
 
         frame.on("load", function ()
         {
             loading.html("").hide();
 
-            if (isIPad())
-                $("#@this.Model.ContainerId").addClass("scroll-wrapper");
-
-            var height = 'calc(100% - ' + toolbar.outerHeight() + 'px)';
-            frame.css("height", height);
-            frame.show();
+            @*if (isIPad())
+                $("#@this.Model.ContainerId").addClass("scroll-wrapper");*@
+            frameWrapper.show();
             toolbar.show();
 
             @if (this.Model.PrintFrameOnLoad)
             {
                 <text>@this.Model.PrintFunctionName;</text>
             }
+
+            setTimeout(function () {
+                var myFrame = $("#@this.Model.FrameId");
+                myFrame.css("height", myFrame.contents().height() + "px");
+            }, 250);
         });
 
     });

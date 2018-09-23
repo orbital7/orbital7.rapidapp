@@ -22,7 +22,7 @@
             {
                 var id = "sideTabContent" + item.Index;
                 <div id="@id"
-                     class="ra-container ra-sidetab-content"
+                     class="ra-parent ra-sidetab-content"
                      data-tab-loaded="false"
                      data-tab-contenturl="@item.PartialViewUrl"></div>
             }
@@ -47,10 +47,9 @@
             sideTabs.find(".ra-sidetab-content").hide();
             var tabContent = sideTabs.find("#sideTabContent" + tabIndex);
             tabContent.show();
-            resizeAll();
 
             if (tabContent.attr("data-tab-loaded") === "false") {
-                showLoading(tabContent, false);
+                raShowLoading(tabContent, false);
                 $.get({
                     url: tabContent.attr("data-tab-contenturl"),
                     cache: false,
@@ -70,8 +69,6 @@
             }
         }
     }
-
-    resizeAll();
 
     @if (this.Model.SelectedIndex >= 0)
     {

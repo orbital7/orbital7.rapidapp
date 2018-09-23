@@ -16,21 +16,22 @@ namespace Microsoft.AspNetCore.Mvc
         {
             var content = new HtmlContentBuilder();
 
-            content.AppendFormat("<form type='{0}' src='{1}'>", "POST",
+            
+
+            content.AppendFormat("<nav class='navbar ra-toolbar {0}' style='{1}'>", toolbarClass, toolbarStyle);
+
+            content.AppendFormat("<form class='form-inline' type='{0}' src='{1}'>", "POST",
                 htmlHelper.ViewContext.HttpContext.Request.Path);
 
-            content.AppendFormat("<div class='navbar-form ra-toolbar {0}' style='{1}'>", toolbarClass, toolbarStyle);
-            content.AppendHtml("<div class='form-group form-group-sm'>");
-
             htmlHelper.ViewContext.Writer.Write(content);
-            return new TagCloser(htmlHelper, "</div></div></form>");
+            return new TagCloser(htmlHelper, "</form></nav>");
         }
 
         public static TagCloser RABeginToolbarSingleSelectedRowEditor(this IHtmlHelper htmlHelper)
         {
             var content = new HtmlContentBuilder();
             content.AppendHtml("</div>");   // Close off the primary form group from RABeginToolbar.
-            content.AppendHtml("<div class='form-group form-group-sm ra-datagrid-singleselect-toolbar-editor' style='display: none;'>");
+            content.AppendHtml("<div class='ra-datagrid-singleselect-toolbar-editor' style='display: none;'>");
             htmlHelper.ViewContext.Writer.Write(content);
             return new TagCloser(htmlHelper, "");
         }
@@ -39,7 +40,7 @@ namespace Microsoft.AspNetCore.Mvc
         {
             var content = new HtmlContentBuilder();
             content.AppendHtml("</div>");   // Close off the primary form group from RABeginToolbar.
-            content.AppendHtml("<div class='form-group form-group-sm ra-datagrid-multiselect-toolbar-editor' style='display: none;'>");
+            content.AppendHtml("<div class='ra-datagrid-multiselect-toolbar-editor' style='display: none;'>");
             htmlHelper.ViewContext.Writer.Write(content);
             return new TagCloser(htmlHelper, "");
         }
@@ -68,19 +69,20 @@ namespace Microsoft.AspNetCore.Mvc
             return content;
         }
 
-        public static IHtmlContent RAToolbarButton(this IHtmlHelper htmlHelper, string buttonText, object htmlAttributes = null,
-            string navigateToUrl = null)
+        public static IHtmlContent RAToolbarButton(
+            this IHtmlHelper htmlHelper, 
+            string buttonText, 
+            object htmlAttributes = null,
+            string navigateToUrl = null,
+            string buttonClass = "btn-secondary")
         {
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
-            attributes.AddButtonAttributes(buttonText);
+            attributes.AddButtonAttributes(buttonClass);
             attributes.AddToolbarButtonAttributes();
             if (!String.IsNullOrEmpty(navigateToUrl))
-            {
-                attributes.AddOrAppendToExisting("ontouchend", String.Format("navigateTo('{0}'); event.preventDefault()", navigateToUrl), "; ");
                 attributes.AddOrAppendToExisting("onmouseup", String.Format("navigateTo('{0}')", navigateToUrl), "; ");
-            }
 
-            return attributes.ToInput();
+            return attributes.ToButton(buttonText);
         }
 
         public static IHtmlContent RAToolbarShowDialogButton(this IHtmlHelper htmlHelper, string buttonText, string contentUrl,
@@ -96,7 +98,7 @@ namespace Microsoft.AspNetCore.Mvc
 
         private static void AddToolbarButtonAttributes(this IDictionary<string, object> attributes)
         {
-            attributes.AddOrAppendToExisting("class", "btn-default");
+            attributes.AddOrAppendToExisting("class", "btn-secondary");
             attributes.AddOrAppendToExisting("class", "btn-sm");
             attributes.AddOrAppendToExisting("class", "ra-toolbar-button");
         }
