@@ -19,7 +19,7 @@ namespace Microsoft.AspNetCore.Mvc
             string supplimentalRowHtml = null)
         {
             htmlHelper.ViewContext.Writer.Write(
-                "<tr class=\"clickable\" onmouseup=\"{0}\" {1}>", 
+                "<tr class=\"ra-clickable\" onmouseup=\"{0}\" {1}>", 
                 onClickUpScript, supplimentalRowHtml);
             return new TagCloser(htmlHelper, "</tr>");
         }
@@ -40,8 +40,8 @@ namespace Microsoft.AspNetCore.Mvc
                 content.AppendFormat("<td class='ra-touchtable-cell-image'><img src='{0}' class='ra-touchinput-image' /></td>", leftImageUrl);
             else
                 content.AppendHtml("<td></td>");
-            content.AppendFormat("<td class='ra-touchtable-cell font-bold'>{0}</td>", leftText);
-            content.AppendFormat("<td class='ra-touchtable-cell align-right'>{0}</td>", rightText);
+            content.AppendFormat("<td class='ra-touchtable-cell ra-font-bold'>{0}</td>", leftText);
+            content.AppendFormat("<td class='ra-touchtable-cell ra-align-right'>{0}</td>", rightText);
 
             return content;
         }

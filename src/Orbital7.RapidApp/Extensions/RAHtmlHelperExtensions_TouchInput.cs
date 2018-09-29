@@ -494,7 +494,7 @@ namespace Microsoft.AspNetCore.Mvc
         {
             content.AppendFormat("<div class='ra-touchinput ra-touchinput-field {0}' style='{1}'", touchInputClass, touchInputStyle);
             if (!String.IsNullOrEmpty(touchDialogValueEditUrl) || !isReadOnly)
-                content.AppendFormat("ontouchstart='showTouchDialog(event, this, \"{0}\");' onmousedown='showTouchDialog(event, this, \"{0}\");'", 
+                content.AppendFormat("ontouchstart='raShowTouchDialog(event, this, \"{0}\");' onmousedown='raShowTouchDialog(event, this, \"{0}\");'", 
                     touchDialogValueEditUrl, touchDialogValueEditUrl);
             content.AppendHtml(">");
             content.AppendFormat("<div class='ra-touchinput-field-value {0}' data-touchinput-type-primary='{1}' data-touchinput-type-secondary='{2}' {3} {4}>", 
@@ -516,7 +516,7 @@ namespace Microsoft.AspNetCore.Mvc
             object primaryDisplayValue = null, string secondaryValueId = null, object secondaryValue = null, string secondaryDisplayValueId = null, 
             object secondaryDisplayValue = null, string imageUrlId = null, object imageUrl = null)
         {
-            return String.Format("</div><script>updateTouchInputField('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}');</script></div>", 
+            return String.Format("</div><script>raUpdateTouchInputField('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}');</script></div>", 
                 primaryValueId, primaryValue, primaryDisplayValueId, primaryDisplayValue,
                 secondaryValueId, secondaryValue, secondaryDisplayValueId, secondaryDisplayValue,
                 imageUrlId, imageUrl);

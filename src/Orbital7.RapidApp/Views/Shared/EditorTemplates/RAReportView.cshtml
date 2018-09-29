@@ -1,52 +1,75 @@
 ﻿@using Orbital7.Extensions.Reporting
 @model Orbital7.RapidApp.Models.RAReportView
 
-@using (Html.RABeginToolbar(toolbarStyle: "margin-bottom: 0px !important;"))
-{
-    @Html.RAToolbarButton("Print", new { @onclick = "printReportFrame();" })
-    @Html.RAToolbarButton("Download as Pdf", null, this.Model.ReportPdfDownloadUrl)
+<div style="height: 100%;">
 
-    @if (this.Model.ReportNativeType != ReportNativeType.Pdf)
+    @using (Html.RABeginToolbar(toolbarStyle: "margin-bottom: 0px !important;"))
     {
-        @Html.RAToolbarButton("Download as " + this.Model.ReportNativeType.ToDisplayString(),
-            null, this.Model.ReportNativeDownloadUrl)
+        @Html.RAToolbarButton("Print", new { @onclick = "printReportFrame();" })
+        @Html.RAToolbarButton("Download as Pdf", null, this.Model.ReportPdfDownloadUrl)
+
+        @if (this.Model.ReportNativeType != ReportNativeType.Pdf)
+        {
+            @Html.RAToolbarButton("Download as " + this.Model.ReportNativeType.ToDisplayString(),
+                null, this.Model.ReportNativeDownloadUrl)
+        }
+
+        @if (this.Model.ReportNativeType == ReportNativeType.ExcelSpreadsheet)
+        {
+            @Html.RAToolbarButton("Download as CSV",
+                null, this.Model.ReportCsvDownloadUrl)
+        }
     }
 
-    @if (this.Model.ReportNativeType == ReportNativeType.ExcelSpreadsheet)
-    {
-        @Html.RAToolbarButton("Download as CSV",
-            null, this.Model.ReportCsvDownloadUrl)
-    }
-}
+    <div id="ra-report-frame-wrapper"
+         class="ra-fullheight ra-border"
+         style="width: 100%;">
+        <iframe id="ra-report-frame"
+                scrolling="no"
+                name="ra-report-frame"
+                frameborder="0"
+                class="ra-fullheight"
+                style="width: 100%;"
+                src="@this.Model.ReportPdfInlineDisplayUrl"></iframe>
+    </div>
 
-<div id="ra-report-frame-loading"
-     class="ra-fullheight"
-     data-fullheight-offset="-24">Generating report...</div>
+    <div id="ra-report-frame-loading" class="ra-border" style="width: 100%; height: calc(100% - 40px);" />
 
-<iframe id="ra-report-frame"
-        name="ra-report-frame"
-        frameborder="0"
-        class="ra-fullheight"
-        data-fullheight-offset="-33"
-        src="@this.Model.ReportPdfInlineDisplayUrl"></iframe>
+</div>
 
 <script>
 
-    function printReportFrame() {
+        function printReportFrame() {
 
-        var frame = window.frames["ra-report-frame"];
-        frame.focus();
-        frame.print();
-    }
+            var frame = window.frames["ra-report-frame"];
+            frame.focus();
+            frame.print();
+        }
 
-    $(document).ready(function () {
+        $(document).ready(function () {
 
-        $("#ra-report-frame").hide();
-        $("#ra-report-frame").on("load", function () {
-            $("#ra-report-frame-loading").hide();
-            $("#ra-report-frame").show();
+            var frame = $("#ra-report-frame");
+            var frameWrapper = $("#ra-report-frame-wrapper");
+            var loading = $("#ra-report-frame-loading");
+
+            raShowLoading(loading, false);
+            frameWrapper.hide();
+ 
+
+            frame.on("load", function ()
+            {
+                loading.html("").hide();
+
+                frameWrapper.show();
+
+                setTimeout(function () {
+                    var height = $("#ra-report-frame").contents().height();
+                    if (height > 0) {
+                        myFrame.css("height", myFrame + "px");
+                    }
+                }, 250);
+            });
+
         });
-
-    });
 
 </script>

@@ -97,17 +97,17 @@
             }
             @if (this.Model.ShowDoneButton)
             {
-                <td class="ra-touchpad-cell font-bold"
+                <td class="ra-touchpad-cell ra-font-bold"
                     ontouchstart="handleTouchStart(this);"
                     onmousedown="handleTouchStart(this);"
-                    ontouchend="handleTouchEnd(this); closeTouchDialog(); event.preventDefault();"
-                    onmouseup="handleTouchEnd(this); closeTouchDialog();">
+                    ontouchend="handleTouchEnd(this); raCloseTouchDialog(); event.preventDefault();"
+                    onmouseup="handleTouchEnd(this); raCloseTouchDialog();">
                     DONE
                 </td>
             }
             else
             {
-                <td class="ra-touchpad-cell font-bold">
+                <td class="ra-touchpad-cell ra-font-bold">
                     &nbsp;
                 </td>
 
@@ -156,7 +156,7 @@
     }
 
     function updateValueInput() {
-        updateTouchInputField("@this.Model.ValueId", _touchPadValue, "", "", "", "", "", "", "", "", "@this.Model.PostEditUpdateScript");
+        raUpdateTouchInputField("@this.Model.ValueId", _touchPadValue, "", "", "", "", "", "", "", "", "@this.Model.PostEditUpdateScript");
     }
 
 </script>

@@ -334,8 +334,8 @@ namespace Microsoft.AspNetCore.Mvc
                 touchPropertyBlockTypePrimary, touchPropertyBlockTypeSecondary);
             if (!String.IsNullOrEmpty(touchDialogValueEditUrl))
             {
-                content.AppendFormat("ontouchend='showTouchDialog(event, this, \"{0}\"); event.preventDefault();'", touchDialogValueEditUrl);
-                content.AppendFormat("onmouseup='showTouchDialog(event, this, \"{0}\");'", touchDialogValueEditUrl);
+                content.AppendFormat("ontouchend='raShowTouchDialog(event, this, \"{0}\"); event.preventDefault();'", touchDialogValueEditUrl);
+                content.AppendFormat("onmouseup='raShowTouchDialog(event, this, \"{0}\");'", touchDialogValueEditUrl);
             }
             content.AppendHtml(">");
             content.AppendFormat("<div class='ra-touchinput-field-label'>{0}</div>", displayLabel);

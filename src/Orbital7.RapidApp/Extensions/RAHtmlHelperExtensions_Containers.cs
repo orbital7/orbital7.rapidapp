@@ -28,7 +28,7 @@ namespace Microsoft.AspNetCore.Mvc
             string containerStyle = null)
         {
             var content = new HtmlContentBuilder();
-            content.AppendFormat("<div class='ra-container {0} {1} {2}' style='{3}'>",
+            content.AppendFormat("<div class='ra-container ra-parent {0} {1} {2}' style='{3}'>",
                 isPadded ? "ra-container-padded" : null,
                 GetScrollingClass(scrolling), 
                 containerClass, 

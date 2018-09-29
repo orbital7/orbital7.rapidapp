@@ -334,7 +334,7 @@
     <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-fonts.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-glyphbuttons.scss">
+    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-buttons.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-layout.scss">

@@ -42,12 +42,10 @@ namespace Microsoft.AspNetCore.Mvc
             content.AppendHtml("</tbody>");
             content.AppendHtml("</table>");
             content.AppendHtml("<div>");
-            content.AppendHtml("<a class=\"ra-glyphbutton ra-glyphbutton-green\" ");
-            content.AppendFormat("onmouseup=\"addDynamicTableRow('{0}', '{1}');\" ",
-                tableId, completeAjaxAddRowUrl);
-            content.AppendHtml("><span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span>");
-            content.AppendFormat("<span class=\"ra-glyphbutton-text\">{0}</span>", addRowLinkText);
-            content.AppendHtml("</a>");
+            content.AppendHtml(htmlHelper.RAButton("<i class='fas fa-plus'></i> " + addRowLinkText,
+                string.Format("raAddDynamicTableRow('{0}', '{1}');", tableId, completeAjaxAddRowUrl),
+                buttonClass: "btn-primary ra-btn-xs"));
+            content.AppendHtml("</button>");
             content.AppendHtml("</div>");
 
             return content;
@@ -67,10 +65,9 @@ namespace Microsoft.AspNetCore.Mvc
 
             var contentEnd = new HtmlContentBuilder();
             contentEnd.AppendHtml("<td>");
-            contentEnd.AppendHtml("<a class=\"ra-glyphbutton ra-glyphbutton-red\" ");
-            contentEnd.AppendHtml("onmouseup=\"removeDynamicTableRow(this);\">");
-            contentEnd.AppendHtml("<span class=\"glyphicon glyphicon-remove-sign\" aria-hidden=\"true\"></span>");
-            contentEnd.AppendHtml("</a>");
+            contentEnd.AppendHtml(htmlHelper.RAButton("<i class='fas fa-times'></i>",
+                "raRemoveDynamicTableRow(this);",
+                buttonClass: "btn-secondary ra-btn-xs ra-btn-delete"));
             contentEnd.AppendHtml(htmlHelper.HiddenFor(x => x.HtmlFieldPrefix));
             contentEnd.AppendFormat("<input type=\"hidden\" id=\"{0}\" name=\"{1}\" value=\"{2}\" />",
                 model.IndexId, model.IndexName, model.Index);

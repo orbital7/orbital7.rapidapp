@@ -57,7 +57,7 @@
                         tabContent.attr("data-tab-loaded", "true");
                         tabContent.html(response);
                         sideTabs.find(".ra-sidetabs-content").scrollTop(0);
-                        updateBindings();
+                        raUpdateBindings();
                     },
                     error: function (xhr) {
                         if (xhr.responseText)

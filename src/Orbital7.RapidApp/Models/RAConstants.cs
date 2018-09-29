@@ -8,7 +8,5 @@ namespace Microsoft.AspNetCore.Mvc
     public static class RAConstants
     {
         public const string DATAGRID_ID = "{datagrid-id}";
-
-        public const string DATAGRID_SELECTED_ROW_ID = "{datagrid-selected-row-id}";
     }
 }

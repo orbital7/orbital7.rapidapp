@@ -50,7 +50,7 @@ namespace Microsoft.AspNetCore.Mvc
             DashboardState state)
         {
             content.AppendFormat("<td class='ra-dashboard-cell-value-{0} ra-dashboard-cell-{1} {2}'",
-                    mainClass, state.ToString().ToLower(), !String.IsNullOrEmpty(url) ? "clickable" : null);
+                    mainClass, state.ToString().ToLower(), !String.IsNullOrEmpty(url) ? "ra-clickable" : null);
 
             if (!String.IsNullOrEmpty(url))
             {

@@ -16,8 +16,6 @@ namespace Microsoft.AspNetCore.Mvc
         {
             var content = new HtmlContentBuilder();
 
-            
-
             content.AppendFormat("<nav class='navbar ra-toolbar {0}' style='{1}'>", toolbarClass, toolbarStyle);
 
             content.AppendFormat("<form class='form-inline' type='{0}' src='{1}'>", "POST",
@@ -25,15 +23,6 @@ namespace Microsoft.AspNetCore.Mvc
 
             htmlHelper.ViewContext.Writer.Write(content);
             return new TagCloser(htmlHelper, "</form></nav>");
-        }
-
-        public static TagCloser RABeginToolbarSingleSelectedRowEditor(this IHtmlHelper htmlHelper)
-        {
-            var content = new HtmlContentBuilder();
-            content.AppendHtml("</div>");   // Close off the primary form group from RABeginToolbar.
-            content.AppendHtml("<div class='ra-datagrid-singleselect-toolbar-editor' style='display: none;'>");
-            htmlHelper.ViewContext.Writer.Write(content);
-            return new TagCloser(htmlHelper, "");
         }
 
         public static TagCloser RABeginToolbarMultiSelectedRowEditor(this IHtmlHelper htmlHelper)

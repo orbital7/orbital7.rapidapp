@@ -58,7 +58,7 @@ namespace Orbital7.RapidApp.Models
 
             if (!item.IsVisible)
             {
-                className = "invisible";
+                className = "ra-hide";
             }
             else if (item.Index == this.SelectedIndex)
             {

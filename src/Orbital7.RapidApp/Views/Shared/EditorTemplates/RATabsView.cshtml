@@ -58,7 +58,7 @@
                         tabContent.attr("data-tab-loaded", "true");
                         tabContent.html(response);
                         $(".ra-tabs-content").scrollTop(0);
-                        updateBindings();
+                        raUpdateBindings();
                     },
                     error: function (xhr) {
                         if (xhr.responseText)

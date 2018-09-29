@@ -6,7 +6,7 @@
                 <button id="ra-dialog-cancelbutton-corner"
                         type="button"
                         class="close"
-                        onclick="closeModalDialog(event);"
+                        onclick="raCloseModalDialog(event);"
                         aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -19,18 +19,14 @@
                 <span id="ra-dialog-processing" style="display: none;">
                     <img src="/orbital7-rapidapp/dist/images/spinners/ra-spinner-sm.gif" /> Processing...
                 </span>
-                <button type="button"
-                        class="btn btn-secondary btn-lg"
-                        id="ra-dialog-cancelbutton"
-                        onclick="closeModalDialog(event);">
-                    CANCEL
-                </button>
-                <button type="button"
-                        class="btn btn-primary btn-lg"
-                        id="ra-dialog-actionbutton"
-                        onmouseup="submitModalDialog(event);">
-                    ACTION
-                </button>
+                @Html.RAButton("CANCEL",
+                    "raCloseModalDialog(event);",
+                    buttonClass: "btn-secondary btn-lg",
+                    buttonId: "ra-dialog-cancelbutton")
+                @Html.RAButton("ACTION",
+                    "submitModalDialog(event);",
+                    buttonClass: "btn-primary btn-lg",
+                    buttonId: "ra-dialog-actionbutton")
             </div>
         </div>
     </div>
@@ -38,5 +34,8 @@
 
 <div class="ra-layout-minimum-size">
     <div class="ra-layout-minimum-size-title">Display Too Small</div>
-    <div class="ra-layout-minimum-size-message">Please rotate your device or increase your window size</div>
+    <div class="ra-layout-minimum-size-message">
+        Please <span class="ra-font-bold">rotate</span> your device 
+        or <span class="ra-font-bold">resize</span> your browser window
+    </div>
 </div>

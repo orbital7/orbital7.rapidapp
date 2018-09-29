@@ -62,7 +62,9 @@ namespace Microsoft.AspNetCore.Mvc
             return RAFormatAsShortTimeForTimeZone((DateTime?)value);
         }
 
-        private static IHtmlContent ToButton(this IDictionary<string, object> attributes, string text)
+        private static IHtmlContent ToButton(
+            this IDictionary<string, object> attributes, 
+            string text)
         {
             var tagBuilder = new TagBuilder("button");
             tagBuilder.MergeAttributes(attributes);
@@ -141,7 +143,7 @@ namespace Microsoft.AspNetCore.Mvc
                         html = Convert.ToDateTime(html).RAFormatAsShortDateTimeForTimeZone();
                     else
                         html = Convert.ToDateTime(html).FormatAsShortDate();
-                    html = "<span style='white-space: nowrap;'>" + html + "</span>";
+                    html = "<span class='ra-nowrap'>" + html + "</span>";
                 }
                 else if (value is TimeSpan)
                 {
@@ -194,7 +196,7 @@ namespace Microsoft.AspNetCore.Mvc
             if (value != null)
             {
                 if (value is int || value is decimal || value is double)
-                    classname = "align-right";
+                    classname = "ra-align-right";
             }
 
             return classname;
@@ -213,7 +215,7 @@ namespace Microsoft.AspNetCore.Mvc
             content.AppendFormat("<div id=\"{0}AjaxContent\" class=\"{1}\" style=\"{2}\" data-content-url=\"{3}\" data-content-url-script=\"{4}\"></div>", 
                 contentKey, contentClass, contentStyle, contentUrl, contentUrlScript);
 
-            content.AppendFormat("<script>updateAjaxContentSection('{0}');{1}</script>", contentKey, postUpdateScript);
+            content.AppendFormat("<script>raUpdateAjaxContentSection('{0}');{1}</script>", contentKey, postUpdateScript);
 
             return content;
         }
