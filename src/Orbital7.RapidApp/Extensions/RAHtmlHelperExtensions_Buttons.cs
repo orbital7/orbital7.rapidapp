@@ -76,10 +76,9 @@ namespace Microsoft.AspNetCore.Mvc
             string buttonType = "button")
         {
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
-            attributes.AddButtonAttributes(buttonClass, buttonType);
+            attributes.AddButtonAttributes(buttonClass, buttonStyle, buttonType);
             if (!string.IsNullOrEmpty(buttonId))
                 attributes.AddIfMissing("id", buttonId);
-            attributes.AddOrInsertToExisting("style", buttonStyle);
             attributes.Add("onmouseup", actionScript);
 
             return attributes.ToButton(buttonHtml);
@@ -96,10 +95,11 @@ namespace Microsoft.AspNetCore.Mvc
             string actionButtonCaption = "Save", 
             bool showCancelButton = true, 
             string cancelButtonCaption = "Cancel",
-            string buttonClass = "btn-secondary")
+            string buttonClass = "btn-secondary",
+            string buttonStyle = null)
         {
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
-            attributes.AddButtonAttributes(buttonClass);
+            attributes.AddButtonAttributes(buttonClass, buttonStyle);
             attributes.Add("onmouseup", htmlHelper.RAShowDialogOnClickScript(contentUrl, returnAction, dialogTitle ?? buttonHtml,
                 showActionButton, actionButtonCaption, showCancelButton, cancelButtonCaption));
 
@@ -143,9 +143,11 @@ namespace Microsoft.AspNetCore.Mvc
         private static void AddButtonAttributes(
             this IDictionary<string, object> attributes,
             string buttonClass,
+            string buttonStyle = null,
             string buttonType = "button")
         {
             attributes.AddOrInsertToExisting("class", "btn " + buttonClass);
+            attributes.AddOrInsertToExisting("style", buttonStyle);
             attributes.Add("type", buttonType);
         }
     }

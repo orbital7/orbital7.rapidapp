@@ -40,6 +40,7 @@
 
         var tab = $("#ra-tab-" + tabIndex);
         if (!tab.hasClass("ra-tab-header-selected")) {
+
             $(".ra-tab").removeClass("ra-tab-header-selected");
             $(".ra-tab").addClass("ra-tab-header");
             tab.removeClass("ra-tab-header");
@@ -49,26 +50,46 @@
             var tabContent = $("#ra-tab-content-" + tabIndex);
             tabContent.show();
 
-            if (tabContent.attr("data-tab-loaded") === "false") {
-                raShowLoading(tabContent);
-                $.get({
-                    url: tabContent.attr("data-tab-contenturl"),
-                    cache: false,
-                    success: function (response) {
-                        tabContent.attr("data-tab-loaded", "true");
-                        tabContent.html(response);
-                        $(".ra-tabs-content").scrollTop(0);
-                        raUpdateBindings();
-                    },
-                    error: function (xhr) {
-                        if (xhr.responseText)
-                            tabContent.html(xhr.responseText);
-                        else
-                            tabContent.html("<strong class='red'>ERROR:</strong> Tab content could not be loaded");
-                    }
-                });
-            }
+            if (tabContent.attr("data-tab-loaded") === "false")
+                loadTabContent(tabContent);
         }
+    }
+
+    function loadTabContent(tabContent) {
+
+        raShowLoading(tabContent);
+
+        $.get({
+            url: tabContent.attr("data-tab-contenturl"),
+            cache: false,
+            success: function (response) {
+                tabContent.attr("data-tab-loaded", "true");
+                tabContent.html(response);
+                $(".ra-tabs-content").scrollTop(0);
+                raUpdateBindings();
+            },
+            error: function (xhr) {
+                if (xhr.responseText)
+                    tabContent.html(xhr.responseText);
+                else
+                    tabContent.html("<strong class='red'>ERROR:</strong> Tab content could not be loaded");
+            }
+        });
+    }
+
+    function raUpdateTabUrl(tabIndex, contentUrl) {
+
+        var tabContent = $("#ra-tab-content-" + tabIndex);
+        tabContent.attr("data-tab-contenturl", contentUrl);
+        tabContent.attr("data-tab-loaded", "false");
+    }
+
+    function raReloadCurrentTab() {
+
+        var tabSelected = $(".ra-tab-header-selected");
+        var tabIndex = tabSelected.attr("data-tab-index");
+        var tabContent = $("#ra-tab-content-" + tabIndex); 
+        loadTabContent(tabContent);
     }
 
     @if (this.Model.SelectedIndex >= 0)

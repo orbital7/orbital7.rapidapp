@@ -22,6 +22,19 @@ namespace Microsoft.AspNetCore.Mvc
 
     public static partial class RAHtmlHelperExtensions
     {
+        public static IHtmlContent RATwoLineDateTime<TModel>(
+            this IHtmlHelper<TModel> htmlHelper,
+            DateTime? dateTimeUtc)
+        {
+            var content = new HtmlContentBuilder();
+
+            content.AppendFormat("<div class='ra-nowrap'>{0}</div> <div class='ra-nowrap'>{1}</div>",
+                dateTimeUtc.RAFormatAsShortDateForTimeZone(),
+                dateTimeUtc.RAFormatAsShortTimeForTimeZone());
+
+            return content;
+        }
+
         public static IHtmlContent RACheckBoxFor<TModel>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, bool>> expression,
@@ -154,17 +167,20 @@ namespace Microsoft.AspNetCore.Mvc
                 else if (modelExplorer.ModelType == typeof(DateTime?))
                     value = ((DateTime?)modelExplorer.Model).FormatAsShortDate();
 
-                attributes.AddOrAppendToExisting("class", "ra-behavior-datepicker");
+                attributes.AddOrAppendToExisting("class", "ra-behavior-datepicker ra-clickable");
                 if (isToolbar)
-                {
-                    attributes.AddOrAppendToExisting("class", "ra-toolbar-datepicker ra-clickable");
-                    attributes.AddIfMissing("readonly", "true");
-                }
+                    attributes.AddOrAppendToExisting("class", "ra-toolbar-datepicker");
+                attributes.AddIfMissing("readonly", "true");
                 content.AppendHtml(htmlHelper.TextBoxFor(expression, value, attributes));
             }
             else if (modelExplorer.ModelType.IsNumeric())
             {
                 attributes.AddIfMissing("type", "number");
+                if (modelExplorer.ModelType == typeof(decimal) || modelExplorer.ModelType == typeof(decimal?))
+                {
+                    attributes.AddIfMissing("placeholder", "0.00");
+                    attributes.AddIfMissing("min", "0");
+                }
                 content.AppendHtml(htmlHelper.TextBoxFor(expression, attributes));
             }
             else if (dataTypeAttribute?.DataType == DataType.Password || expression.HasAttribute(typeof(PasswordAttribute)))

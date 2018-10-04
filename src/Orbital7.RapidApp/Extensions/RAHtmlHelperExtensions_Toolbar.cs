@@ -63,10 +63,11 @@ namespace Microsoft.AspNetCore.Mvc
             string buttonText, 
             object htmlAttributes = null,
             string navigateToUrl = null,
-            string buttonClass = "btn-secondary")
+            string buttonClass = "btn-secondary",
+            string buttonStyle = null)
         {
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
-            attributes.AddButtonAttributes(buttonClass);
+            attributes.AddButtonAttributes(buttonClass, buttonStyle);
             attributes.AddToolbarButtonAttributes();
             if (!String.IsNullOrEmpty(navigateToUrl))
                 attributes.AddOrAppendToExisting("onmouseup", String.Format("navigateTo('{0}')", navigateToUrl), "; ");

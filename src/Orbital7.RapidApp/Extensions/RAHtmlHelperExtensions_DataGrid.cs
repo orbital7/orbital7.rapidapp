@@ -11,13 +11,20 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Mvc
 {
+    public enum RASortDirection
+    {
+        Ascending,
+
+        Descending
+    }
+
     public static partial class RAHtmlHelperExtensions
     {
         public static TagCloser RABeginDataGrid(
             this IHtmlHelper htmlHelper, 
             string tableClass = null,
             string tableStyle = null,
-            bool fullHeight = true, 
+            int fixedHeight = 0, 
             bool sortable = true,
             bool updateRowColors = true)
         {
@@ -35,7 +42,7 @@ namespace Microsoft.AspNetCore.Mvc
             var closingTags = String.Format("</table><script>{0}setupDataGrid('{1}',{2},{3});</script>", 
                 sortable ? sortCommand : null, 
                 tableId, 
-                fullHeight.Totruefalse(),
+                fixedHeight,
                 updateRowColors.Totruefalse());
             return new TagCloser(htmlHelper, closingTags);
         }
@@ -64,29 +71,97 @@ namespace Microsoft.AspNetCore.Mvc
             string cellStyle = null, 
             bool sortable = true, 
             string sortMethod = null, 
-            bool isSortDefault = false)
+            bool isSortDefault = false,
+            RASortDirection? sortDirection = null)
+        {
+            var content = new HtmlContentBuilder();
+
+            content.AppendHtml(GetDataGridHeadingCellStartHtml(
+                cellClass,
+                cellStyle,
+                sortable,
+                sortMethod,
+                isSortDefault,
+                sortDirection));
+            content.AppendHtml(cellValueHtml);
+            content.AppendHtml(GetDataGridHeadingCellEndHtml());
+
+            return content;
+        }
+
+        private static string GetDataGridHeadingCellStartHtml(
+            string cellClass = null,
+            string cellStyle = null,
+            bool sortable = true,
+            string sortMethod = null,
+            bool isSortDefault = false,
+            RASortDirection? sortDirection = null)
         {
             if (!sortable)
                 sortMethod = "none";
 
-            return new HtmlString(String.Format("<th class='ra-datagrid-cell-header {0}' " +
-                "style='{1}' {2} {3}>{4}<sup class='ra-datagrid-sortaria' style='visibility: hidden;'>&#9650;</sup></th>",
-                cellClass, 
-                cellStyle, 
-                !String.IsNullOrEmpty(sortMethod) ? "data-sort-method='" + sortMethod + "'" : null, 
+            // NB: Due to a peculiarity of how TableSort handles initial sorting, we 
+            // need to specify the OPPOSITE of what we actually want here.
+            string sortAria = null;
+            if (sortDirection.HasValue)
+            {
+                // Intentionally opposite.
+                if (sortDirection.Value == RASortDirection.Ascending)
+                    sortAria = "descending";
+                else
+                    sortAria = "ascending";
+            }
+
+            return String.Format("<th class='ra-datagrid-cell-header {0} {1}' " +
+                "style='{2}' {3} {4} {5}>",
+                cellClass,
+                sortable ? null : "ra-datagrid-notsortable",
+                cellStyle,
+                !String.IsNullOrEmpty(sortMethod) ? "data-sort-method='" + sortMethod + "'" : null,
                 sortable && isSortDefault ? "data-sort-default" : null,
-                cellValueHtml));
+                sortable && sortDirection.HasValue ? "aria-sort='" + sortAria + "'" : null);
         }
 
-        public static IHtmlContent RADataGridHeadingCellFor<TModel, TProperty>(this IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, TProperty>> expression, string cellClass = null, string cellStyle = null,
-            bool sortable = true, string sortMethodOverride = null, bool isSortDefault = false)
+        private static string GetDataGridHeadingCellEndHtml()
+        {
+            return "<sup class='ra-datagrid-sortaria' style='visibility: hidden;'>&#9650;</sup></th>";
+        }
+
+        public static IHtmlContent RADataGridHeadingCellFor<TModel, TProperty>(
+            this IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression, 
+            string cellClass = null, 
+            string cellStyle = null,
+            bool sortable = true, 
+            string sortMethodOverride = null, 
+            bool isSortDefault = false,
+            RASortDirection? sortDirection = null)
         {
             var modelExplorer = htmlHelper.GetModelExplorer(expression);
             var sortMethod = sortable && String.IsNullOrEmpty(sortMethodOverride) ? GetSortMethod(modelExplorer) : sortMethodOverride;
 
             return RADataGridHeadingCell(htmlHelper, modelExplorer.GetPropertyDisplayName(),
-                cellClass, cellStyle, sortable, sortMethod, isSortDefault);
+                cellClass, cellStyle, sortable, sortMethod, isSortDefault, sortDirection);
+        }
+
+
+        public static TagCloser RABeginDataGridHeadingCell(
+            this IHtmlHelper htmlHelper, 
+            string cellClass = null, 
+            string cellStyle = null,
+            bool sortable = true,
+            string sortMethod = null,
+            bool isSortDefault = false,
+            RASortDirection? sortDirection = null)
+        {
+            htmlHelper.ViewContext.Writer.Write(GetDataGridHeadingCellStartHtml(
+                cellClass,
+                cellStyle,
+                sortable,
+                sortMethod,
+                isSortDefault,
+                sortDirection));
+            return new TagCloser(htmlHelper, GetDataGridHeadingCellEndHtml());
         }
 
         private static string GetSortMethod(ModelExplorer modelExplorer)
