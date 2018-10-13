@@ -13,7 +13,7 @@ namespace Orbital7.RapidApp.Controllers
     {
         public IActionResult JumpToUrl(string url)
         {
-            return PartialView(url);
+            return PartialView("JumpToUrl", url);
         }
 
         public IActionResult RawHtmlContent(string html)

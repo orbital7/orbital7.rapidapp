@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.FileProviders;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,17 +9,40 @@ namespace Microsoft.AspNetCore.Builder
 {
     public static class StaticFileExtensions
     {
-        public static IApplicationBuilder UseLocalRAStaticFiles(
-            this IApplicationBuilder app)
+        //public static IApplicationBuilder UseLocalRAStaticFiles(
+        //    this IApplicationBuilder app)
+        //{
+        //    var localWWWRootPath = Path.Combine(Directory.GetCurrentDirectory(), @"bin\debug\net461\wwwroot");
+        //    if (Directory.Exists(localWWWRootPath))
+        //    {
+        //        app.UseStaticFiles(new StaticFileOptions
+        //        {
+        //            FileProvider = new PhysicalFileProvider(localWWWRootPath),
+        //            RequestPath = ""
+        //        });
+        //    }
+
+        //    return app;
+        //}
+
+        public static IApplicationBuilder ExtendWebRootStaticFiles(
+            this IApplicationBuilder app,
+            IHostingEnvironment env,
+            string physicalPath,
+            string requestPath)
         {
-            var localWWWRootPath = Path.Combine(Directory.GetCurrentDirectory(), @"bin\debug\net461\wwwroot");
-            if (Directory.Exists(localWWWRootPath))
+            if (Directory.Exists(physicalPath))
             {
-                app.UseStaticFiles(new StaticFileOptions
+                var compositeProvider = new CompositeFileProvider(
+                    env.WebRootFileProvider,
+                    new PhysicalFileProvider(physicalPath));
+                env.WebRootFileProvider = compositeProvider;
+                var options = new StaticFileOptions()
                 {
-                    FileProvider = new PhysicalFileProvider(localWWWRootPath),
-                    RequestPath = ""
-                });
+                    FileProvider = compositeProvider,
+                    RequestPath = requestPath,
+                };
+                app.UseStaticFiles(options);
             }
 
             return app;
