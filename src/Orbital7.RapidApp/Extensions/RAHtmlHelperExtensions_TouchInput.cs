@@ -35,11 +35,12 @@ namespace Microsoft.AspNetCore.Mvc
             string leftDisplayValueClass = null,
             string rightDisplayValueClass = null,
             string leftDisplayValueStyle = null,
-            string rightDisplayValueStyle = null)
+            string rightDisplayValueStyle = null,
+            string onMouseDownMethod = "raShowTouchDialog")
         {
             return htmlHelper.TouchInputFor<TModel, object, TProperty1, object, object, object>(null, primaryValueExpression, 
                 null, null, null, touchDialogValueEditUrl, leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, 
-                rightDisplayValueStyle);
+                rightDisplayValueStyle, onMouseDownMethod: onMouseDownMethod);
         }
 
         public static IHtmlContent RATouchInputFor<TModel, TProperty1, TProperty2>(this IHtmlHelper<TModel> htmlHelper,
@@ -50,11 +51,12 @@ namespace Microsoft.AspNetCore.Mvc
             string rightDisplayValueClass = null,
             string leftDisplayValueStyle = null,
             string rightDisplayValueStyle = null,
-            bool readOnly = false)
+            bool readOnly = false,
+            string onMouseDownMethod = "raShowTouchDialog")
         {
             return htmlHelper.TouchInputFor<TModel, object, TProperty1, TProperty2, object, object>(null, primaryValueExpression,
                 primaryDisplayValueExpression, null, null, touchDialogValueEditUrl, leftDisplayValueClass, rightDisplayValueClass, 
-                leftDisplayValueStyle, rightDisplayValueStyle, readOnly);
+                leftDisplayValueStyle, rightDisplayValueStyle, readOnly, onMouseDownMethod: onMouseDownMethod);
         }
 
         public static IHtmlContent RATouchInputFor<TModel, TProperty1, TProperty2, TProperty3>(this IHtmlHelper<TModel> htmlHelper,
@@ -65,11 +67,12 @@ namespace Microsoft.AspNetCore.Mvc
             string leftDisplayValueClass = null,
             string rightDisplayValueClass = null,
             string leftDisplayValueStyle = null,
-            string rightDisplayValueStyle = null)
+            string rightDisplayValueStyle = null,
+            string onMouseDownMethod = "raShowTouchDialog")
         {
             return htmlHelper.TouchInputFor<TModel, object, TProperty1, TProperty2, TProperty3, object>(null, primaryValueExpression,
                 primaryDisplayValueExpression, secondaryValueExpression, null, touchDialogValueEditUrl, leftDisplayValueClass, 
-                rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle);
+                rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle, onMouseDownMethod: onMouseDownMethod);
         }
 
         public static IHtmlContent RATouchInputFor<TModel, TProperty1, TProperty2, TProperty3, TProperty4>(this IHtmlHelper<TModel> htmlHelper,
@@ -81,11 +84,13 @@ namespace Microsoft.AspNetCore.Mvc
             string leftDisplayValueClass = null,
             string rightDisplayValueClass = null,
             string leftDisplayValueStyle = null,
-            string rightDisplayValueStyle = null)
+            string rightDisplayValueStyle = null,
+            string onMouseDownMethod = "raShowTouchDialog")
         {
             return htmlHelper.TouchInputFor<TModel, object, TProperty1, TProperty2, TProperty3, TProperty4>(null, primaryValueExpression,
                 primaryDisplayValueExpression, secondaryValueExpression, secondaryDisplayValueExpression, touchDialogValueEditUrl,
-                leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle);
+                leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle, 
+                onMouseDownMethod: onMouseDownMethod);
         }
 
         public static IHtmlContent RATouchInputWithImageFor<TModel, TProperty1, TProperty2>(this IHtmlHelper<TModel> htmlHelper,
@@ -95,11 +100,12 @@ namespace Microsoft.AspNetCore.Mvc
             string leftDisplayValueClass = null,
             string rightDisplayValueClass = null,
             string leftDisplayValueStyle = null,
-            string rightDisplayValueStyle = null)
+            string rightDisplayValueStyle = null,
+            string onMouseDownMethod = "raShowTouchDialog")
         {
             return htmlHelper.TouchInputFor<TModel, TProperty1, TProperty2, object, object, object>(imageUrlExpression, 
                 primaryValueExpression, null, null, null, touchDialogValueEditUrl, leftDisplayValueClass, rightDisplayValueClass, 
-                leftDisplayValueStyle, rightDisplayValueStyle);
+                leftDisplayValueStyle, rightDisplayValueStyle, onMouseDownMethod: onMouseDownMethod);
         }
 
         public static IHtmlContent RATouchInputWithImageFor<TModel,TProperty1, TProperty2, TProperty3>(this IHtmlHelper<TModel> htmlHelper,
@@ -110,11 +116,12 @@ namespace Microsoft.AspNetCore.Mvc
             string leftDisplayValueClass = null,
             string rightDisplayValueClass = null,
             string leftDisplayValueStyle = null,
-            string rightDisplayValueStyle = null)
+            string rightDisplayValueStyle = null,
+            string onMouseDownMethod = "raShowTouchDialog")
         {
             return htmlHelper.TouchInputFor<TModel, TProperty1, TProperty2, TProperty3, object, object>(imageUrlExpression, primaryValueExpression,
                 primaryDisplayValueExpression, null, null, touchDialogValueEditUrl, leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, 
-                rightDisplayValueStyle);
+                rightDisplayValueStyle, onMouseDownMethod: onMouseDownMethod);
         }
 
         public static IHtmlContent RATouchInputReadOnlyWithImageFor<TModel, TProperty1, TProperty2, TProperty3>(this IHtmlHelper<TModel> htmlHelper,
@@ -140,11 +147,12 @@ namespace Microsoft.AspNetCore.Mvc
             string leftDisplayValueClass = null,
             string rightDisplayValueClass = null,
             string leftDisplayValueStyle = null,
-            string rightDisplayValueStyle = null)
+            string rightDisplayValueStyle = null,
+            string onMouseDownMethod = "raShowTouchDialog")
         {
             return htmlHelper.TouchInputFor<TModel, TProperty1, TProperty2, TProperty3, TProperty4, object>(imageUrlExpression, primaryValueExpression,
                 primaryDisplayValueExpression, secondaryValueExpression, null, touchDialogValueEditUrl, leftDisplayValueClass, rightDisplayValueClass, 
-                leftDisplayValueStyle, rightDisplayValueStyle);
+                leftDisplayValueStyle, rightDisplayValueStyle, onMouseDownMethod: onMouseDownMethod);
         }
 
         public static IHtmlContent RATouchInputWithImageFor<TModel, TProperty1, TProperty2, TProperty3, TProperty4, TProperty5>(this IHtmlHelper<TModel> htmlHelper,
@@ -157,11 +165,12 @@ namespace Microsoft.AspNetCore.Mvc
             string leftDisplayValueClass = null,
             string rightDisplayValueClass = null,
             string leftDisplayValueStyle = null,
-            string rightDisplayValueStyle = null)
+            string rightDisplayValueStyle = null,
+            string onMouseDownMethod = "raShowTouchDialog")
         {
             return htmlHelper.TouchInputFor<TModel, TProperty1, TProperty2, TProperty3, TProperty4, TProperty5>(imageUrlExpression, primaryValueExpression,
                 primaryDisplayValueExpression, secondaryValueExpression, secondaryDisplayValueExpression, touchDialogValueEditUrl,
-                leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle);
+                leftDisplayValueClass, rightDisplayValueClass, leftDisplayValueStyle, rightDisplayValueStyle, onMouseDownMethod: onMouseDownMethod);
         }
 
         private static IHtmlContent TouchInputFor<TModel, TProperty1, TProperty2, TProperty3, TProperty4, TProperty5>(this IHtmlHelper<TModel> htmlHelper,
@@ -175,7 +184,8 @@ namespace Microsoft.AspNetCore.Mvc
             string rightDisplayValueClass = null,
             string leftDisplayValueStyle = null,
             string rightDisplayValueStyle = null, 
-            bool readOnly = false)
+            bool readOnly = false,
+            string onMouseDownMethod = "raShowTouchDialog")
         {
             var primaryValueModelExplorer = htmlHelper.GetModelExplorer(primaryValueExpression);
             var primaryDisplayValueModelExplorer = primaryDisplayValueExpression != null ?
@@ -213,7 +223,8 @@ namespace Microsoft.AspNetCore.Mvc
                 !String.IsNullOrEmpty(imageUrlId),
                 readOnly,
                 null,
-                null);
+                null,
+                onMouseDownMethod);
             content.AppendHtml(htmlHelper.HiddenFor(primaryValueExpression));
 
             if (primaryDisplayValueExpression != null)
@@ -434,7 +445,8 @@ namespace Microsoft.AspNetCore.Mvc
             string staticImageUrl = null,
             bool isReadOnly = false,
             double? minValue = null,
-            double? maxValue = null)
+            double? maxValue = null,
+            string onMouseDownMethod = "raShowTouchDialog")
         {
             var modelExplorer = htmlHelper.GetModelExplorer(valueExpression);
             var valueId = htmlHelper.IdFor(valueExpression);
@@ -458,7 +470,8 @@ namespace Microsoft.AspNetCore.Mvc
                 imageUrlExpression != null || !String.IsNullOrEmpty(staticImageUrl), 
                 isReadOnly,
                 minValue,
-                maxValue);
+                maxValue,
+                onMouseDownMethod);
 
             content.AppendHtml(htmlHelper.HiddenFor(valueExpression));
             if (imageUrlExpression != null)
@@ -490,12 +503,13 @@ namespace Microsoft.AspNetCore.Mvc
             bool hasImage,
             bool isReadOnly,
             double? minValue,
-            double? maxValue)
+            double? maxValue,
+            string onMouseDownMethod)
         {
             content.AppendFormat("<div class='ra-touchinput ra-touchinput-field {0}' style='{1}'", touchInputClass, touchInputStyle);
             if (!String.IsNullOrEmpty(touchDialogValueEditUrl) || !isReadOnly)
-                content.AppendFormat("ontouchstart='raShowTouchDialog(event, this, \"{0}\");' onmousedown='raShowTouchDialog(event, this, \"{0}\");'", 
-                    touchDialogValueEditUrl, touchDialogValueEditUrl);
+                content.AppendFormat("onmousedown='{0}(event, this, \"{1}\");'",
+                    onMouseDownMethod, touchDialogValueEditUrl);
             content.AppendHtml(">");
             content.AppendFormat("<div class='ra-touchinput-field-value {0}' data-touchinput-type-primary='{1}' data-touchinput-type-secondary='{2}' {3} {4}>", 
                 isReadOnly ? "ra-touchinput-field-value-readonly" : "", 
