@@ -175,7 +175,7 @@ namespace Microsoft.AspNetCore.Mvc
                 }
                 else if (value is string && !String.IsNullOrEmpty(fieldName) && fieldName.ToUpper().EndsWith("PASSWORD"))
                 {
-                    html = value?.ToString().Mask();
+                    html = value?.ToString().Mask(maskChar: "•");
                 }
                 else if (value is string && !String.IsNullOrEmpty(fieldName) && fieldName.ToUpper().EndsWith("PHONENUMBER"))
                 {
