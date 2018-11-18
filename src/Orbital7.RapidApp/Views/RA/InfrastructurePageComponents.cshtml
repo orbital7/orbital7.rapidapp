@@ -1,4 +1,6 @@
-﻿<div id="ra-dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ra-dialog-title">
+﻿@model Orbital7.RapidApp.Models.InfrastructurePageComponentsModel
+
+<div id="ra-dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ra-dialog-title">
     <div class="modal-dialog" role="document">
         <div id="ra-dialog-modal-content" class="modal-content">
             <div class="modal-header">
@@ -33,9 +35,10 @@
 </div>
 
 <div class="ra-layout-minimum-size">
-    <div class="ra-layout-minimum-size-title">Display Too Small</div>
+    <div class="ra-layout-minimum-size-title">
+        @this.Model.LayoutMinimumSizeTitle
+    </div>
     <div class="ra-layout-minimum-size-message">
-        Please <span class="ra-font-bold">rotate</span> your device 
-        or <span class="ra-font-bold">resize</span> your browser window
+        @Html.Raw(this.Model.LayoutMinimumSizeMessageHtml)
     </div>
 </div>

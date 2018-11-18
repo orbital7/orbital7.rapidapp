@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Orbital7.RapidApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,9 +10,19 @@ namespace Microsoft.AspNetCore.Mvc
     public static partial class RAHtmlHelperExtensions
     {
         public static IHtmlContent RAInfrastructurePageComponents(
-            this IHtmlHelper htmlHelper)
+            this IHtmlHelper htmlHelper,
+            string layoutMinimumSizeTitle = "Whoops!",
+            string layoutMinimumSizeMessageHtml = 
+                "Please <span class='ra-font-bold'>rotate</span> your device or " +
+                "<span class='ra-font-bold'>resize</span> your browser window")
         {
-            return htmlHelper.Partial("~/Views/RA/InfrastructurePageComponents.cshtml");
+            var model = new InfrastructurePageComponentsModel()
+            {
+                LayoutMinimumSizeTitle = layoutMinimumSizeTitle,
+                LayoutMinimumSizeMessageHtml = layoutMinimumSizeMessageHtml,
+            };
+
+            return htmlHelper.Partial("~/Views/RA/InfrastructurePageComponents.cshtml", model);
         }
 
         public static IHtmlContent RAInfrastructureBodyComponents(
