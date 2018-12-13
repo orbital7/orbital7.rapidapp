@@ -220,7 +220,7 @@ namespace Microsoft.AspNetCore.Mvc
             return content;
         }
 
-        public static TagCloser RABeginAjaxContentSection(this IHtmlHelper htmlHelper,
+        public static TagCloserX RABeginAjaxContentSection(this IHtmlHelper htmlHelper,
             string contentKey,
             string contentUrl = null,
             string contentUrlScript = null,
@@ -231,7 +231,7 @@ namespace Microsoft.AspNetCore.Mvc
             content.AppendFormat("<div id=\"{0}AjaxContent\" class=\"{1}\" style=\"{2}\" data-content-url=\"{3}\" data-content-url-script=\"{4}\">",
                 contentKey, contentClass, contentStyle, contentUrl, contentUrlScript);
             htmlHelper.ViewContext.Writer.Write(content);
-            return new TagCloser(htmlHelper, "</div");
+            return new TagCloserX(htmlHelper, "</div");
         }
 
         public static IHtmlContent RAContentFrame(

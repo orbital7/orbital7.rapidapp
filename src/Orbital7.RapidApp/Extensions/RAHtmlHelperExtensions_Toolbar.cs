@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.Mvc
 {
     public static partial class RAHtmlHelperExtensions
     {
-        public static TagCloser RABeginToolbar(this IHtmlHelper htmlHelper,
+        public static TagCloserX RABeginToolbar(this IHtmlHelper htmlHelper,
             string toolbarClass = null, string toolbarStyle = null)
         {
             var content = new HtmlContentBuilder();
@@ -22,16 +22,16 @@ namespace Microsoft.AspNetCore.Mvc
                 htmlHelper.ViewContext.HttpContext.Request.Path);
 
             htmlHelper.ViewContext.Writer.Write(content);
-            return new TagCloser(htmlHelper, "</form></nav>");
+            return new TagCloserX(htmlHelper, "</form></nav>");
         }
 
-        public static TagCloser RABeginToolbarMultiSelectedRowEditor(this IHtmlHelper htmlHelper)
+        public static TagCloserX RABeginToolbarMultiSelectedRowEditor(this IHtmlHelper htmlHelper)
         {
             var content = new HtmlContentBuilder();
             content.AppendHtml("</div>");   // Close off the primary form group from RABeginToolbar.
             content.AppendHtml("<div class='ra-datagrid-multiselect-toolbar-editor' style='display: none;'>");
             htmlHelper.ViewContext.Writer.Write(content);
-            return new TagCloser(htmlHelper, "");
+            return new TagCloserX(htmlHelper, "");
         }
 
         public static IHtmlContent RAToolbarEditorFor<TModel, TProperty>(this IHtmlHelper<TModel> htmlHelper,

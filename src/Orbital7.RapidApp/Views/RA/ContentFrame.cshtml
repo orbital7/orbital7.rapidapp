@@ -31,8 +31,8 @@
                 scrolling="no"
                 name="@this.Model.FrameId"
                 frameborder="0"
-                class="ra-background-color-white"
-                style="width: 100%; height: 0px; overflow: hidden;"
+                class="ra-background-color-white ra-fullheight"
+                style="width: 100%;"
                 src="@this.Model.ContentUrl"></iframe>
     </div>
 
@@ -72,10 +72,11 @@
                 <text>@this.Model.PrintFunctionName;</text>
             }
 
-            setTimeout(function () {
+            @*setTimeout(function () {
                 var myFrame = $("#@this.Model.FrameId");
+                alert(myFrame.contents().height());
                 myFrame.css("height", myFrame.contents().height() + "px");
-            }, 250);
+            }, 250);*@
         });
 
     });

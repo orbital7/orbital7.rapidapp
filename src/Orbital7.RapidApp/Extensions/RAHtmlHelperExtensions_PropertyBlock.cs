@@ -10,7 +10,7 @@ namespace Microsoft.AspNetCore.Mvc
 {
     public static partial class RAHtmlHelperExtensions
     {
-        public static TagCloser RABeginPropertyBlockDisplayCustom(
+        public static TagCloserX RABeginPropertyBlockDisplayCustom(
             this IHtmlHelper htmlHelper, 
             string displayLabel,
             string displayValueClass = null, 
@@ -24,7 +24,7 @@ namespace Microsoft.AspNetCore.Mvc
             var content = new HtmlContentBuilder();
             content.AppendPropertyBlockDisplayHtmlStart(displayLabel, displayValueClass, displayValueStyle);
             htmlHelper.ViewContext.Writer.Write(content);
-            return new TagCloser(htmlHelper, GetPropertyBlockDisplayHtmlEnd());
+            return new TagCloserX(htmlHelper, GetPropertyBlockDisplayHtmlEnd());
         }
 
         private static void AppendPropertyBlockDisplayHtmlStart(
@@ -43,7 +43,7 @@ namespace Microsoft.AspNetCore.Mvc
             return "</div></div>";
         }
 
-        public static TagCloser RABeginPropertyBlockDisplayCustomFor<TModel, TProperty>(
+        public static TagCloserX RABeginPropertyBlockDisplayCustomFor<TModel, TProperty>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression, 
             string displayValueClass = null, 
@@ -56,7 +56,7 @@ namespace Microsoft.AspNetCore.Mvc
             content.AppendPropertyBlockDisplayHtmlStart(String.IsNullOrEmpty(displayLabel) ? modelExplorer.GetPropertyDisplayName() : displayLabel,
                 displayValueClass, displayValueStyle);
             htmlHelper.ViewContext.Writer.Write(content);
-            return new TagCloser(htmlHelper, GetPropertyBlockDisplayHtmlEnd());
+            return new TagCloserX(htmlHelper, GetPropertyBlockDisplayHtmlEnd());
         }
 
         public static IHtmlContent RAPropertyBlockDisplay<TModel>(

@@ -51,7 +51,7 @@ namespace Microsoft.AspNetCore.Mvc
             return content;
         }
 
-        public static TagCloser RABeginDynamicTableRow<TModel>(
+        public static TagCloserX RABeginDynamicTableRow<TModel>(
             this IHtmlHelper<TModel> htmlHelper)
             where TModel : RATableRowItemBase
         {
@@ -74,7 +74,7 @@ namespace Microsoft.AspNetCore.Mvc
             contentEnd.AppendHtml("</td>");
             contentEnd.AppendHtml("</tr>");
 
-            return new TagCloser(htmlHelper, contentEnd, existingHtmlPrefixField);
+            return new TagCloserX(htmlHelper, contentEnd, existingHtmlPrefixField);
         }
     }
 }

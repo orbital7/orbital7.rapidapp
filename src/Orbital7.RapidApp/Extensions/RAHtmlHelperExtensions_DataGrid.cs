@@ -20,7 +20,7 @@ namespace Microsoft.AspNetCore.Mvc
 
     public static partial class RAHtmlHelperExtensions
     {
-        public static TagCloser RABeginDataGrid(
+        public static TagCloserX RABeginDataGrid(
             this IHtmlHelper htmlHelper, 
             string tableClass = null,
             string tableStyle = null,
@@ -44,10 +44,10 @@ namespace Microsoft.AspNetCore.Mvc
                 tableId, 
                 fixedHeight,
                 updateRowColors.Totruefalse());
-            return new TagCloser(htmlHelper, closingTags);
+            return new TagCloserX(htmlHelper, closingTags);
         }
 
-        public static TagCloser RABeginDataGridSelectableRow(
+        public static TagCloserX RABeginDataGridSelectableRow(
             this IHtmlHelper htmlHelper, 
             IIdObject idObject, 
             bool canSelect = true,
@@ -61,7 +61,7 @@ namespace Microsoft.AspNetCore.Mvc
                 canSelect ? "selectDataGridRow(this);" : "");
             content.AppendHtml(">");
             htmlHelper.ViewContext.Writer.Write(content);
-            return new TagCloser(htmlHelper, "</tr>");
+            return new TagCloserX(htmlHelper, "</tr>");
         }
 
         public static IHtmlContent RADataGridHeadingCell(
@@ -145,7 +145,7 @@ namespace Microsoft.AspNetCore.Mvc
         }
 
 
-        public static TagCloser RABeginDataGridHeadingCell(
+        public static TagCloserX RABeginDataGridHeadingCell(
             this IHtmlHelper htmlHelper, 
             string cellClass = null, 
             string cellStyle = null,
@@ -161,7 +161,7 @@ namespace Microsoft.AspNetCore.Mvc
                 sortMethod,
                 isSortDefault,
                 sortDirection));
-            return new TagCloser(htmlHelper, GetDataGridHeadingCellEndHtml());
+            return new TagCloserX(htmlHelper, GetDataGridHeadingCellEndHtml());
         }
 
         private static string GetSortMethod(ModelExplorer modelExplorer)
@@ -189,10 +189,10 @@ namespace Microsoft.AspNetCore.Mvc
             return null;
         }
 
-        public static TagCloser RABeginDataGridBodyCell(this IHtmlHelper htmlHelper, string cellClass = null, string cellStyle = null)
+        public static TagCloserX RABeginDataGridBodyCell(this IHtmlHelper htmlHelper, string cellClass = null, string cellStyle = null)
         {
             htmlHelper.ViewContext.Writer.Write("<td class='ra-datagrid-cell {0}' style='{1}'>", cellClass, cellStyle);
-            return new TagCloser(htmlHelper, "</td>");
+            return new TagCloserX(htmlHelper, "</td>");
         }
 
         public static IHtmlContent RADataGridBodyCell<TModel>(this IHtmlHelper<TModel> htmlHelper, object cellValue,

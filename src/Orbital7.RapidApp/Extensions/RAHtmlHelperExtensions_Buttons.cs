@@ -10,7 +10,7 @@ namespace Microsoft.AspNetCore.Mvc
 {
     public static partial class RAHtmlHelperExtensions
     {
-        public static TagCloser RABeginDropdownButton(
+        public static TagCloserX RABeginDropdownButton(
             this IHtmlHelper htmlHelper,
             string buttonHtml,
             string buttonId,
@@ -33,7 +33,7 @@ namespace Microsoft.AspNetCore.Mvc
                 buttonId);
 
             htmlHelper.ViewContext.Writer.Write(content);
-            return new TagCloser(htmlHelper, "</div></div>");
+            return new TagCloserX(htmlHelper, "</div></div>");
         }
 
         public static IHtmlContent RADropdownItem(

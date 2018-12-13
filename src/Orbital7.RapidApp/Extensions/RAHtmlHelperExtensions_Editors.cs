@@ -117,6 +117,7 @@ namespace Microsoft.AspNetCore.Mvc
             // Gather data.
             var nullableUnderlyingType = Nullable.GetUnderlyingType(modelExplorer.ModelType);
             var dataTypeAttribute = expression.GetAttribute<TModel, TProperty, DataTypeAttribute>();
+            var zipCodeAttribute = expression.GetAttribute<TModel, TProperty, ZipCodeAttribute>();
 
             // Create a dynamic select list for enum types.
             if (selectList == null)
@@ -183,10 +184,27 @@ namespace Microsoft.AspNetCore.Mvc
                 }
                 content.AppendHtml(htmlHelper.TextBoxFor(expression, attributes));
             }
+            else if (dataTypeAttribute?.DataType == DataType.PostalCode || zipCodeAttribute != null)
+            {
+                attributes.AddIfMissing("type", "number");
+                attributes.AddIfMissing("max", false ? "999999999" : "99999");    // TODO: Handle full Zip Code.
+                content.AppendHtml(htmlHelper.TextBoxFor(expression, attributes));
+            }
+            else if (dataTypeAttribute?.DataType == DataType.PhoneNumber || expression.HasAttribute(typeof(PhoneAttribute)))
+            {
+                attributes.AddIfMissing("type", "number");
+                attributes.AddIfMissing("max", "9999999999");
+                content.AppendHtml(htmlHelper.TextBoxFor(expression, attributes));
+            }
+            else if (dataTypeAttribute?.DataType == DataType.EmailAddress || expression.HasAttribute(typeof(EmailAddressAttribute)))
+            {
+                attributes.AddIfMissing("type", "email");
+                content.AppendHtml(htmlHelper.TextBoxFor(expression, attributes));
+            }
             else if (dataTypeAttribute?.DataType == DataType.Password || expression.HasAttribute(typeof(PasswordAttribute)))
             {
                 attributes.Add("value", modelExplorer.Model?.ToString());
-                content.AppendHtml(htmlHelper.PasswordFor(expression, attributes));
+                content.AppendHtml(htmlHelper.TextBoxFor(expression, attributes));
             }
             else
             {
