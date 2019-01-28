@@ -120,7 +120,7 @@ namespace Microsoft.AspNetCore.Mvc
                     foreach (object item in items)
                     {
                         if (item is ITagObject)
-                            html += String.Format("<span class='badge badge-pill badge-info ra-badge'>{0}</span>", ((ITagObject)item).TagName);
+                            html += String.Format("<span class='badge badge-pill badge-info ra-badge'>{0}</span>&nbsp;", ((ITagObject)item).TagName);
                         else
                             html += String.Format("<div>{0}</div>", GetValueDisplayHtml(htmlHelper, item));
                     }

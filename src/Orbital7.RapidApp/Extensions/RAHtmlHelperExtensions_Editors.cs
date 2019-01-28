@@ -204,7 +204,7 @@ namespace Microsoft.AspNetCore.Mvc
             else if (dataTypeAttribute?.DataType == DataType.Password || expression.HasAttribute(typeof(PasswordAttribute)))
             {
                 attributes.Add("value", modelExplorer.Model?.ToString());
-                content.AppendHtml(htmlHelper.TextBoxFor(expression, attributes));
+                content.AppendHtml(htmlHelper.PasswordFor(expression, attributes));
             }
             else
             {
