@@ -1,0 +1,44 @@
+﻿@model Orbital7.RapidApp2.Models.InfrastructurePageComponentsModel
+
+<div id="ra-dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ra-dialog-title">
+    <div class="modal-dialog" role="document">
+        <div id="ra-dialog-modal-content" class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="ra-dialog-title">TITLE</h4>
+                <button id="ra-dialog-cancelbutton-corner"
+                        type="button"
+                        class="close"
+                        onclick="raCloseModalDialog(event);"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <input type="hidden" id="ra-dialog-returnaction" />
+            </div>
+            <div class="modal-body" id="ra-dialog-body">
+                BODY
+            </div>
+            <div class="modal-footer">
+                <span id="ra-dialog-processing" style="display: none;">
+                    <img src="/orbital7-rapidapp/dist/images/spinners/ra-spinner-sm.gif" /> Processing...
+                </span>
+                @Html.RAButton("CANCEL",
+                    "raCloseModalDialog(event);",
+                    buttonClass: "btn-secondary btn-lg",
+                    buttonId: "ra-dialog-cancelbutton")
+                @Html.RAButton("ACTION",
+                    "submitModalDialog(event);",
+                    buttonClass: "btn-primary btn-lg",
+                    buttonId: "ra-dialog-actionbutton")
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ra-layout-minimum-size">
+    <div class="ra-layout-minimum-size-title">
+        @this.Model.LayoutMinimumSizeTitle
+    </div>
+    <div class="ra-layout-minimum-size-message">
+        @Html.Raw(this.Model.LayoutMinimumSizeMessageHtml)
+    </div>
+</div>

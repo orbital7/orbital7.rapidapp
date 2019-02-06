@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Orbital7.RapidApp2 Sample Web App" />
+    <title>Sample Web App</title>
+    @Html.RAInfrastructureStylesheets()
+    @Html.RAInfrastructureScripts(includeTouch: true)
+    @RenderSection("Scripts", required: false)
+
+    <style>
+        .sidebarButtonTop {
+            margin-top: 10px;
+        }
+
+        .sidebarButtonBottom {
+            margin-bottom: 10px;
+        }
+
+        .sidebarDivider {
+            border-top: 2px solid gray;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="layout-sidebar"
+         style="position: absolute; width: 290px; height: 100%;">
+
+        <div id="layout-sectionbar"
+             style="position: absolute; width: 80px; background-color: #1F2631; height: 100%; color: white;">
+            <table style="width: 100%; height: 100%;">
+                <tr>
+                    <td style="text-align: center; vertical-align: top;">
+                        <div class="sidebarButtonTop">
+                            <i class="far fa-arrow-alt-circle-left fa-2x"></i>
+                        </div>
+                        <div class="sidebarButtonTop sidebarDivider"></div>
+                        <div class="sidebarButtonTop">
+                            <i class="fas fa-search fa-2x"></i>
+                        </div>
+                        <div class="sidebarButtonTop sidebarDivider"></div>
+                        <div class="sidebarButtonTop">
+                            <i class="fas fa-home fa-2x"></i>
+                        </div>
+                        <div class="sidebarButtonTop">
+                            <i class="fas fa-table fa-2x"></i>
+                        </div>
+                        <div class="sidebarButtonTop">
+                            <i class="fas fa-window-restore fa-2x"></i>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; vertical-align: bottom;">
+                        <div class="sidebarButtonBottom">
+                            @using (Html.RABeginDropdownButton("<i class='fas fa-cogs fa-2x' style='color: white;'></i>",
+                                "adminButton", buttonClass: "btn-link", dropdownClass: "btn-group dropright"))
+                            {
+                                @Html.RADropdownItem("SETTINGS 1", "alert('Settings 1');")
+                                @Html.RADropdownItem("SETTINGS 2", "alert('Settings 2');")
+                            }
+                        </div>
+                        <div class="sidebarButtonBottom">
+                            <i class="far fa-user fa-2x"></i>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="layout-taskbar"
+             style="position: absolute; left: 80px; width: 210px; background-color: #F2F4F8; height: 100%;">
+            Y
+        </div>
+
+    </div>
+
+    <div id="layout-body"
+         style="position: absolute; left: 290px; right: 0px; background-color: white; height: 100%;">
+
+        @RenderBody()
+    </div>
+
+    
+</body>
+</html>
