@@ -127,24 +127,23 @@ select.form-control {
   top: 0px;
   background-color: transparent;
   width: 100%;
-  height: 100%;
-  min-width: 1024px; }
+  height: 100%; }
 
 .ra-layout.ra-layout-fixed-width {
-  width: 1024px; }
+  width: 100%; }
 
 .ra-layout.ra-layout-fixed-height {
-  height: 748px; }
+  height: 100%; }
 
 .ra-layout.ra-layout-fixed-width.ra-layout-fixed-width-center {
-  left: calc((100% - 1024px) / 2); }
+  left: calc((100% - 100%) / 2); }
 
 .ra-layout-header {
   position: relative;
   left: 0px;
   top: 0px;
   right: 0px;
-  height: 80px;
+  height: 0px;
   display: block;
   background-color: white;
   border-bottom: 1px solid #E1E1E1;
@@ -154,10 +153,10 @@ select.form-control {
 .ra-layout-sidebar {
   position: absolute;
   left: 0px;
-  top: 80px;
-  width: 0px;
-  background-color: #F0F0F0;
-  height: calc(100% - 80px);
+  top: 0px;
+  width: 290px;
+  background-color: white;
+  height: calc(100% - 0px);
   overflow: hidden;
   display: block;
   z-index: auto; }
@@ -167,11 +166,11 @@ select.form-control {
 
 .ra-layout-navbar {
   position: absolute;
-  left: 0px;
-  top: 80px;
+  left: 290px;
+  top: 0px;
   right: 0px;
   height: 0px;
-  background-color: #F0F0F0;
+  background-color: white;
   overflow: hidden;
   display: block;
   margin: 0;
@@ -179,46 +178,21 @@ select.form-control {
 
 .ra-layout-body {
   position: absolute;
-  left: 0px;
-  top: calc(80px + 0px);
+  left: 290px;
+  top: calc(0px + 0px);
   right: 0px;
   bottom: 0px;
   overflow: hidden;
   display: block;
-  background-color: #F0F0F0; }
+  background-color: white; }
 
-.ra-layout-minimum-size {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  display: none;
-  text-align: center;
-  vertical-align: middle;
-  opacity: 0.9;
-  background-color: dimgray; }
-
-.ra-layout-minimum-size-title {
-  width: 100%;
-  margin-top: 200px;
-  font-weight: bold;
-  font-size: 14pt;
-  color: palegreen; }
-
-.ra-layout-minimum-size-message {
-  width: 100%;
-  padding-top: 10px;
-  color: white;
-  font-size: 12pt; }
-
-@media (max-width: 1024px) {
+@media (max-width: 100%) {
   .ra-layout.ra-layout-fixed-width.ra-layout-fixed-width-center {
     left: 0px; }
   .ra-layout.ra-layout-fixed-width {
     width: 100%; } }
 
-@media (max-width: calc(0px - 1px)) {
+@media (max-width: calc(768px - 1px)) {
   .ra-layout-sidebar {
     display: none; }
   .ra-layout-sidebar-visible {
@@ -227,11 +201,7 @@ select.form-control {
   .ra-layout-body {
     left: 0px; }
   .ra-layout-sidebar-toggle-button {
-    display: inline; } }
-
-@media (max-width: calc(1024px - 1px)) {
-  .ra-layout-minimum-size {
-    display: block; } }
+    display: table-cell; } }
 
 .ra-container {
   overflow-x: hidden;
@@ -428,7 +398,7 @@ sup.ra-datagrid-sortaria {
   max-width: 1000px; }
 
 .modal-content {
-  background-color: #F0F0F0 !important; }
+  background-color: white !important; }
 
 #ra-dialog-processing {
   margin-right: 20px;
@@ -438,7 +408,7 @@ sup.ra-datagrid-sortaria {
   overflow: hidden;
   min-height: 100px; }
 
-@media (max-width: calc(0px - 1px)) {
+@media (max-width: calc(768px - 1px)) {
   .modal-dialog {
     width: 70%; } }
 

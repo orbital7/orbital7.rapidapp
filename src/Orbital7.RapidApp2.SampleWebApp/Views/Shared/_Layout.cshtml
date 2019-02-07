@@ -30,64 +30,109 @@
 </head>
 <body>
 
-    <div id="layout-sidebar"
-         style="position: absolute; width: 290px; height: 100%;">
+    <div class="ra-layout">
+        <div class="ra-layout-sidebar">
 
-        <div id="layout-sectionbar"
-             style="position: absolute; width: 80px; background-color: #1F2631; height: 100%; color: white;">
-            <table style="width: 100%; height: 100%;">
+            <div class="layout-sectionbar"
+                 style="position: absolute; width: 80px; background-color: #1F2631; height: 100%;">
+                <table style="width: 100%; height: 100%;">
+                    <tr>
+                        <td style="text-align: center; vertical-align: top;">
+                            <div class="sidebarButtonTop">
+                                <i class="far fa-arrow-alt-circle-left fa-2x"></i>
+                            </div>
+                            <div class="sidebarButtonTop sidebarDivider"></div>
+                            <div class="sidebarButtonTop">
+                                <i class="fas fa-search fa-2x"></i>
+                            </div>
+                            <div class="sidebarButtonTop sidebarDivider"></div>
+                            <div class="sidebarButtonTop">
+                                @Html.RAButton("<i class='fas fa-home fa-2x ra-color-white'></i>",
+                                    "navigateTo('/Home/Index');", buttonClass: "btn-link")
+                            </div>
+                            <div class="sidebarButtonTop">
+                                @Html.RAButton("<i class='fas fa-table fa-2x ra-color-white'></i>",
+                                    "navigateTo('/DataGrids/Index');", buttonClass: "btn-link")
+                            </div>
+                            <div class="sidebarButtonTop">
+                                @Html.RAButton("<i class='fas fa-window-restore fa-2x ra-color-white'></i>",
+                                    "navigateTo('/ModalDialogs/Index');", buttonClass: "btn-link")
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center; vertical-align: bottom;">
+                            <div class="sidebarButtonBottom">
+                                @using (Html.RABeginDropdownButton("<i class='fas fa-cogs fa-2x' style='color: white;'></i>",
+                                   "adminButton", buttonClass: "btn-link", dropdownClass: "btn-group dropright"))
+                                {
+                                    @Html.RADropdownItem("SETTINGS 1", "alert('Settings 1');")
+                                    @Html.RADropdownItem("SETTINGS 2", "alert('Settings 2');")
+                                }
+                            </div>
+                            <div class="sidebarButtonBottom">
+                                <i class="far fa-user fa-2x"></i>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            @if (IsSectionDefined("taskbar"))
+            {
+                <div class="layout-taskbar"
+                     style="position: absolute; left: 80px; width: 210px; background-color: #F2F4F8; height: 100%;">
+                    @RenderSection("taskbar")
+                </div>
+            }
+            else
+            {
+                <style>
+
+                    .ra-layout-sidebar {
+                        width: 80px;
+                    }
+
+                    .ra-layout-body {
+                        left: 80px;
+                    }
+
+                    @@media (max-width: calc(767px)) {
+
+                        .ra-layout-body {
+                            left: 0px;
+                        }
+                    }
+
+                </style>
+            }
+
+        </div>
+
+        <div class="ra-layout-body" style="padding: 15px;" onmousedown="raHideSidebar();">
+
+            <table style="width: 100%; margin-bottom: 20px;">
                 <tr>
-                    <td style="text-align: center; vertical-align: top;">
-                        <div class="sidebarButtonTop">
-                            <i class="far fa-arrow-alt-circle-left fa-2x"></i>
-                        </div>
-                        <div class="sidebarButtonTop sidebarDivider"></div>
-                        <div class="sidebarButtonTop">
-                            <i class="fas fa-search fa-2x"></i>
-                        </div>
-                        <div class="sidebarButtonTop sidebarDivider"></div>
-                        <div class="sidebarButtonTop">
-                            <i class="fas fa-home fa-2x"></i>
-                        </div>
-                        <div class="sidebarButtonTop">
-                            <i class="fas fa-table fa-2x"></i>
-                        </div>
-                        <div class="sidebarButtonTop">
-                            <i class="fas fa-window-restore fa-2x"></i>
-                        </div>
+                    <td class="ra-layout-sidebar-toggle-button" style="height: 38px; width: 56px; vertical-align: middle; text-align: left;">
+                        <button type="button"
+                                class="btn btn-outline-secondary"
+                                onclick="raToggleSidebar()">
+                            <i class="fas fa-bars" style="font-size: 1.1em;"></i>
+                        </button>
                     </td>
-                </tr>
-                <tr>
-                    <td style="text-align: center; vertical-align: bottom;">
-                        <div class="sidebarButtonBottom">
-                            @using (Html.RABeginDropdownButton("<i class='fas fa-cogs fa-2x' style='color: white;'></i>",
-                                "adminButton", buttonClass: "btn-link", dropdownClass: "btn-group dropright"))
-                            {
-                                @Html.RADropdownItem("SETTINGS 1", "alert('Settings 1');")
-                                @Html.RADropdownItem("SETTINGS 2", "alert('Settings 2');")
-                            }
-                        </div>
-                        <div class="sidebarButtonBottom">
-                            <i class="far fa-user fa-2x"></i>
-                        </div>
+                    <td style="text-align: left; height: 38px;">
+                        Left
+                    </td>
+                    <td style="text-align: right; height: 38px;">
+                        Right
                     </td>
                 </tr>
             </table>
-        </div>
 
-        <div id="layout-taskbar"
-             style="position: absolute; left: 80px; width: 210px; background-color: #F2F4F8; height: 100%;">
-            Y
+            @RenderBody()
         </div>
 
     </div>
-
-    <div id="layout-body"
-         style="position: absolute; left: 290px; right: 0px; background-color: white; height: 100%;">
-
-        @RenderBody()
-    </div>
-
     
 </body>
 </html>
