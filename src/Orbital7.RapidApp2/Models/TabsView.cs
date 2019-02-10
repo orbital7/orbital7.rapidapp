@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Orbital7.RapidApp2.Models
 {
-    public class RATabsView
+    public class TabsView
     {
         public string Id { get; private set; }
 
@@ -13,7 +13,7 @@ namespace Orbital7.RapidApp2.Models
 
         public List<RATabItem> Items { get; private set; }
         
-        public RATabsView(List<RATabItem> items)
+        public TabsView(List<RATabItem> items)
         {
             this.Id = Guid.NewGuid().ToString().Replace("-", "");
 

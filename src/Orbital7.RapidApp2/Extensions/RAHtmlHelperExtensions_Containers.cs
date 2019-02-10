@@ -20,7 +20,7 @@ namespace Microsoft.AspNetCore.Mvc
 
     public static partial class RAHtmlHelperExtensions
     {
-        public static TagCloserX RABeginContainer(
+        public static TagCloser RABeginContainer(
             this IHtmlHelper htmlHelper,
             bool isPadded,
             ContainerScrolling scrolling = ContainerScrolling.None,
@@ -35,7 +35,7 @@ namespace Microsoft.AspNetCore.Mvc
                 containerStyle);
 
             htmlHelper.ViewContext.Writer.Write(content);
-            return new TagCloserX(htmlHelper, "</div>");
+            return new TagCloser(htmlHelper, "</div>");
         }
 
         private static string GetScrollingClass(
@@ -47,7 +47,7 @@ namespace Microsoft.AspNetCore.Mvc
                     return "ra-container-scrollable-y";
 
                 case ContainerScrolling.Both:
-                    return "ra-container-scrollable";
+                    return "ra-container-scrollable-both";
 
                 case ContainerScrolling.X:
                     return "ra-container-scrollable-x";

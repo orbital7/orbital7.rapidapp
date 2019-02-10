@@ -1,10 +1,10 @@
-﻿@model Orbital7.RapidApp2.Models.RATabsView
+﻿@model Orbital7.RapidApp2.Models.TabsView
 
 @{
     this.Model.SetSelectedIndex(this.Context.Request.Query["selectedTab"]);
 }
 
-<table class="ra-tabs-header">
+@*<table class="ra-tabs-header">
     <tr>
         @foreach (var item in this.Model.Items)
         {
@@ -21,7 +21,23 @@
             }
         }
     </tr>
-</table>
+</table>*@
+
+<div class="ra-tabs-header">
+    @foreach (var item in this.Model.Items)
+    {
+        if (item.IsVisible)
+        {
+            string id = "ra-tab-" + item.Index;
+            <div id="@id"
+                 class="ra-tab ra-tab-header"
+                 data-tab-index="@item.Index"
+                 onclick="loadTab('@item.Index');">
+                @item.Name
+            </div>
+        }
+    }
+</div>
 
 <div class="ra-tabs-content">
     @foreach (var item in this.Model.Items)

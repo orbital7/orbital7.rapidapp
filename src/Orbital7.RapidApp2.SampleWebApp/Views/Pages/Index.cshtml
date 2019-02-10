@@ -1,0 +1,42 @@
+﻿@using Orbital7.RapidApp2.SampleWebApp.Models.Pages
+@model IndexModel
+
+@section taskbar {
+
+<div style="padding: 15px;">
+
+    <div class="ra-margin-bottom-xs">
+        <a onclick="raPagePanel('/Pages/_PanelOverview');">Overview</a>
+    </div>
+    <div class="ra-margin-bottom-xs">
+        <a onclick="raPagePanel('/Pages/_PanelScrollNone');">Scroll None</a>
+    </div>
+    <div class="ra-margin-bottom-xs">
+        <a onclick="raPagePanel('/Pages/_PanelScrollX');">Scroll X</a>
+    </div>
+    <div class="ra-margin-bottom-xs">
+        <a onclick="raPagePanel('/Pages/_PanelScrollY');">Scroll Y</a>
+    </div>
+    <div class="ra-margin-bottom-xs">
+        <a onclick="raPagePanel('/Pages/_PanelScrollBoth');">Scroll Both</a>
+    </div>
+    <div class="ra-margin-bottom-xs">
+        <a onclick="raPagePanel('/Pages/_PanelTabs');">Tabs</a>
+    </div>
+</div>
+
+}
+
+<div id="ra-pagePanel" class="ra-fullheight" style="">
+
+</div>
+
+<script>
+
+    function raPagePanel(contentUrl) {
+
+        raLoadAjaxContent(contentUrl, $("#ra-pagePanel"));
+
+    }
+
+</script>

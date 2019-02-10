@@ -3,12 +3,35 @@
 
 @section taskbar {
 
-    <div style="padding: 15px;">
+<div style="padding: 15px;">
 
-        Data Grids Taskbar
-
+    <div class="ra-font-bold ra-margin-bottom-sm">Data Grids Taskbar</div>
+    <div class="ra-margin-bottom-xs">
+        <a onclick="raPagePanel('/DataGrids/_PanelOverview');">Overview</a>
     </div>
+    <div class="ra-margin-bottom-xs">
+        <a onclick="raPagePanel('/DataGrids/_PanelBasic');">Basic</a>
+    </div>
+    <div class="ra-margin-bottom-xs">
+        <a onclick="alert('x');">In Tabs</a>
+    </div>
+    <div class="ra-margin-bottom-xs">
+        <a onclick="alert('x');">Selectable</a>
+    </div>
+</div>
 
 }
 
-DataGrids
+<div id="ra-pagePanel" class="ra-fullheight" style="">
+
+</div>
+
+<script>
+
+    function raPagePanel(contentUrl) {
+
+        raLoadAjaxContent(contentUrl, $("#ra-pagePanel"));
+
+    }
+
+</script>

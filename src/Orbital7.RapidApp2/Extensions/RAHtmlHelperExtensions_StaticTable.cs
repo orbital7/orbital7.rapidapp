@@ -27,7 +27,7 @@ namespace Microsoft.AspNetCore.Mvc
             return content;
         }
 
-        public static TagCloserX RABeginStaticTableRow<TModel>(this IHtmlHelper<TModel> htmlHelper)
+        public static TagCloser RABeginStaticTableRow<TModel>(this IHtmlHelper<TModel> htmlHelper)
             where TModel : RATableRowItemBase
         {
             var model = htmlHelper.ViewData.Model;
@@ -46,7 +46,7 @@ namespace Microsoft.AspNetCore.Mvc
             contentEnd.AppendHtml("</td>");
             contentEnd.AppendHtml("</tr>");
 
-            return new TagCloserX(htmlHelper, contentEnd, existingHtmlPrefixField);
+            return new TagCloser(htmlHelper, contentEnd, existingHtmlPrefixField);
         }
     }
 }

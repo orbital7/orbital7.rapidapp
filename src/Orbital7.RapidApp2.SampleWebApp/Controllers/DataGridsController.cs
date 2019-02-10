@@ -13,5 +13,15 @@ namespace Orbital7.RapidApp2.SampleWebApp.Controllers
         {
             return View(new IndexModel());
         }
+
+        public IActionResult _PanelOverview()
+        {
+            return PartialView(new _PanelOverviewModel());
+        }
+
+        public IActionResult _PanelBasic()
+        {
+            return PartialView(_PanelBasicModel.Create());
+        }
     }
 }
