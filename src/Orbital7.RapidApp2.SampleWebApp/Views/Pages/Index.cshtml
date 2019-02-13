@@ -3,40 +3,22 @@
 
 @section taskbar {
 
-<div style="padding: 15px;">
-
-    <div class="ra-margin-bottom-xs">
-        <a onclick="raPagePanel('/Pages/_PanelOverview');">Overview</a>
-    </div>
-    <div class="ra-margin-bottom-xs">
-        <a onclick="raPagePanel('/Pages/_PanelScrollNone');">Scroll None</a>
-    </div>
-    <div class="ra-margin-bottom-xs">
-        <a onclick="raPagePanel('/Pages/_PanelScrollX');">Scroll X</a>
-    </div>
-    <div class="ra-margin-bottom-xs">
-        <a onclick="raPagePanel('/Pages/_PanelScrollY');">Scroll Y</a>
-    </div>
-    <div class="ra-margin-bottom-xs">
-        <a onclick="raPagePanel('/Pages/_PanelScrollBoth');">Scroll Both</a>
-    </div>
-    <div class="ra-margin-bottom-xs">
-        <a onclick="raPagePanel('/Pages/_PanelTabs');">Tabs</a>
-    </div>
-</div>
+    @Html.RATaskbar(new List<RATaskbarItem>()
+    {
+        new RATaskbarItem("Overview", RATaskbarItemType.LoadPagePanel,
+            "/Pages/_PanelOverview"),
+        new RATaskbarItem("Scroll None", RATaskbarItemType.LoadPagePanel,
+            "/Pages/_PanelScrollNone"),
+        new RATaskbarItem("Scroll X", RATaskbarItemType.LoadPagePanel,
+            "/Pages/_PanelScrollX"),
+        new RATaskbarItem("Scroll Y", RATaskbarItemType.LoadPagePanel,
+            "/Pages/_PanelScrollY"),
+        new RATaskbarItem("Scroll Both", RATaskbarItemType.LoadPagePanel,
+            "/Pages/_PanelScrollBoth"),
+        new RATaskbarItem("Tabs", RATaskbarItemType.LoadPagePanel,
+            "/Pages/_PanelTabs"),
+    })
 
 }
 
-<div id="ra-pagePanel" class="ra-fullheight" style="">
-
-</div>
-
-<script>
-
-    function raPagePanel(contentUrl) {
-
-        raLoadAjaxContent(contentUrl, $("#ra-pagePanel"));
-
-    }
-
-</script>
+@Html.RAPagePanel()

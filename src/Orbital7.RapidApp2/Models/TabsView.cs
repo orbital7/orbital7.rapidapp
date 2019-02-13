@@ -7,16 +7,12 @@ namespace Orbital7.RapidApp2.Models
 {
     public class TabsView
     {
-        public string Id { get; private set; }
-
         public int SelectedIndex { get; private set; } = -1;
 
         public List<RATabItem> Items { get; private set; }
         
         public TabsView(List<RATabItem> items)
         {
-            this.Id = Guid.NewGuid().ToString().Replace("-", "");
-
             this.Items = items;
 
             int visibleCount = (from x in this.Items where x.IsVisible select x).Count();
@@ -50,22 +46,6 @@ namespace Orbital7.RapidApp2.Models
 
             if (index >= 0 && index < this.Items.Count && this.Items[index].IsVisible)
                 this.SelectedIndex = index;
-        }
-
-        public string GetClassName(RATabItem item)
-        {
-            string className = String.Empty;
-
-            if (!item.IsVisible)
-            {
-                className = "ra-hide";
-            }
-            else if (item.Index == this.SelectedIndex)
-            {
-                className = "active";
-            }
-
-            return className;
         }
     }
 }

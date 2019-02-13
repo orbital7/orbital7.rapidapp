@@ -100,7 +100,7 @@ namespace Microsoft.AspNetCore.Mvc
         {
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
             attributes.AddButtonAttributes(buttonClass, buttonStyle);
-            attributes.Add("onmouseup", htmlHelper.RAShowDialogOnClickScript(contentUrl, returnAction, dialogTitle ?? buttonHtml,
+            attributes.Add("onmouseup", htmlHelper.RAShowDialogScript(contentUrl, returnAction, dialogTitle ?? buttonHtml,
                 showActionButton, actionButtonCaption, showCancelButton, cancelButtonCaption));
 
             return attributes.ToButton(buttonHtml);
@@ -112,7 +112,7 @@ namespace Microsoft.AspNetCore.Mvc
         {
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
             attributes.AddOrInsertToExisting("class", "ra-clickable");
-            attributes.Add("onmouseup", htmlHelper.RAShowDialogOnClickScript(contentUrl, returnAction, dialogTitle ?? linkText,
+            attributes.Add("onmouseup", htmlHelper.RAShowDialogScript(contentUrl, returnAction, dialogTitle ?? linkText,
                 showActionButton, actionButtonCaption, showCancelButton, cancelButtonCaption));
 
             var tagBuilder = new TagBuilder("a")
@@ -125,7 +125,7 @@ namespace Microsoft.AspNetCore.Mvc
             return tagBuilder;
         }
 
-        public static string RAShowDialogOnClickScript(
+        public static string RAShowDialogScript(
             this IHtmlHelper htmlHelper, 
             string contentUrl, 
             string returnAction, 

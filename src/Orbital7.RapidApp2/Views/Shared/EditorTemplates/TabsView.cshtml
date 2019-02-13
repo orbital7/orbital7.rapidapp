@@ -4,25 +4,6 @@
     this.Model.SetSelectedIndex(this.Context.Request.Query["selectedTab"]);
 }
 
-@*<table class="ra-tabs-header">
-    <tr>
-        @foreach (var item in this.Model.Items)
-        {
-            if (item.IsVisible)
-            {
-                string id = "ra-tab-" + item.Index;
-                <td id="@id"
-                    class="ra-tab ra-tab-header"
-                    style="width: @item.WidthPercent%;"
-                    data-tab-index="@item.Index"
-                    onclick="loadTab('@item.Index');">
-                    @item.Name
-                </td>
-            }
-        }
-    </tr>
-</table>*@
-
 <div class="ra-tabs-header">
     @foreach (var item in this.Model.Items)
     {

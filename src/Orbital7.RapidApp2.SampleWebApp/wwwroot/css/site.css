@@ -257,86 +257,21 @@ select.form-control {
   width: 100%;
   height: 100%; }
 
-.ra-subtabs-header {
-  background-image: url(/orbital7-rapidapp/dist/images/ra-subtabs-background.png);
-  text-align: center;
-  height: 48px; }
+.ra-taskbar {
+  padding: 15px; }
 
-.ra-subtab-header {
-  border: 1px solid #DDDDDD;
-  color: #636263;
-  background-color: #FBFAFB;
-  padding: 7px;
-  display: inline-block;
-  margin: 0px;
-  user-select: none; }
+.ra-taskbar-item {
+  font-weight: normal;
+  margin-bottom: 5px; }
 
-.ra-subtab-header:hover {
-  border: 1px solid #286090;
-  color: #286090;
+.ra-taskbar-item-selectable {
   cursor: pointer; }
 
-.ra-subtab-header-selected {
-  color: white;
-  border: 1px solid #204d74;
-  background-color: #337ab7;
-  padding: 7px;
-  display: inline-block;
-  margin: 0px; }
+.ra-taskbar-item-selectable:hover {
+  background-color: green; }
 
-.ra-subtabs-content {
-  width: 100%;
-  height: calc(100% - 1px - 48px); }
-
-.ra-subtab-content {
-  width: 100%;
-  height: 100%; }
-
-.ra-sidetabs-header {
-  /*border-right: 1px solid $ra-color-content-border;*/
-  padding-right: 15px;
-  vertical-align: top; }
-
-.ra-sidetabs-content {
-  padding-left: 15px; }
-
-.ra-sidetab {
-  margin-top: 10px;
-  margin-bottom: 10px; }
-
-/* This creates a hidden text bit afterwards to ensure the 
-    content length doesn't change upon bolding, etc., on 
-    hover/selection */
-.ra-sidetab::after {
-  display: block;
-  content: attr(title);
-  font-weight: bold;
-  height: 1px;
-  color: transparent;
-  overflow: hidden;
-  visibility: hidden;
-  text-transform: uppercase; }
-
-.ra-sidetab-header {
-  color: #9E9E9E;
-  user-select: none; }
-
-.ra-sidetab-header:hover {
-  color: #286090;
-  font-weight: bold;
-  cursor: pointer; }
-
-.ra-sidetab-header-selected {
-  text-transform: uppercase;
-  color: #337ab7;
-  font-weight: bold;
-  user-select: none; }
-
-.ra-sidetab-content {
-  background: white;
-  padding: 0px;
-  height: 100%;
-  width: 100%; }
+.ra-taskbar-item-selected {
+  font-weight: bold; }
 
 table.ra-datagrid-table {
   border: 1px solid #E1E1E1;
