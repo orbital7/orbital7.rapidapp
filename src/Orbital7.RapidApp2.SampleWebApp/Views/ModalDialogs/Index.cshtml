@@ -1,4 +1,16 @@
 ﻿@using Orbital7.RapidApp2.SampleWebApp.Models.ModalDialogs
 @model IndexModel
 
-Modal Dialogs
+@section taskbar {
+
+    @Html.RATaskbar(new List<RATaskbarItem>()
+    {
+        new RATaskbarItem("Overview", RATaskbarItemType.LoadPagePanel,
+            "/ModalDialogs/_PanelOverview"),
+        new RATaskbarItem("Basic", RATaskbarItemType.LoadPagePanel,
+            "/ModalDialogs/_PanelBasic"),
+    })
+
+}
+
+@Html.RAPagePanel()
