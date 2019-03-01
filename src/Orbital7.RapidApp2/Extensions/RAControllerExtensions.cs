@@ -40,22 +40,28 @@ namespace Microsoft.AspNetCore.Mvc
             controller.Response.SetFailureState();
         }
 
-        public static IActionResult RAFailureView(this Controller controller, object model, string viewName = null)
+        public static IActionResult RAFailureView(this Controller controller, object model)
         {
             controller.Response.SetFailureState();
-            if (!String.IsNullOrEmpty(viewName))
-                return controller.View(viewName, model);
-            else
-                return controller.View(model);
+            return controller.View(model);
         }
 
-        public static IActionResult RAFailurePartialView(this Controller controller, object model, string viewName = null)
+        public static IActionResult RAFailureView(this Controller controller, string viewName, object model)
         {
             controller.Response.SetFailureState();
-            if (!String.IsNullOrEmpty(viewName))
-                return controller.PartialView(viewName, model);
-            else
-                return controller.PartialView(model);
+            return controller.View(viewName, model);
+        }
+
+        public static IActionResult RAFailurePartialView(this Controller controller, object model)
+        {
+            controller.Response.SetFailureState();
+            return controller.PartialView(model);
+        }
+
+        public static IActionResult RAFailurePartialView(this Controller controller, string viewName, object model)
+        {
+            controller.Response.SetFailureState();
+            return controller.PartialView(viewName, model);
         }
 
         public static IActionResult RARawHtml(this Controller controller, string html)

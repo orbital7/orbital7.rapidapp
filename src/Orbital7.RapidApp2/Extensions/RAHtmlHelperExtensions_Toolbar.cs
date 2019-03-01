@@ -82,7 +82,7 @@ namespace Microsoft.AspNetCore.Mvc
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
             attributes.AddToolbarButtonAttributes();
 
-            return htmlHelper.RAShowDialogButton(buttonText, contentUrl, returnUrl, attributes, dialogTitle, showActionButton,
+            return htmlHelper.RAShowModalDialogButton(buttonText, contentUrl, returnUrl, attributes, dialogTitle, showActionButton,
                 actionButtonCaption, showCancelButton, cancelButtonCaption);
         }
 

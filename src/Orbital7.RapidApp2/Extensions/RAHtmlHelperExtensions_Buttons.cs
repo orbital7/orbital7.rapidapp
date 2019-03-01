@@ -8,6 +8,14 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Mvc
 {
+    public enum RAModalDialogSize
+    {
+        Small,
+        Medium,
+        Large,
+        Full,
+    }
+
     public static partial class RAHtmlHelperExtensions
     {
         public static TagCloser RABeginDropdownButton(
@@ -84,7 +92,7 @@ namespace Microsoft.AspNetCore.Mvc
             return attributes.ToButton(buttonHtml);
         }
 
-        public static IHtmlContent RAShowDialogButton(
+        public static IHtmlContent RAShowModalDialogButton(
             this IHtmlHelper htmlHelper, 
             string buttonHtml, 
             string contentUrl,
@@ -100,7 +108,7 @@ namespace Microsoft.AspNetCore.Mvc
         {
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
             attributes.AddButtonAttributes(buttonClass, buttonStyle);
-            attributes.Add("onmouseup", htmlHelper.RAShowDialogScript(contentUrl, returnAction, dialogTitle ?? buttonHtml,
+            attributes.Add("onmouseup", htmlHelper.RAShowModalDialogScript(contentUrl, returnAction, dialogTitle ?? buttonHtml,
                 showActionButton, actionButtonCaption, showCancelButton, cancelButtonCaption));
 
             return attributes.ToButton(buttonHtml);
@@ -112,7 +120,7 @@ namespace Microsoft.AspNetCore.Mvc
         {
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
             attributes.AddOrInsertToExisting("class", "ra-clickable");
-            attributes.Add("onmouseup", htmlHelper.RAShowDialogScript(contentUrl, returnAction, dialogTitle ?? linkText,
+            attributes.Add("onmouseup", htmlHelper.RAShowModalDialogScript(contentUrl, returnAction, dialogTitle ?? linkText,
                 showActionButton, actionButtonCaption, showCancelButton, cancelButtonCaption));
 
             var tagBuilder = new TagBuilder("a")
@@ -125,7 +133,7 @@ namespace Microsoft.AspNetCore.Mvc
             return tagBuilder;
         }
 
-        public static string RAShowDialogScript(
+        public static string RAShowModalDialogScript(
             this IHtmlHelper htmlHelper, 
             string contentUrl, 
             string returnAction, 
@@ -133,11 +141,18 @@ namespace Microsoft.AspNetCore.Mvc
             bool showActionButton = true, 
             string actionButtonCaption = "Save", 
             bool showCancelButton = true, 
-            string cancelButtonCaption = "Cancel")
+            string cancelButtonCaption = "Cancel",
+            RAModalDialogSize dialogSize = RAModalDialogSize.Medium)
         {
-            return String.Format("raShowModalDialog('{0}', '{1}', '{2}', {3}, '{4}', {5}, '{6}', this);",
-                contentUrl, returnAction, dialogTitle, showActionButton.ToString().ToLower(), actionButtonCaption, showCancelButton.ToString().ToLower(), 
-                cancelButtonCaption);
+            return String.Format("raShowModalDialog('{0}', '{1}', '{2}', {3}, '{4}', {5}, '{6}', '{7}', this);",
+                contentUrl, 
+                returnAction, 
+                dialogTitle, 
+                showActionButton.ToString().ToLower(), 
+                actionButtonCaption, 
+                showCancelButton.ToString().ToLower(), 
+                cancelButtonCaption,
+                dialogSize.ToString().ToLower());
         }
 
         private static void AddButtonAttributes(
