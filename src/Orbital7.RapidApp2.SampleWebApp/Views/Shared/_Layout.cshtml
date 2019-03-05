@@ -7,8 +7,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Orbital7.RapidApp2 Sample Web App" />
     <title>Sample Web App</title>
-    @Html.RAInfrastructureStylesheets()
-    @Html.RAInfrastructureScripts(includeTouch: true)
+    @await Html.RAInfrastructureStylesheetsAsync()
+    @await Html.RAInfrastructureScriptsAsync()
     @RenderSection("Scripts", required: false)
 
     <style>

@@ -104,24 +104,34 @@ namespace Microsoft.AspNetCore.Mvc
             bool showCancelButton = true, 
             string cancelButtonCaption = "Cancel",
             string buttonClass = "btn-secondary",
-            string buttonStyle = null)
+            string buttonStyle = null,
+            RAModalDialogSize dialogSize = RAModalDialogSize.Medium)
         {
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
             attributes.AddButtonAttributes(buttonClass, buttonStyle);
             attributes.Add("onmouseup", htmlHelper.RAShowModalDialogScript(contentUrl, returnAction, dialogTitle ?? buttonHtml,
-                showActionButton, actionButtonCaption, showCancelButton, cancelButtonCaption));
+                showActionButton, actionButtonCaption, showCancelButton, cancelButtonCaption, dialogSize));
 
             return attributes.ToButton(buttonHtml);
         }
 
-        public static IHtmlContent RAShowDialogLink(this IHtmlHelper htmlHelper, string linkText, string contentUrl,
-            string returnAction = null, object htmlAttributes = null, string dialogTitle = null, bool showActionButton = true,
-            string actionButtonCaption = "Save", bool showCancelButton = true, string cancelButtonCaption = "Cancel")
+        public static IHtmlContent RAShowDialogLink(
+            this IHtmlHelper htmlHelper, 
+            string linkText, 
+            string contentUrl,
+            string returnAction = null, 
+            object htmlAttributes = null, 
+            string dialogTitle = null, 
+            bool showActionButton = true,
+            string actionButtonCaption = "Save", 
+            bool showCancelButton = true, 
+            string cancelButtonCaption = "Cancel",
+            RAModalDialogSize dialogSize = RAModalDialogSize.Medium)
         {
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
             attributes.AddOrInsertToExisting("class", "ra-clickable");
             attributes.Add("onmouseup", htmlHelper.RAShowModalDialogScript(contentUrl, returnAction, dialogTitle ?? linkText,
-                showActionButton, actionButtonCaption, showCancelButton, cancelButtonCaption));
+                showActionButton, actionButtonCaption, showCancelButton, cancelButtonCaption, dialogSize));
 
             var tagBuilder = new TagBuilder("a")
             {

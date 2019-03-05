@@ -1,6 +1,4 @@
-﻿@model bool
-
-@*<environment include="Development">*@
+﻿@*<environment include="Development">*@
     <script src="~/jquery/dist/jquery.js"></script>
     <script src="~/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
@@ -9,10 +7,6 @@
     <script src="~/overlayscrollbars/js/jquery.overlayScrollbars.js"></script>
     <script src="~/orbital7-rapidapp/dist/js/orbital7-extensions.js" asp-append-version="true"></script>
     <script src="~/orbital7-rapidapp/dist/js/orbital7-rapidapp.js" asp-append-version="true"></script>
-    @if (this.Model)
-    {
-        <script src="~/orbital7-rapidapp/dist/js/orbital7-rapidapp-touch.js" asp-append-version="true"></script>
-    }
     <script src="~/js/site.js" asp-append-version="true"></script>
 @*</environment>
 <environment exclude="Development">

@@ -11,13 +11,14 @@
                 Small dialog with Close button
             </td>
             <td class="ra-padding-bottom-sm">
-                @Html.RAShowDialogButton(
+                @Html.RAShowModalDialogButton(
                     "Show",
                     "/ModalDialogs/_DialogMessage?message=This is a small message dialog.",
                     dialogTitle: "Small Dialog",
                     showActionButton: false,
                     cancelButtonCaption: "Close",
-                    buttonClass: "btn-primary btn-sm")
+                    buttonClass: "btn-primary btn-sm",
+                    dialogSize: RAModalDialogSize.Small)
             </td>
         </tr>
         <tr>
@@ -25,13 +26,14 @@
                 Medium dialog with Close button
             </td>
             <td class="ra-padding-bottom-sm">
-                @Html.RAShowDialogButton(
+                @Html.RAShowModalDialogButton(
                     "Show",
                     "/ModalDialogs/_DialogMessage?message=This is a medium message dialog.",
                     dialogTitle: "Medium Dialog",
                     showActionButton: false,
                     cancelButtonCaption: "Close",
-                    buttonClass: "btn-primary btn-sm")
+                    buttonClass: "btn-primary btn-sm",
+                    dialogSize: RAModalDialogSize.Medium)
             </td>
         </tr>
     </table>

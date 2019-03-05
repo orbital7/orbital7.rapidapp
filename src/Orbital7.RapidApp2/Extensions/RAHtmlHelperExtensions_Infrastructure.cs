@@ -4,12 +4,13 @@ using Orbital7.RapidApp2.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Mvc
 {
     public static partial class RAHtmlHelperExtensions
     {
-        public static IHtmlContent RAInfrastructurePageComponents(
+        public static async Task<IHtmlContent> RAInfrastructurePageComponentsAsync(
             this IHtmlHelper htmlHelper,
             string layoutMinimumSizeTitle = "Whoops!",
             string layoutMinimumSizeMessageHtml = 
@@ -22,35 +23,31 @@ namespace Microsoft.AspNetCore.Mvc
                 LayoutMinimumSizeMessageHtml = layoutMinimumSizeMessageHtml,
             };
 
-            return htmlHelper.Partial("~/Views/RA/InfrastructurePageComponents.cshtml", model);
+            return await htmlHelper.PartialAsync("~/Views/RA/InfrastructurePageComponents.cshtml", model);
         }
 
-        public static IHtmlContent RAInfrastructureBodyComponents(
-            this IHtmlHelper htmlHelper,
-            bool includeTouch = false)
-        {
-            return htmlHelper.Partial("~/Views/RA/InfrastructureBodyComponents.cshtml",
-                includeTouch);
-        }
-
-        public static IHtmlContent RAInfrastructureScripts(
-            this IHtmlHelper htmlHelper,
-            bool includeTouch = false)
-        {
-            return htmlHelper.Partial("~/Views/RA/InfrastructureScripts.cshtml",
-                includeTouch);
-        }
-
-        public static IHtmlContent RAInfrastructureStylesheets(
+        public static async Task<IHtmlContent> RAInfrastructureScriptsAsync(
             this IHtmlHelper htmlHelper)
         {
-            return htmlHelper.Partial("~/Views/RA/InfrastructureStylesheets.cshtml");
+            return await htmlHelper.PartialAsync("~/Views/RA/InfrastructureScripts.cshtml");
         }
 
-        public static IHtmlContent RAInfrastructureSignaturePad(
+        public static async Task<IHtmlContent> RAInfrastructureStylesheetsAsync(
+            this IHtmlHelper htmlHelper,
+            string fontAwesomeCSSLink = "<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr' crossorigin='anonymous'>")
+        {
+            return await htmlHelper.PartialAsync(
+                "~/Views/RA/InfrastructureStylesheets.cshtml",
+                new InfrastructureStylesheetsModel()
+                {
+                    FontAwesomeCSSLink = fontAwesomeCSSLink,
+                });
+        }
+
+        public static async Task<IHtmlContent> RAInfrastructureSignaturePadAsync(
             this IHtmlHelper htmlHelper)
         {
-            return htmlHelper.Partial("~/Views/RA/InfrastructureSignaturePad.cshtml");
+            return await htmlHelper.PartialAsync("~/Views/RA/InfrastructureSignaturePad.cshtml");
         }
     }
 }
