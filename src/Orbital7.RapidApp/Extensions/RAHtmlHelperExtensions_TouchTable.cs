@@ -9,19 +9,19 @@ namespace Microsoft.AspNetCore.Mvc
 {
     public static partial class RAHtmlHelperExtensions
     {
-        public static TagCloserX RABeginTouchTable<TModel>(this IHtmlHelper<TModel> htmlHelper)
+        public static TagCloser RABeginTouchTable<TModel>(this IHtmlHelper<TModel> htmlHelper)
         {
             htmlHelper.ViewContext.Writer.Write("<table class='ra-touchtable'>");
-            return new TagCloserX(htmlHelper, "</table>");
+            return new TagCloser(htmlHelper, "</table>");
         }
 
-        public static TagCloserX RABeginTouchTableClickableRow<TModel>(this IHtmlHelper<TModel> htmlHelper, string onClickUpScript, 
+        public static TagCloser RABeginTouchTableClickableRow<TModel>(this IHtmlHelper<TModel> htmlHelper, string onClickUpScript, 
             string supplimentalRowHtml = null)
         {
             htmlHelper.ViewContext.Writer.Write(
                 "<tr class=\"ra-clickable\" onmouseup=\"{0}\" {1}>", 
                 onClickUpScript, supplimentalRowHtml);
-            return new TagCloserX(htmlHelper, "</tr>");
+            return new TagCloser(htmlHelper, "</tr>");
         }
 
         public static IHtmlContent RATouchTableHeaderRow<TModel>(this IHtmlHelper<TModel> htmlHelper, string headerText)

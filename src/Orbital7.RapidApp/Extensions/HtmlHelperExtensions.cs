@@ -28,12 +28,12 @@ namespace Microsoft.AspNetCore.Mvc
             return builder;
         }
 
-        public static IHtmlContent PartialFor<TModel, TResult>(this IHtmlHelper<TModel> helper, 
+        public static async Task<IHtmlContent> PartialForAsync<TModel, TResult>(this IHtmlHelper<TModel> helper, 
             Expression<Func<TModel, TResult>> expression, string partialViewName, string prefix = "")
         {
             var modelExplorer = helper.GetModelExplorer(expression);
             helper.ViewData.TemplateInfo.HtmlFieldPrefix += prefix;
-            return helper.Partial(partialViewName, modelExplorer.Model, helper.ViewData);
+            return await helper.PartialAsync(partialViewName, modelExplorer.Model, helper.ViewData);
         }
     }
 }

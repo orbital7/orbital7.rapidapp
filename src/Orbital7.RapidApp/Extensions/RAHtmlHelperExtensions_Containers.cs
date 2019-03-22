@@ -20,22 +20,40 @@ namespace Microsoft.AspNetCore.Mvc
 
     public static partial class RAHtmlHelperExtensions
     {
-        public static TagCloserX RABeginContainer(
+        public static IHtmlContent RAPagePanel<TModel>(
+            this IHtmlHelper<TModel> htmlHelper,
+            string contentUrl = null,
+            string containerClass = "ra-fullheight",
+            string containerStyle = null)
+        {
+            var content = new HtmlContentBuilder();
+
+            content.AppendFormat(
+                "<div id='ra-pagePanel' data-content-url='{0}' class='{1}' style='{2}'></div>",
+                contentUrl,
+                containerClass,
+                containerStyle);
+
+            if (!string.IsNullOrEmpty(contentUrl))
+                content.AppendHtml("<script>$(document).ready(function() { raRefreshPagePanel(); });</script>");
+
+            return content;
+        }
+
+        public static TagCloser RABeginContainer(
             this IHtmlHelper htmlHelper,
-            bool isPadded,
             ContainerScrolling scrolling = ContainerScrolling.None,
             string containerClass = null,
             string containerStyle = null)
         {
             var content = new HtmlContentBuilder();
-            content.AppendFormat("<div class='ra-container ra-parent {0} {1} {2}' style='{3}'>",
-                isPadded ? "ra-container-padded" : null,
+            content.AppendFormat("<div class='ra-container ra-parent {0} {1}' style='{2}'>",
                 GetScrollingClass(scrolling), 
                 containerClass, 
                 containerStyle);
 
             htmlHelper.ViewContext.Writer.Write(content);
-            return new TagCloserX(htmlHelper, "</div>");
+            return new TagCloser(htmlHelper, "</div>");
         }
 
         private static string GetScrollingClass(
@@ -47,7 +65,7 @@ namespace Microsoft.AspNetCore.Mvc
                     return "ra-container-scrollable-y";
 
                 case ContainerScrolling.Both:
-                    return "ra-container-scrollable";
+                    return "ra-container-scrollable-both";
 
                 case ContainerScrolling.X:
                     return "ra-container-scrollable-x";

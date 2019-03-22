@@ -20,7 +20,7 @@ namespace Microsoft.AspNetCore.Mvc
 
     public static partial class RAHtmlHelperExtensions
     {
-        public static TagCloserX RABeginDataGrid(
+        public static TagCloser RABeginDataGrid(
             this IHtmlHelper htmlHelper, 
             string tableClass = null,
             string tableStyle = null,
@@ -44,10 +44,10 @@ namespace Microsoft.AspNetCore.Mvc
                 tableId, 
                 fixedHeight,
                 updateRowColors.Totruefalse());
-            return new TagCloserX(htmlHelper, closingTags);
+            return new TagCloser(htmlHelper, closingTags);
         }
 
-        public static TagCloserX RABeginDataGridSelectableRow(
+        public static TagCloser RABeginDataGridSelectableRow(
             this IHtmlHelper htmlHelper, 
             IIdObject idObject, 
             bool canSelect = true,
@@ -61,7 +61,7 @@ namespace Microsoft.AspNetCore.Mvc
                 canSelect ? "selectDataGridRow(this);" : "");
             content.AppendHtml(">");
             htmlHelper.ViewContext.Writer.Write(content);
-            return new TagCloserX(htmlHelper, "</tr>");
+            return new TagCloser(htmlHelper, "</tr>");
         }
 
         public static IHtmlContent RADataGridHeadingCell(
@@ -72,7 +72,8 @@ namespace Microsoft.AspNetCore.Mvc
             bool sortable = true, 
             string sortMethod = null, 
             bool isSortDefault = false,
-            RASortDirection? sortDirection = null)
+            RASortDirection? sortDirection = null,
+            bool noWrap = true)
         {
             var content = new HtmlContentBuilder();
 
@@ -82,7 +83,8 @@ namespace Microsoft.AspNetCore.Mvc
                 sortable,
                 sortMethod,
                 isSortDefault,
-                sortDirection));
+                sortDirection,
+                noWrap));
             content.AppendHtml(cellValueHtml);
             content.AppendHtml(GetDataGridHeadingCellEndHtml());
 
@@ -90,12 +92,13 @@ namespace Microsoft.AspNetCore.Mvc
         }
 
         private static string GetDataGridHeadingCellStartHtml(
-            string cellClass = null,
-            string cellStyle = null,
-            bool sortable = true,
-            string sortMethod = null,
-            bool isSortDefault = false,
-            RASortDirection? sortDirection = null)
+            string cellClass,
+            string cellStyle,
+            bool sortable,
+            string sortMethod,
+            bool isSortDefault,
+            RASortDirection? sortDirection,
+            bool noWrap)
         {
             if (!sortable)
                 sortMethod = "none";
@@ -112,14 +115,15 @@ namespace Microsoft.AspNetCore.Mvc
                     sortAria = "ascending";
             }
 
-            return String.Format("<th class='ra-datagrid-cell-header {0} {1}' " +
+            return String.Format("<th class='ra-datagrid-cell-header {0} {1} {6}' " +
                 "style='{2}' {3} {4} {5}>",
                 cellClass,
                 sortable ? null : "ra-datagrid-notsortable",
                 cellStyle,
                 !String.IsNullOrEmpty(sortMethod) ? "data-sort-method='" + sortMethod + "'" : null,
                 sortable && isSortDefault ? "data-sort-default" : null,
-                sortable && sortDirection.HasValue ? "aria-sort='" + sortAria + "'" : null);
+                sortable && sortDirection.HasValue ? "aria-sort='" + sortAria + "'" : null,
+                noWrap ? "ra-nowrap" : null);
         }
 
         private static string GetDataGridHeadingCellEndHtml()
@@ -145,14 +149,15 @@ namespace Microsoft.AspNetCore.Mvc
         }
 
 
-        public static TagCloserX RABeginDataGridHeadingCell(
+        public static TagCloser RABeginDataGridHeadingCell(
             this IHtmlHelper htmlHelper, 
             string cellClass = null, 
             string cellStyle = null,
             bool sortable = true,
             string sortMethod = null,
             bool isSortDefault = false,
-            RASortDirection? sortDirection = null)
+            RASortDirection? sortDirection = null,
+            bool noWrap = true)
         {
             htmlHelper.ViewContext.Writer.Write(GetDataGridHeadingCellStartHtml(
                 cellClass,
@@ -160,8 +165,9 @@ namespace Microsoft.AspNetCore.Mvc
                 sortable,
                 sortMethod,
                 isSortDefault,
-                sortDirection));
-            return new TagCloserX(htmlHelper, GetDataGridHeadingCellEndHtml());
+                sortDirection,
+                noWrap));
+            return new TagCloser(htmlHelper, GetDataGridHeadingCellEndHtml());
         }
 
         private static string GetSortMethod(ModelExplorer modelExplorer)
@@ -189,10 +195,10 @@ namespace Microsoft.AspNetCore.Mvc
             return null;
         }
 
-        public static TagCloserX RABeginDataGridBodyCell(this IHtmlHelper htmlHelper, string cellClass = null, string cellStyle = null)
+        public static TagCloser RABeginDataGridBodyCell(this IHtmlHelper htmlHelper, string cellClass = null, string cellStyle = null)
         {
             htmlHelper.ViewContext.Writer.Write("<td class='ra-datagrid-cell {0}' style='{1}'>", cellClass, cellStyle);
-            return new TagCloserX(htmlHelper, "</td>");
+            return new TagCloser(htmlHelper, "</td>");
         }
 
         public static IHtmlContent RADataGridBodyCell<TModel>(this IHtmlHelper<TModel> htmlHelper, object cellValue,

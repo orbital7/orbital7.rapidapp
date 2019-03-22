@@ -220,7 +220,7 @@ namespace Microsoft.AspNetCore.Mvc
             return content;
         }
 
-        public static TagCloserX RABeginAjaxContentSection(this IHtmlHelper htmlHelper,
+        public static TagCloser RABeginAjaxContentSection(this IHtmlHelper htmlHelper,
             string contentKey,
             string contentUrl = null,
             string contentUrlScript = null,
@@ -231,10 +231,10 @@ namespace Microsoft.AspNetCore.Mvc
             content.AppendFormat("<div id=\"{0}AjaxContent\" class=\"{1}\" style=\"{2}\" data-content-url=\"{3}\" data-content-url-script=\"{4}\">",
                 contentKey, contentClass, contentStyle, contentUrl, contentUrlScript);
             htmlHelper.ViewContext.Writer.Write(content);
-            return new TagCloserX(htmlHelper, "</div");
+            return new TagCloser(htmlHelper, "</div");
         }
 
-        public static IHtmlContent RAContentFrame(
+        public static async Task<IHtmlContent> RAContentFrameAsync(
             this IHtmlHelper htmlHelper,
             string contentUrl,
             string containerClass = "ra-fullheight",
@@ -245,7 +245,7 @@ namespace Microsoft.AspNetCore.Mvc
             bool printFrameOnLoad = false,
             bool showPrintButton = false)
         {
-            return htmlHelper.RAContentFrame(new RAContentFrameModel()
+            return await htmlHelper.RAContentFrameAsync(new RAContentFrameModel()
             {
                 ContentUrl = contentUrl,
                 ContainerClass = containerClass,
@@ -258,11 +258,11 @@ namespace Microsoft.AspNetCore.Mvc
             });
         }
 
-        public static IHtmlContent RAContentFrame(
+        public static async Task<IHtmlContent> RAContentFrameAsync(
             this IHtmlHelper htmlHelper,
             RAContentFrameModel contentFrame)
         {
-            return htmlHelper.Partial("~/Views/RA/ContentFrame.cshtml", contentFrame);
+            return await htmlHelper.PartialAsync("~/Views/RA/ContentFrame.cshtml", contentFrame);
         }
 
         public static string RACreatePartialViewContentFrameUrl(this IHtmlHelper htmlHelper, 
