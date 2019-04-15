@@ -15,7 +15,9 @@ namespace Microsoft.AspNetCore.Mvc
     // TODO: Move to Orbital7.Extensions.AspNetCore
     public static class ControllerExtensions
     {
-        public static byte[] ReadFormFile(this Controller controller, IFormFile formFile)
+        public static byte[] ReadFormFile(
+            this Controller controller, 
+            IFormFile formFile)
         {
             if (formFile != null)
             {
@@ -26,7 +28,12 @@ namespace Microsoft.AspNetCore.Mvc
             return null;
         }
 
-        public static FileContentResult FileResult(this Controller controller, byte[] fileContents, string contentType, string filename, bool isInLine)
+        public static FileContentResult FileResult(
+            this Controller controller, 
+            byte[] fileContents, 
+            string contentType, 
+            string filename, 
+            bool isInLine)
         {
             if (isInLine)
             {
@@ -39,7 +46,10 @@ namespace Microsoft.AspNetCore.Mvc
             }
         }
 
-        public static void HandleException(this Controller controller, string prefix, Exception ex)
+        public static void HandleException(
+            this Controller controller, 
+            string prefix, 
+            Exception ex)
         {
             string key = String.Empty;
             string message = ex.Message;
@@ -57,13 +67,18 @@ namespace Microsoft.AspNetCore.Mvc
             controller.ModelState.AddModelError(key, message);
         }
 
-        public static void HandleException(this Controller controller, Exception ex)
+        public static void HandleException(
+            this Controller controller, 
+            Exception ex)
         {
             HandleException(controller, String.Empty, ex);
         }
 
-        public static async Task<string> RenderPartialViewToStringAsync(this Controller controller, ICompositeViewEngine viewEngine,
-            string viewName, object model)
+        public static async Task<string> RenderPartialViewToStringAsync(
+            this Controller controller, 
+            ICompositeViewEngine viewEngine,
+            string viewName, 
+            object model)
         {
             if (string.IsNullOrEmpty(viewName))
                 viewName = controller.ControllerContext.ActionDescriptor.ActionName;
