@@ -55,12 +55,12 @@ namespace Orbital7.RapidApp.SampleWebApp
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-#if debug
-            var nodeModulesPath = Path.GetFullPath(Path.Combine(env.ContentRootPath, 
-                @"..\Orbital7.RapidApp\node_modules"));
-#else
-            var nodeModulesPath = Path.Combine(env.ContentRootPath, @"node_modules");
-#endif
+            #if debug
+                var nodeModulesPath = Path.GetFullPath(Path.Combine(env.ContentRootPath, 
+                    "../Orbital7.RapidApp/node_modules"));
+            #else
+                var nodeModulesPath = Path.Combine(env.ContentRootPath, @"node_modules");
+            #endif
             app.ExtendWebRootStaticFiles(env, nodeModulesPath, "");
 
             //app.UseCookiePolicy();
