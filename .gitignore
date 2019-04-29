@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /src/Orbital7.RapidApp.SampleWebApp/Properties/PublishProfiles/realtorhive - Web Deploy.pubxml
+*.pubxml

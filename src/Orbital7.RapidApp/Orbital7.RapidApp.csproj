@@ -130,18 +130,6 @@
     <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-toolbar.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-touch.scss">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-touchdialog.scss">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-touchinput.scss">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-touchtable.scss">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="node_modules\orbital7-rapidapp\dist\images\spinners\ra-spinner-lg.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

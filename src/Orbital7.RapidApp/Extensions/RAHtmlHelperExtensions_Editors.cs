@@ -42,7 +42,7 @@ namespace Microsoft.AspNetCore.Mvc
             object htmlAttributes = null,
             string wrapperClass = null,
             string wrapperStyle = null,
-            string stateClass = "p-primary",
+            string stateClass = "ra-p-theme",
             string labelClass = null,
             string labelStyle = null)
         {
