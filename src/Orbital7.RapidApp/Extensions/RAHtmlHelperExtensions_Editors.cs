@@ -169,10 +169,11 @@ namespace Microsoft.AspNetCore.Mvc
                 else if (modelExplorer.ModelType == typeof(DateTime?))
                     value = ((DateTime?)modelExplorer.Model).FormatAsShortDate();
 
-                attributes.AddOrAppendToExisting("class", "ra-behavior-datepicker ra-clickable");
+                //attributes.AddOrAppendToExisting("class", "ra-behavior-datepicker ra-clickable");
                 if (isToolbar)
                     attributes.AddOrAppendToExisting("class", "ra-toolbar-datepicker");
-                attributes.AddIfMissing("readonly", "true");
+                //attributes.AddIfMissing("readonly", "true");
+                attributes.AddIfMissing("type", "date");
                 content.AppendHtml(htmlHelper.TextBoxFor(expression, value, attributes));
             }
             else if (modelExplorer.ModelType.IsNumeric())
