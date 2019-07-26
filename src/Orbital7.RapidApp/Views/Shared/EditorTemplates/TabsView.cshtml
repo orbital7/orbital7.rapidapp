@@ -32,11 +32,11 @@
 </div>
 
 <script>
-    
+
     function loadTab(tabIndex) {
 
         var tab = $("#ra-tab-" + tabIndex);
-        if (!tab.hasClass("ra-tab-header-selected")) {
+        if (tab && !tab.hasClass("ra-tab-header-selected")) {
 
             $(".ra-tab").removeClass("ra-tab-header-selected");
             $(".ra-tab").addClass("ra-tab-header");
@@ -85,13 +85,20 @@
 
         var tabSelected = $(".ra-tab-header-selected");
         var tabIndex = tabSelected.attr("data-tab-index");
-        var tabContent = $("#ra-tab-content-" + tabIndex); 
+        var tabContent = $("#ra-tab-content-" + tabIndex);
         loadTabContent(tabContent);
     }
 
     @if (this.Model.SelectedIndex >= 0)
-    {
-        <text>loadTab('@this.Model.SelectedIndex');</text>
+    { 
+        <text>
+            var tabIndex = '@this.Model.SelectedIndex';
+            var queryParams = getQueryStringParams();
+            var selectedTabIndex = queryParams["selectedTab"];
+            if (selectedTabIndex)
+                tabIndex = selectedTabIndex;
+            loadTab(tabIndex);
+        </text>
     }
 
 </script>

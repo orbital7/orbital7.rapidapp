@@ -18,6 +18,8 @@ namespace Microsoft.AspNetCore.Mvc
         Dropdown,
 
         RadioButton,
+
+        Number,
     }
 
     public static partial class RAHtmlHelperExtensions
@@ -222,6 +224,9 @@ namespace Microsoft.AspNetCore.Mvc
                 }
                 else
                 {
+                    if (editorTypeOverride.HasValue && editorTypeOverride.Value == RAEditorType.Number)
+                        attributes.AddIfMissing("type", "number");
+
                     content.AppendHtml(htmlHelper.TextBoxFor(expression, attributes));
                 }
             }
