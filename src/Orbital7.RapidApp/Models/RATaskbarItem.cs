@@ -19,13 +19,17 @@ namespace Orbital7.RapidApp.Models
 
         public string Action { get; private set; }
 
+        public bool IsVisible { get; private set; } = true;
+
         public RATaskbarItem(
             string text,
             RATaskbarItemType type,
-            string action)
+            string action,
+            bool isVisible = true)
         {
             this.Text = text;
             this.Type = type;
+            this.IsVisible = isVisible;
 
             switch (this.Type)
             {

@@ -4,11 +4,14 @@
 
     @foreach (var item in this.Model.Items)
     {
-        <div class="ra-taskbar-item ra-taskbar-item-selectable"
-             data-task-action="@item.Action" 
-             onclick="loadTaskbarItem('@item.Text');">
-            @item.Text
-        </div>
+        if (item.IsVisible)
+        {
+            <div class="ra-taskbar-item ra-taskbar-item-selectable"
+                 data-task-action="@item.Action" 
+                 onclick="loadTaskbarItem('@item.Text');">
+                @item.Text
+            </div>
+        }
     }
 
 </div>
