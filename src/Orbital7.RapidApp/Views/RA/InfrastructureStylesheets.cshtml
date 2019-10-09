@@ -1,11 +1,19 @@
 ﻿@model InfrastructureStylesheetsModel
-
 @*<environment include="Development">*@
-<link rel="stylesheet" href="~/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous">
 @Html.Raw(this.Model.FontAwesomeCSSLink)
-<link rel="stylesheet" href="~/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" />
-<link rel="stylesheet" href="~/overlayscrollbars/css/OverlayScrollbars.css" />
-<link rel="stylesheet" href="~/pretty-checkbox/dist/pretty-checkbox.css" />
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.css"
+      integrity="sha256-AghQEDQh6JXTN1iI/BatwbIHpJRKQcg2lay7DE5U/RQ="
+      crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretty-checkbox/3.0.3/pretty-checkbox.min.css"
+      integrity="sha256-sI14MHRjSf+KF9MjQHjqHkbDPwsdKXUkhBUdnGCg1iU="
+      crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.5.2/css/OverlayScrollbars.min.css" 
+      integrity="sha256-65MzX0Z6BJweRhSd5vkJsFkyfkfqzye3RRzAQZbPh3c=" 
+      crossorigin="anonymous">
 <link rel="stylesheet" href="~/css/@this.Model.MainCSSFilename" asp-append-version="true" />
 @*</environment>
     <environment exclude="Development">

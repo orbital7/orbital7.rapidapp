@@ -25,166 +25,79 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="node_modules\bootstrap-datepicker\dist\css\bootstrap-datepicker.css">
+    <None Update="Lib\orbital7-rapidapp\dist\css\bootstrap4Switches.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\bootstrap-datepicker\dist\css\bootstrap-datepicker3.css">
+    <None Update="Lib\orbital7-rapidapp\dist\css\signaturePad.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\bootstrap-datepicker\dist\js\bootstrap-datepicker.js">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-all.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\bootstrap-datepicker\js\bootstrap-datepicker.js">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-buttons.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\bootstrap\dist\css\bootstrap-grid.css">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-containers.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\bootstrap\dist\css\bootstrap-reboot.css">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-content.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\bootstrap\dist\css\bootstrap.css">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-dashboard.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\bootstrap\dist\js\bootstrap.bundle.js">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-datagrid.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\bootstrap\dist\js\bootstrap.js">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-defaults.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\bootstrap\dist\js\bootstrap.js.map">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-dialog.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\bootstrap\dist\js\bootstrap.min.js">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-dynamictable.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-fonts.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\jquery-validation\dist\additional-methods.js">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-layout.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\jquery-validation\dist\jquery.validate.js">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-mixins.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\jquery\dist\core.js">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-propertyblocks.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\jquery\dist\jquery.js">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-reports.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\bootstrap4Switches.scss">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-statictable.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\signaturePad.scss">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-tabs.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-all.scss">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-toolbar.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-buttons.scss">
+    <None Update="Lib\orbital7-rapidapp\dist\images\spinners\ra-spinner-lg.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-containers.scss">
+    <None Update="Lib\orbital7-rapidapp\dist\images\spinners\ra-spinner-sm.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-content.scss">
+    <None Update="Lib\orbital7-rapidapp\dist\js\orbital7-extensions.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-dashboard.scss">
+    <None Update="Lib\orbital7-rapidapp\dist\js\orbital7-rapidapp-touch.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-datagrid.scss">
+    <None Update="Lib\orbital7-rapidapp\dist\js\orbital7-rapidapp.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-defaults.scss">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-dialog.scss">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-dynamictable.scss">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-fonts.scss">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-layout.scss">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-mixins.scss">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-propertyblocks.scss">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-reports.scss">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-statictable.scss">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-tabs.scss">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\css\_ra-toolbar.scss">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\images\spinners\ra-spinner-lg.gif">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\images\spinners\ra-spinner-sm.gif">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\js\orbital7-extensions.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\js\orbital7-rapidapp-touch.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\js\orbital7-rapidapp.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\orbital7-rapidapp\dist\js\signaturePad.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\overlayscrollbars\css\OverlayScrollbars.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\overlayscrollbars\js\jquery.overlayScrollbars.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\overlayscrollbars\js\OverlayScrollbars.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\pretty-checkbox\dist\maps\pretty-checkbox.css.map">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\pretty-checkbox\dist\pretty-checkbox.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\signature_pad\dist\signature_pad.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\signature_pad\dist\signature_pad.mjs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\tablesort\dist\sorts\tablesort.date.min.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\tablesort\dist\sorts\tablesort.dotsep.min.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\tablesort\dist\sorts\tablesort.filesize.min.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\tablesort\dist\sorts\tablesort.monthname.min.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\tablesort\dist\sorts\tablesort.number.min.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="node_modules\tablesort\dist\tablesort.min.js">
+    <None Update="Lib\orbital7-rapidapp\dist\js\signaturePad.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
