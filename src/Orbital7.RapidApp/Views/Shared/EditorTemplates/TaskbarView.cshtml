@@ -1,6 +1,7 @@
 ﻿@model Orbital7.RapidApp.Models.TaskbarView
 
-<div class="ra-taskbar">
+<div class="ra-taskbar"
+     data-key="@this.Model.Key">
 
     @foreach (var item in this.Model.Items)
     {
@@ -18,11 +19,12 @@
 
 <script>
 
-    $(document).ready(function() {
+    $(document).ready(function () {
+
         var selectedTaskName = "@this.Context.Request.Query["selectedTask"]";
 
         if (!selectedTaskName)
-            selectedTaskName = localStorage.getItem("selectedTask");
+            selectedTaskName = sessionStorage.getItem("taskbar_" + "@this.Model.Key" + "_selectedTask");
 
         if (!selectedTaskName)
             selectedTaskName = "@this.Model.Items.FirstOrDefault()?.Text";

@@ -11,9 +11,10 @@ namespace Microsoft.AspNetCore.Mvc
     {
         public static IHtmlContent RATaskbar<TModel>(
             this IHtmlHelper<TModel> htmlHelper,
+            string key,
             List<RATaskbarItem> taskbarItems)
         {
-            var taskbar = new TaskbarView(taskbarItems);
+            var taskbar = new TaskbarView(key, taskbarItems);
             return htmlHelper.EditorFor(x => taskbar);
         }
     }

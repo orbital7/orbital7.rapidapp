@@ -1,0 +1,18 @@
+﻿@page
+@model SampleWebApp.Pages.ModalDialogs.IndexModel
+@{
+}
+
+@section taskbar {
+
+    @Html.RATaskbar("dialogs", new List<RATaskbarItem>()
+    {
+        new RATaskbarItem("Overview", RATaskbarItemType.LoadPagePanel,
+            "/ModalDialogs/PanelOverview"),
+        new RATaskbarItem("Basic", RATaskbarItemType.LoadPagePanel,
+            "/ModalDialogs/PanelBasic"),
+    })
+
+}
+
+@Html.RAPagePanel()

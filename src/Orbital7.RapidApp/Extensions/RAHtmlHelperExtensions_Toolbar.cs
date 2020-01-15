@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +46,7 @@ namespace Microsoft.AspNetCore.Mvc
             if (!String.IsNullOrEmpty(label))
             {
                 var id = htmlHelper.GenerateIdFromName(
-                    htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(ExpressionHelper.GetExpressionText(expression)));
+                    htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(htmlHelper.GetExpressionText(expression)));
                 content.AppendFormat("<label for='{0}' class='ra-toolbar-label {1}'>{2}:</label>", id,
                     displayLabelClass, label);
             }

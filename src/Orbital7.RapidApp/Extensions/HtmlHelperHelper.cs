@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
@@ -23,11 +22,6 @@ namespace Microsoft.AspNetCore.Mvc
                 attributes = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
 
             return attributes;
-        }
-
-        public static string GetHtmlFieldPrefix<TModel, TProperty>(Expression<Func<TModel, TProperty>> expression)
-        {
-            return ExpressionHelper.GetExpressionText(expression);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 using Orbital7.Extensions.Models;
 using System;
 using System.Collections.Generic;
@@ -225,7 +224,7 @@ namespace Microsoft.AspNetCore.Mvc
             var content = new HtmlContentBuilder();
             content.AppendHtml("<div id=\"selectedDataGridItemsList\"></div>");
             content.AppendFormat("<script>createSelectedDataGridItemsList('{0}', '{1}', '{2}', '{3}');</script>", 
-                dataGridId, ExpressionHelper.GetExpressionText(expression), includeRowNames.ToString().ToLower(), rowNameClass);
+                dataGridId, htmlHelper.GetExpressionText(expression), includeRowNames.ToString().ToLower(), rowNameClass);
 
             return content;
         }

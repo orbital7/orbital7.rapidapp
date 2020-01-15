@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 using Orbital7.RapidApp.Models;
 using System;
 using System.Collections;
@@ -30,7 +29,7 @@ namespace Microsoft.AspNetCore.Mvc
                 content.AppendHtml("<thead>" + tHeadInnerHtml + "</thead>");
             content.AppendHtml("<tbody class=\"ra-dynamictable-body\">");
 
-            var htmlFieldPrefix = ExpressionHelper.GetExpressionText(tableRowItemsExpression);
+            var htmlFieldPrefix = htmlHelper.GetExpressionText(tableRowItemsExpression);
             var modelExplorer = htmlHelper.GetModelExplorer(tableRowItemsExpression);
             foreach (var rowItem in (IList<TTableRowItem>)modelExplorer.Model)
             {

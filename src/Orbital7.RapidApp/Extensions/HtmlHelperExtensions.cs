@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
@@ -12,13 +12,24 @@ namespace Microsoft.AspNetCore.Mvc
 {
     public static class HtmlHelperExtensions
     {
+        public static string GetExpressionText<TModel, TResult>(
+            this IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TResult>> expression)
+        {
+            var expresionProvider = htmlHelper.ViewContext.HttpContext.RequestServices
+                .GetService(typeof(ModelExpressionProvider)) as ModelExpressionProvider;
+
+            return expresionProvider.GetExpressionText(expression);
+        }
+
         public static IHtmlContent FileFor<TModel, TProperty>(this IHtmlHelper<TModel> helper, 
             Expression<Func<TModel, TProperty>> expression, object htmlAttributes = null)
         {
             var builder = new TagBuilder("input");
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
 
-            var id = helper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(ExpressionHelper.GetExpressionText(expression));
+            var id = helper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
+                helper.GetExpressionText(expression));
             builder.GenerateId(id, "");
             builder.MergeAttribute("name", id);
             builder.MergeAttribute("type", "file");

@@ -582,7 +582,7 @@ function raDropdownValueExists(dropdown, targetValue) {
     var exists = false;
 
     dropdown.find('option').each(function () {
-        if (this.value == targetValue) {
+        if (this.value === targetValue) {
             exists = true;
             return;
         }
@@ -686,18 +686,19 @@ function loadTaskbarItem(
     taskName) {
 
     var taskbar = $(".ra-taskbar");
+    var key = taskbar.data("key");
 
     var selectedTask = taskbar.findByContentText(taskName);
     if (selectedTask) {
 
         taskbar.find(".ra-taskbar-item-selected")
             .removeClass("ra-taskbar-item-selected")
-            .addClass("ra-taskbar-item-selectable")
+            .addClass("ra-taskbar-item-selectable");
 
         selectedTask.removeClass("ra-taskbar-item-selectable");
         selectedTask.addClass("ra-taskbar-item-selected");
 
-        localStorage.setItem("selectedTask", taskName);
+        sessionStorage.setItem("taskbar_" + key + "_selectedTask", taskName);
 
         var action = selectedTask.attr("data-task-action");
         eval(action);
