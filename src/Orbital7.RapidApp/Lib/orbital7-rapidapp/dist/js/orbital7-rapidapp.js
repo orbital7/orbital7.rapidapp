@@ -525,7 +525,7 @@ function updateDialogBodyHtml(dialog, dialogBody, actionButton, enableActionButt
 
     setTimeout(function () {
         dialogBody.find(":input:enabled:visible:first").focus().select();
-    }, 300);
+    }, 500);
 }
 
 function raLoadAjaxContent(contentUrl, destination) {
@@ -759,6 +759,27 @@ function raUpdateBindings() {
             y: "scroll"
         },
         paddingAbsolute: true
+    });
+
+    $("input").keypress(function (e) {
+        if (e.which === 13) {
+
+            var x = $(this);
+            x.blur();
+
+            if (x.closest("#ra-dialog").length > 0) {
+                submitModalDialog();
+            }
+            else {
+                $(":submit").click();
+            }
+            return false;
+        }
+    });
+
+    $(":submit").click(function (e) {
+        bsDisable(this);
+        $("form").submit();
     });
 }
 
