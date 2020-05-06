@@ -16,10 +16,12 @@ namespace Microsoft.AspNetCore.Mvc
         public static IHtmlContent RADynamicTable<TModel, TTableRowItem>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, IList<TTableRowItem>>> tableRowItemsExpression,
+            string rowViewName,
             string ajaxAddRowUrl,
             string addRowLinkText,
+            string addButtonClass = "ra-btn-theme",
             string tHeadInnerHtml = null)
-            where TTableRowItem : RATableRowItemBase
+            where TTableRowItem : IDynamicTableRowItem
         {
             var content = new HtmlContentBuilder();
             string tableId = Guid.NewGuid().ToString().Replace("-", "");
@@ -34,7 +36,7 @@ namespace Microsoft.AspNetCore.Mvc
             foreach (var rowItem in (IList<TTableRowItem>)modelExplorer.Model)
             {
                 rowItem.HtmlFieldPrefix = htmlFieldPrefix;
-                content.AppendHtml(htmlHelper.EditorFor(x => rowItem));
+                content.AppendHtml(htmlHelper.Partial(rowViewName, rowItem)); //htmlHelper.EditorFor(x => rowItem));
             }
 
             var completeAjaxAddRowUrl = ajaxAddRowUrl += "&htmlFieldPrefix=" + htmlFieldPrefix;
@@ -43,7 +45,7 @@ namespace Microsoft.AspNetCore.Mvc
             content.AppendHtml("<div>");
             content.AppendHtml(htmlHelper.RAButton("<i class='fas fa-plus'></i> " + addRowLinkText,
                 string.Format("raAddDynamicTableRow('{0}', '{1}');", tableId, completeAjaxAddRowUrl),
-                buttonClass: "btn-primary ra-btn-xs"));
+                buttonClass: $"{addButtonClass} ra-btn-xs"));
             content.AppendHtml("</button>");
             content.AppendHtml("</div>");
 
@@ -52,7 +54,7 @@ namespace Microsoft.AspNetCore.Mvc
 
         public static TagCloser RABeginDynamicTableRow<TModel>(
             this IHtmlHelper<TModel> htmlHelper)
-            where TModel : RATableRowItemBase
+            where TModel : IDynamicTableRowItem
         {
             var model = htmlHelper.ViewData.Model;
             string existingHtmlPrefixField = htmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix;
@@ -66,7 +68,7 @@ namespace Microsoft.AspNetCore.Mvc
             contentEnd.AppendHtml("<td>");
             contentEnd.AppendHtml(htmlHelper.RAButton("<i class='fas fa-times'></i>",
                 "raRemoveDynamicTableRow(this);",
-                buttonClass: "btn-secondary ra-btn-xs ra-btn-delete"));
+                buttonClass: "btn-danger ra-btn-xs"));
             contentEnd.AppendHtml(htmlHelper.HiddenFor(x => x.HtmlFieldPrefix));
             contentEnd.AppendFormat("<input type=\"hidden\" id=\"{0}\" name=\"{1}\" value=\"{2}\" />",
                 model.IndexId, model.IndexName, model.Index);

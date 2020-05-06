@@ -156,11 +156,12 @@ namespace Microsoft.AspNetCore.Mvc
                 const string TRUE = "Yes";
                 const string FALSE = "No";
                 content.AppendHtml("<div class='form=group'><span class='switch switch-sm'>");
-                attributes.Add("data-checked", TRUE);
-                attributes.Add("data-unchecked", FALSE);
+                attributes.AddIfMissing("data-checked", TRUE);
+                attributes.AddIfMissing("data-unchecked", FALSE);
                 attributes.AddOrAppendToExisting("onclick", "raUpdateFlipswitchLabel(this);");
                 content.AppendHtml(htmlHelper.CheckBoxFor(expression as Expression<Func<TModel, bool>>, attributes));
-                content.AppendHtml(htmlHelper.LabelFor(expression, (bool)modelExplorer.Model ? TRUE : FALSE, null));
+                content.AppendHtml(htmlHelper.LabelFor(expression,
+                    (bool)modelExplorer.Model ? attributes["data-checked"].ToString() : attributes["data-unchecked"].ToString(), null));
                 content.AppendHtml("</span></div>");
             }
             else if (modelExplorer.ModelType == typeof(DateTime) || modelExplorer.ModelType == typeof(DateTime?))

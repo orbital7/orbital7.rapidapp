@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace Orbital7.RapidApp.Models
 {
-    public abstract class RATableRowItemBase : IDynamicTableRowItem
+    public class RATableRowItemPageModel 
+        : PageModel, IDynamicTableRowItem
     {
         public Guid Index { get; set; }
 
@@ -17,12 +18,12 @@ namespace Orbital7.RapidApp.Models
 
         public string IndexedHtmlFieldPrefix => this.HtmlFieldPrefix + "[" + this.Index + "]";
 
-        protected RATableRowItemBase()
+        protected RATableRowItemPageModel()
         {
             this.Index = Guid.NewGuid();
         }
 
-        protected RATableRowItemBase(string htmlFieldPrefix)
+        protected RATableRowItemPageModel(string htmlFieldPrefix)
             : this()
         {
             this.HtmlFieldPrefix = htmlFieldPrefix.Replace(".", "_");

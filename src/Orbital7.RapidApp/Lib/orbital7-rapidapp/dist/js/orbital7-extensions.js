@@ -19,7 +19,7 @@ jQuery.fn.visibilityToggle = function () {
 
 jQuery.fn.findByContentText = function (text) {
     return this.contents().filter(function () {
-        return jQuery(this).text().trim() == text.trim();
+        return jQuery(this).text().trim() === text.trim();
     });
 };
 

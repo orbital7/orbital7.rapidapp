@@ -1,0 +1,13 @@
+[
+  {
+    "outputFileName": "Lib/orbital7-rapidapp/dist/js/orbital7-rapidapp.js",
+    "inputFiles": [
+      "Lib/orbital7-rapidapp/dist/js/orbital7-rapidapp-containers.js",
+      "Lib/orbital7-rapidapp/dist/js/orbital7-rapidapp-datagrid.js",
+      "Lib/orbital7-rapidapp/dist/js/orbital7-rapidapp-dialogs.js",
+      "Lib/orbital7-rapidapp/dist/js/orbital7-rapidapp-documentready.js",
+      "Lib/orbital7-rapidapp/dist/js/orbital7-rapidapp-dynamictable.js",
+      "Lib/orbital7-rapidapp/dist/js/orbital7-rapidapp-ux.js"
+    ]
+  }
+]
