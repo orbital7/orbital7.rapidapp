@@ -168,9 +168,9 @@ namespace Microsoft.AspNetCore.Mvc
             {
                 var value = String.Empty;
                 if (modelExplorer.ModelType == typeof(DateTime))
-                    value = ((DateTime)modelExplorer.Model).FormatAsShortDate();
+                    value = ((DateTime)modelExplorer.Model).ToString("yyyy-MM-dd");
                 else if (modelExplorer.ModelType == typeof(DateTime?))
-                    value = ((DateTime?)modelExplorer.Model).FormatAsShortDate();
+                    value = ((DateTime?)modelExplorer.Model)?.ToString("yyyy-MM-dd");
 
                 //attributes.AddOrAppendToExisting("class", "ra-behavior-datepicker ra-clickable");
                 if (isToolbar)

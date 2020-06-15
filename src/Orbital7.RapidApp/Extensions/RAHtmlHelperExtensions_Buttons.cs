@@ -130,6 +130,7 @@ namespace Microsoft.AspNetCore.Mvc
         {
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
             attributes.AddOrInsertToExisting("class", "ra-clickable");
+            attributes.Add("href", "#");
             attributes.Add("onmouseup", htmlHelper.RAShowModalDialogScript(contentUrl, returnAction, dialogTitle ?? linkText,
                 showActionButton, actionButtonCaption, showCancelButton, cancelButtonCaption, dialogSize));
 

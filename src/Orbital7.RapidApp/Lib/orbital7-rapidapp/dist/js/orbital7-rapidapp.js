@@ -999,6 +999,9 @@ function raUpdateAjaxDropdowns(dropdownsSelector, url, optionLabel) {
 
     var dropdowns = $(dropdownsSelector);
 
+    // TODO: This only works for a single dropdown; need to make this work with multiple dropdowns.
+    var selected = dropdowns.val();
+
     dropdowns.each(function () {
         $(this).html("<option value=''>Loading...</option>");
     });
@@ -1020,7 +1023,6 @@ function raUpdateAjaxDropdowns(dropdownsSelector, url, optionLabel) {
             dropdowns.each(function () {
 
                 var dropdown = $(this);
-                var selected = dropdown.val();
                 dropdown.html(options);
 
                 if (selected)

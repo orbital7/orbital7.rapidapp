@@ -68,7 +68,7 @@
     <None Update="Lib\orbital7-rapidapp\dist\css\_ra-dynamictable.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-fonts.scss">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-fonts-opensans.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Lib\orbital7-rapidapp\dist\css\_ra-layout.scss">

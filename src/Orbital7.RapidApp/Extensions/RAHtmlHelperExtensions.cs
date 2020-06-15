@@ -126,7 +126,7 @@ namespace Microsoft.AspNetCore.Mvc
                 }
                 else
                 {
-                    html = (value is Guid ? String.Empty : value?.ToString());
+                    html = value?.ToString();// (value is Guid ? String.Empty : value?.ToString()); // JVE: Not sure why ignoring GUIDs.
                 }
             }             
 
