@@ -21,6 +21,16 @@ namespace Orbital7.RapidApp.Models
 
         public bool IsVisible { get; private set; } = true;
 
+        public bool IsHeading { get; set; }
+
+        public RATaskbarItem(
+            string text,
+            bool isHeading)
+        {
+            this.Text = text;
+            this.IsHeading = isHeading;
+        }
+
         public RATaskbarItem(
             string text,
             RATaskbarItemType type,

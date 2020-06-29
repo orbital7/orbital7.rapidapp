@@ -170,7 +170,7 @@ function submitModalDialog(event) {
     $.ajax({
         type: "POST",
         cache: false,
-        async: false,
+        async: true,
         enctype: 'multipart/form-data',
         contentType: false,
         data: formData,

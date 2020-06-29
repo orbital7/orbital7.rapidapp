@@ -10,6 +10,11 @@ namespace Orbital7.RapidApp.Models
 
         public List<RATaskbarItem> Items { get; private set; }
 
+        public RATaskbarItem FirstItem =>
+            (from x in this.Items
+             where !x.IsHeading
+             select x).FirstOrDefault();
+
         public TaskbarView(
             string key,
             List<RATaskbarItem> items)

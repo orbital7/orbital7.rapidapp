@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Orbital7.RapidApp.Models;
 
-namespace SampleWebApp.Pages.Containers
+namespace SampleWebApp.Pages.ModalDialogs
 {
-    public class PanelTabsModel 
+    public class PanelActionModel
         : PartialPageModel
     {
         public void OnGet()

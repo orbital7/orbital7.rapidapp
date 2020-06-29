@@ -74,20 +74,30 @@ namespace Microsoft.AspNetCore.Mvc
             return attributes.ToButton(buttonText);
         }
 
-        public static IHtmlContent RAToolbarShowDialogButton(this IHtmlHelper htmlHelper, string buttonText, string contentUrl,
-            string returnUrl = null, object htmlAttributes = null, string dialogTitle = null, bool showActionButton = true,
-            string actionButtonCaption = "Save", bool showCancelButton = true, string cancelButtonCaption = "Cancel")
+        public static IHtmlContent RAToolbarShowDialogButton(
+            this IHtmlHelper htmlHelper, 
+            string buttonText, 
+            string contentUrl,
+            string returnUrl = null, 
+            object htmlAttributes = null, 
+            string dialogTitle = null, 
+            bool showActionButton = true,
+            string actionButtonCaption = "Save", 
+            bool showCancelButton = true, 
+            string cancelButtonCaption = "Cancel",
+            string buttonClass = "btn-secondary",
+            string buttonStyle = null)
         {
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
             attributes.AddToolbarButtonAttributes();
 
             return htmlHelper.RAShowModalDialogButton(buttonText, contentUrl, returnUrl, attributes, dialogTitle, showActionButton,
-                actionButtonCaption, showCancelButton, cancelButtonCaption);
+                actionButtonCaption, showCancelButton, cancelButtonCaption, buttonClass, buttonStyle);
         }
 
-        private static void AddToolbarButtonAttributes(this IDictionary<string, object> attributes)
+        private static void AddToolbarButtonAttributes(
+            this IDictionary<string, object> attributes)
         {
-            attributes.AddOrAppendToExisting("class", "btn-secondary");
             attributes.AddOrAppendToExisting("class", "btn-sm");
             attributes.AddOrAppendToExisting("class", "ra-toolbar-button");
         }

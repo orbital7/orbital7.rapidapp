@@ -1,0 +1,19 @@
+﻿@page
+@model SampleWebApp.Pages.ModalDialogs.DialogActionModel
+@{
+    Layout = null;
+}
+
+@using (Html.RABeginContainer(ContainerScrolling.Y))
+{
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+
+        <div>@this.Model.Message</div>
+        <div>&nbsp;</div>
+
+        @Html.HiddenFor(x => x.Message)
+        @Html.RAPropertyBlockEditorFor(x => x.Input.SampleValue)
+    }
+}

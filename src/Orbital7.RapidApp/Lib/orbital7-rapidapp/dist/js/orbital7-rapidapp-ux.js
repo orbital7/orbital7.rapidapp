@@ -78,7 +78,7 @@ function raDropdownValueExists(dropdown, targetValue) {
     return exists;
 }
 
-function raUpdateAjaxDropdowns(dropdownsSelector, url, optionLabel) {
+function raUpdateAjaxDropdowns(dropdownsSelector, url, optionLabel, whenDone) {
 
     var dropdowns = $(dropdownsSelector);
 
@@ -111,6 +111,8 @@ function raUpdateAjaxDropdowns(dropdownsSelector, url, optionLabel) {
                 if (selected)
                     dropdown.val(selected).attr("selected", true).siblings("option").removeAttr("selected");
             });
+
+            whenDone();
 
         },
         error: function (xhr) {

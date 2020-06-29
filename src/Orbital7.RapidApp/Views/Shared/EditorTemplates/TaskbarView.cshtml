@@ -5,7 +5,13 @@
 
     @foreach (var item in this.Model.Items)
     {
-        if (item.IsVisible)
+        if (item.IsHeading)
+        {
+            <div class="ra-font-bold" style="margin-left: -5px; margin-top: 15px; margin-bottom: 5px;">
+                @item.Text
+            </div>
+        }
+        else if (item.IsVisible)
         {
             <div class="ra-taskbar-item ra-taskbar-item-selectable"
                  data-task-action="@item.Action" 
@@ -27,7 +33,7 @@
             selectedTaskName = sessionStorage.getItem("taskbar_" + "@this.Model.Key" + "_selectedTask");
 
         if (!selectedTaskName)
-            selectedTaskName = "@this.Model.Items.FirstOrDefault()?.Text";
+            selectedTaskName = "@this.Model.FirstItem?.Text";
 
         if (selectedTaskName)
             loadTaskbarItem(selectedTaskName);

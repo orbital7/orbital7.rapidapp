@@ -67,7 +67,6 @@ function loadTaskbarItem(
     taskName) {
 
     var taskbar = $(".ra-taskbar");
-    var key = taskbar.data("key");
 
     var selectedTask = taskbar.findByContentText(taskName);
     if (selectedTask) {
@@ -79,11 +78,21 @@ function loadTaskbarItem(
         selectedTask.removeClass("ra-taskbar-item-selectable");
         selectedTask.addClass("ra-taskbar-item-selected");
 
+        var key = taskbar.data("key");
         sessionStorage.setItem("taskbar_" + key + "_selectedTask", taskName);
 
         var action = selectedTask.attr("data-task-action");
         eval(action);
     }
+}
+
+function raRefreshTaskbarItem() {
+
+    var taskbar = $(".ra-taskbar");
+    var selectedTask = taskbar.find(".ra-taskbar-item-selected");
+
+    var action = selectedTask.attr("data-task-action");
+    eval(action);
 }
 
 function loadPagePanel(contentUrl) {

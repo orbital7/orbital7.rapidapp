@@ -67,7 +67,6 @@ function loadTaskbarItem(
     taskName) {
 
     var taskbar = $(".ra-taskbar");
-    var key = taskbar.data("key");
 
     var selectedTask = taskbar.findByContentText(taskName);
     if (selectedTask) {
@@ -79,11 +78,21 @@ function loadTaskbarItem(
         selectedTask.removeClass("ra-taskbar-item-selectable");
         selectedTask.addClass("ra-taskbar-item-selected");
 
+        var key = taskbar.data("key");
         sessionStorage.setItem("taskbar_" + key + "_selectedTask", taskName);
 
         var action = selectedTask.attr("data-task-action");
         eval(action);
     }
+}
+
+function raRefreshTaskbarItem() {
+
+    var taskbar = $(".ra-taskbar");
+    var selectedTask = taskbar.find(".ra-taskbar-item-selected");
+
+    var action = selectedTask.attr("data-task-action");
+    eval(action);
 }
 
 function loadPagePanel(contentUrl) {
@@ -777,7 +786,7 @@ function submitModalDialog(event) {
     $.ajax({
         type: "POST",
         cache: false,
-        async: false,
+        async: true,
         enctype: 'multipart/form-data',
         contentType: false,
         data: formData,
@@ -995,7 +1004,7 @@ function raDropdownValueExists(dropdown, targetValue) {
     return exists;
 }
 
-function raUpdateAjaxDropdowns(dropdownsSelector, url, optionLabel) {
+function raUpdateAjaxDropdowns(dropdownsSelector, url, optionLabel, whenDone) {
 
     var dropdowns = $(dropdownsSelector);
 
@@ -1028,6 +1037,8 @@ function raUpdateAjaxDropdowns(dropdownsSelector, url, optionLabel) {
                 if (selected)
                     dropdown.val(selected).attr("selected", true).siblings("option").removeAttr("selected");
             });
+
+            whenDone();
 
         },
         error: function (xhr) {
