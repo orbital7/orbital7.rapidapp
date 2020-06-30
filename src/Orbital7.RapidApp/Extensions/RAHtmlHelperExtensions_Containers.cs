@@ -23,7 +23,7 @@ namespace Microsoft.AspNetCore.Mvc
         public static IHtmlContent RAPagePanel<TModel>(
             this IHtmlHelper<TModel> htmlHelper,
             string contentUrl = null,
-            string containerClass = "ra-fullheight",
+            string containerClass = "ra-container ra-container-vertical",
             string containerStyle = null)
         {
             var content = new HtmlContentBuilder();
@@ -43,13 +43,13 @@ namespace Microsoft.AspNetCore.Mvc
         public static TagCloser RABeginContainer(
             this IHtmlHelper htmlHelper,
             ContainerScrolling scrolling = ContainerScrolling.None,
-            string containerClass = null,
+            string containerClass = "ra-container",
             string containerStyle = null)
         {
             var content = new HtmlContentBuilder();
-            content.AppendFormat("<div class='ra-container ra-parent {0} {1}' style='{2}'>",
+            content.AppendFormat("<div class='{0} {1}' style='{2}'>",
+                containerClass,
                 GetScrollingClass(scrolling), 
-                containerClass, 
                 containerStyle);
 
             htmlHelper.ViewContext.Writer.Write(content);

@@ -121,35 +121,11 @@ function raUpdateBindings() {
 
     //$('input[type=checkbox][data-toggle^=toggle]').bootstrapToggle();
 
-    $(".ra-behavior-datepicker").datepicker({
-        maxViewMode: 2,
-        todayBtn: "linked",
-        autoclose: true
-    });
-
-    $(".ra-container-scrollable-x").overlayScrollbars({
-        overflowBehavior: {
-            x: "scroll",
-            y: "hidden"
-        },
-        paddingAbsolute: true
-    });
-
-    $(".ra-container-scrollable-y").overlayScrollbars({
-        overflowBehavior: {
-            x: "hidden",
-            y: "scroll"
-        },
-        paddingAbsolute: true
-    });
-
-    $(".ra-container-scrollable-both").overlayScrollbars({
-        overflowBehavior: {
-            x: "scroll",
-            y: "scroll"
-        },
-        paddingAbsolute: true
-    });
+    //$(".ra-behavior-datepicker").datepicker({
+    //    maxViewMode: 2,
+    //    todayBtn: "linked",
+    //    autoclose: true
+    //});
 
     $("input").keypress(function (e) {
         if (e.which === 13) {

@@ -3,14 +3,18 @@
     padding: 0px;
     margin: 0px;
     height: 100%;
+    display: block;
     border-collapse: collapse;
     background-color: white;
+    overflow-y: scroll !important;
 }
 
 table.ra-datagrid-table thead tr th {
     background-color: $ra-color-datagrid-heading;
     text-align: left;
     user-select: none;
+    position: sticky;
+    top: 0;
 }
 
 table.sort thead tr th {
@@ -19,12 +23,6 @@ table.sort thead tr th {
 
 .ra-datagrid-notsortable {
     cursor: default !important;
-}
-
-table.ra-datagrid-table tbody {
-    overflow-y: hidden;
-    overflow-x: hidden;
-    height: 100px;
 }
 
 table.ra-datagrid-table tbody td,

@@ -38,9 +38,9 @@ namespace Microsoft.AspNetCore.Mvc
             htmlHelper.ViewContext.Writer.Write(content);
 
             var sortCommand = String.Format("new Tablesort(document.getElementById('{0}'));", tableId);
-            var closingTags = String.Format("</table><script>{0}setupDataGrid('{1}',{2},{3});</script>", 
-                sortable ? sortCommand : null, 
-                tableId, 
+            var closingTags = String.Format("</table><script>{0}setupDataGrid('{1}',{2},{3});</script>",
+                sortable ? sortCommand : null,
+                tableId,
                 fixedHeight,
                 updateRowColors.Totruefalse());
             return new TagCloser(htmlHelper, closingTags);

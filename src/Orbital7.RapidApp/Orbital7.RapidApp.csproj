@@ -71,7 +71,7 @@
     <None Update="Lib\orbital7-rapidapp\dist\css\_ra-fonts-opensans.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-layout.scss">
+    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-sidebar.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Lib\orbital7-rapidapp\dist\css\_ra-mixins.scss">

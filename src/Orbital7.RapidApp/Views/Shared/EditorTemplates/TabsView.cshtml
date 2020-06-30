@@ -4,32 +4,34 @@
     this.Model.SetSelectedIndex(this.Context.Request.Query["selectedTab"]);
 }
 
-<div class="ra-tabs-header">
-    @foreach (var item in this.Model.Items)
-    {
-        if (item.IsVisible)
-        {
-            string id = "ra-tab-" + item.Index;
-            <div id="@id"
-                 class="ra-tab ra-tab-header"
-                 data-tab-index="@item.Index"
-                 onclick="loadTab('@item.Index');">
-                @item.Name
-            </div>
-        }
-    }
-</div>
+    <div class="ra-container ra-container-vertical">
+        <div class="ra-tabs-header">
+            @foreach (var item in this.Model.Items)
+            {
+                if (item.IsVisible)
+                {
+                    string id = "ra-tab-" + item.Index;
+                    <div id="@id"
+                         class="ra-tab ra-tab-header"
+                         data-tab-index="@item.Index"
+                         onclick="loadTab('@item.Index');">
+                        @item.Name
+                    </div>
+                }
+            }
+        </div>
 
-<div class="ra-tabs-content">
-    @foreach (var item in this.Model.Items)
-    {
-        string id = "ra-tab-content-" + item.Index;
-        <div id="@id"
-             class="ra-parent ra-tab-content"
-             data-tab-loaded="false"
-             data-tab-contenturl="@item.PartialViewUrl"></div>
-    }
-</div>
+        <div class="ra-container">
+            @foreach (var item in this.Model.Items)
+            {
+                string id = "ra-tab-content-" + item.Index;
+                <div id="@id"
+                     class="ra-container ra-container-vertical ra-tab-content"
+                     data-tab-loaded="false"
+                     data-tab-contenturl="@item.PartialViewUrl"></div>
+            }
+        </div>
+    </div>
 
 <script>
 

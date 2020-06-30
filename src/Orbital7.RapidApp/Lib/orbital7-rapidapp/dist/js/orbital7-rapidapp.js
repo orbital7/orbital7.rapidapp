@@ -121,35 +121,11 @@ function raUpdateBindings() {
 
     //$('input[type=checkbox][data-toggle^=toggle]').bootstrapToggle();
 
-    $(".ra-behavior-datepicker").datepicker({
-        maxViewMode: 2,
-        todayBtn: "linked",
-        autoclose: true
-    });
-
-    $(".ra-container-scrollable-x").overlayScrollbars({
-        overflowBehavior: {
-            x: "scroll",
-            y: "hidden"
-        },
-        paddingAbsolute: true
-    });
-
-    $(".ra-container-scrollable-y").overlayScrollbars({
-        overflowBehavior: {
-            x: "hidden",
-            y: "scroll"
-        },
-        paddingAbsolute: true
-    });
-
-    $(".ra-container-scrollable-both").overlayScrollbars({
-        overflowBehavior: {
-            x: "scroll",
-            y: "scroll"
-        },
-        paddingAbsolute: true
-    });
+    //$(".ra-behavior-datepicker").datepicker({
+    //    maxViewMode: 2,
+    //    todayBtn: "linked",
+    //    autoclose: true
+    //});
 
     $("input").keypress(function (e) {
         if (e.which === 13) {
@@ -175,111 +151,59 @@ function raUpdateBindings() {
 function setupDataGrid(id, tableHeight, updateRowColors) {
 
     var table = $("#" + id);
-    initializeDataGrid(table, tableHeight, updateRowColors);
-}
 
-function initializeDataGrid(table, tableHeight, updateRowColors) {
+    if (tableHeight > 0)
+        table.css("height", tableHeight + "px");
 
-    var header = table.children("thead");
-    var body = table.children("tbody");
-
-    if (table.attr("data-width-set") !== "true") {
-
-        var headingCells = header.find("tr:first").children();
-
-        colWidthHeading = headingCells.map(function () {
-            return $(this).width();
-        }).get();
-
-        // Set the width of thead columns.
-        header.find("tr").children().each(function (i, v) {
-            $(v).width(colWidthHeading[i]);
-        });
-
-        // Set the width of the first tbody columns.
-        body.find("tr").children().each(function (i, v) {
-            $(v).width(colWidthHeading[i]);
-        });
-
-        // Set the css height of the table and body.
-        if (tableHeight > 0) {
-            table.css("height", tableHeight + "px");
-        }
-        else {
-            setContainerFullHeight(table);
-        }
-        body.css("height", "calc(100% - " +
-            $(headingCells[0]).outerHeight() + "px)");
-
-        header.css("display", "block");
-        body.css("display", "block");
-        table.attr("data-width-set", true);
-
-        updateDataGrid(table, updateRowColors);
-    }
-}
-
-function updateDataGrid(table, updateRowColors) {
-
-    if (table.attr("data-width-set") === "true") {
-
-        table.children("tbody").overlayScrollbars({
-            overflowBehavior: {
-                x: "hidden",
-                y: "scroll"
-            }
-        });
-
-        if (updateRowColors)
-            updateDataGridRowColors(table);
-    }
+    if (updateRowColors)
+        updateDataGridRowColors(table);
 }
 
 function updateDataGridRowColors(table) {
 
-    var tableBody = table.find(".os-content");   // From scrollbar.
+    var tableBody = table.find("tbody");   // From scrollbar.
     tableBody.children("tr").addClass("ra-datagrid-row");
     tableBody.children("tr").removeClass("ra-datagrid-row-alt");
     tableBody.children("tr:odd").addClass("ra-datagrid-row-alt");
 }
 
-function selectDataGridRow(sourceRow) {
+//function selectDataGridRow(sourceRow) {
 
-    var row = $(sourceRow);
-    //var table = row.closest("table");
-    //var selectedRows = table.find(".ra-datagrid-row-selected");
-    //var container = table.closest(".ra-parent");
-    //var multiSelectEditor = container.find(".ra-datagrid-multiselect-toolbar-editor");
+//    var row = $(sourceRow);
+//    //var table = row.closest("table");
+//    //var selectedRows = table.find(".ra-datagrid-row-selected");
+//    //var container = table.closest(".ra-parent");
+//    //var multiSelectEditor = container.find(".ra-datagrid-multiselect-toolbar-editor");
 
-    if (row.hasClass("ra-datagrid-row-selected")) {
-        row.removeClass("ra-datagrid-row-selected");
-    }
-    else {
-        row.addClass("ra-datagrid-row-selected");
-    }
+//    if (row.hasClass("ra-datagrid-row-selected")) {
+//        row.removeClass("ra-datagrid-row-selected");
+//    }
+//    else {
+//        row.addClass("ra-datagrid-row-selected");
+//    }
 
-    //multiSelectEditor.hide();
-    //selectedRows = table.find(".ra-datagrid-row-selected");
-    //if (selectedRows.length >= 1)
-    //    multiSelectEditor.show();
-}
+//    //multiSelectEditor.hide();
+//    //selectedRows = table.find(".ra-datagrid-row-selected");
+//    //if (selectedRows.length >= 1)
+//    //    multiSelectEditor.show();
+//}
 
-function createSelectedDataGridItemsList(dataGridId, htmlFieldPrefix, includeNames, nameDivClass) {
+//function createSelectedDataGridItemsList(dataGridId, htmlFieldPrefix, includeNames, nameDivClass) {
 
-    var table = $("#" + dataGridId);
-    var html = "";
-    var i = 0;
-    table.find(".ra-datagrid-row-selected").each(function () {
-        var row = $(this);
-        html += "<input type='hidden' id='" + htmlFieldPrefix + "[" + i + "]' name='" +
-            htmlFieldPrefix.replace("_", ".") + "[" + i + "]' value='" + row.attr("data-row-id") + "' />";
-        if (includeNames)
-            html += "<div class='" + nameDivClass + "'>" + row.attr("data-row-name") + "</div>";
-        i++;
-    });
+//    var table = $("#" + dataGridId);
+//    var html = "";
+//    var i = 0;
+//    table.find(".ra-datagrid-row-selected").each(function () {
+//        var row = $(this);
+//        html += "<input type='hidden' id='" + htmlFieldPrefix + "[" + i + "]' name='" +
+//            htmlFieldPrefix.replace("_", ".") + "[" + i + "]' value='" + row.attr("data-row-id") + "' />";
+//        if (includeNames)
+//            html += "<div class='" + nameDivClass + "'>" + row.attr("data-row-name") + "</div>";
+//        i++;
+//    });
 
-    $("#selectedDataGridItemsList").html(html);
-}
+//    $("#selectedDataGridItemsList").html(html);
+//}
 
 // JVE: TODO: reference tablesort npm package directly and use beforeSort and afterSort event handlers.
 
@@ -430,11 +354,11 @@ function createSelectedDataGridItemsList(dataGridId, htmlFieldPrefix, includeNam
                 sortMethod = header.getAttribute('data-sort-method'),
                 sortOrder = header.getAttribute('aria-sort');
 
-            $(that.table).find("tbody").each(function () {
-                var instance = OverlayScrollbars(this, {});
-                if (instance)
-                    instance.destroy();
-            });
+            //$(that.table).find("tbody").each(function () {
+            //    var instance = OverlayScrollbars(this, {});
+            //    if (instance)
+            //        instance.destroy();
+            //});
 
             that.table.dispatchEvent(createEvent('beforeSort'));
 
@@ -544,7 +468,7 @@ function createSelectedDataGridItemsList(dataGridId, htmlFieldPrefix, includeNam
                 }
             }
 
-            updateDataGrid($(that.table), true);   // JVE Added.
+            updateDataGridRowColors($(that.table), true);   // JVE Added.
             that.table.dispatchEvent(createEvent('afterSort'));
         },
 

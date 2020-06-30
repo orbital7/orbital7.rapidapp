@@ -32,12 +32,6 @@ namespace Microsoft.AspNetCore.Mvc
             return await htmlHelper.PartialAsync("~/Views/RA/InfrastructureScripts.cshtml");
         }
 
-        public static async Task<IHtmlContent> RAInfrastructureNoTaskbarAsync(
-            this IHtmlHelper htmlHelper)
-        {
-            return await htmlHelper.PartialAsync("~/Views/RA/InfrastructureNoTaskbar.cshtml");
-        }
-
         public static async Task<IHtmlContent> RAInfrastructureStylesheetsAsync(
             this IHtmlHelper htmlHelper,
             string mainCSSFileName = "site.css",

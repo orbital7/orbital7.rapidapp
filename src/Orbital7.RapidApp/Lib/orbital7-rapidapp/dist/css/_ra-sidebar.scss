@@ -1,0 +1,45 @@
+﻿.ra-layout-sidebar-toggle-button {
+    display: none;
+}
+
+.ra-layout-sidebar {
+    height: 100%;
+}
+
+.ra-layout-sectionbar {
+    height: 100vh;
+    background-color: $ra-color-sectionbar;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.ra-sectionbar-divider {
+    border-top: 2px solid gray;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.ra-layout-taskbar {
+    width: 210px;
+    height: 100vh;
+    display: block;
+    overflow-y: auto;
+    background-color: #F2F4F8;
+}
+
+@media (max-width: 768px) {
+
+    .ra-layout-sidebar {
+        display: none;
+        position: absolute;
+    }
+
+    .ra-layout-sidebar-visible {
+        display: block;
+        z-index: 2;
+    }
+
+    .ra-layout-sidebar-toggle-button {
+        display: table-cell;
+    }
+}
