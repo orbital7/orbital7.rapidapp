@@ -881,9 +881,12 @@ function raUpdateFlipswitchLabel(source) {
     checkbox.parent().find("label").html(label);
 }
 
-function raToggleSidebar() {
+function raToggleSidebar(sidebarSelector) {
 
-    var sidebar = $(".ra-layout-sidebar");
+    if (!sidebarSelector)
+        sidebarSelector = ".ra-layout-sidebar";
+
+    var sidebar = $(sidebarSelector);
 
     if (sidebar.hasClass("ra-layout-sidebar-visible"))
         sidebar.removeClass("ra-layout-sidebar-visible");
@@ -891,9 +894,12 @@ function raToggleSidebar() {
         sidebar.addClass("ra-layout-sidebar-visible");
 }
 
-function raHideSidebar() {
+function raHideSidebar(sidebarSelector) {
 
-    $(".ra-layout-sidebar").removeClass("ra-layout-sidebar-visible");
+    if (!sidebarSelector)
+        sidebarSelector = ".ra-layout-sidebar";
+
+    $(sidebarSelector).removeClass("ra-layout-sidebar-visible");
 }
 
 function raShowLoading(element, fullHeight) {

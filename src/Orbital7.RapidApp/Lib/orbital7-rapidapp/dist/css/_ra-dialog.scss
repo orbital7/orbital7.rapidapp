@@ -33,13 +33,6 @@
     min-height: 100px;
 }
 
-/*@media (max-width: calc(#{$ra-layout-min-width-for-sidebar} - 1px)) {
-
-    .modal-dialog {
-        width: 70%;
-    }
-}*/
-
 @media (max-width: 600px) {
 
     .ra-dialog-modal-sm {
