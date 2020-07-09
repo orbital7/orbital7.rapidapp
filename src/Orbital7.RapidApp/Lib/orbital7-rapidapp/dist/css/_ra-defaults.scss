@@ -1,4 +1,13 @@
-﻿html {
+﻿$ra-color-text-default: #636263;
+$ra-color-content-border-default: #DDDDDD;
+$ra-color-actor-selectable-default: #007bff;
+$ra-color-actor-hover-default: #0069d9;
+$ra-color-actor-hover-border-default: #0062cc;
+$ra-color-actor-disabled-default: #0062cc;
+$ra-color-actor-disabled-border-default: #005cbf;
+$ra-font-size: 15px;
+
+html {
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -9,22 +18,22 @@ body {
     padding: 0;
     width: 100%;
     height: 100%;
-    font-family: 'Open Sans';
-    font-size: 11pt;
+    font-family: var(--ra-font-family);
+    font-size: var(--ra-font-size, $ra-font-size);
     font-weight: normal;
-    background-color: $ra-color-page;
-    color: $ra-color-text;
+    background-color: var(--ra-color-page-background, white);
+    color: var(--ra-color-text, $ra-color-text-default);
 }
 
 table {
-    font-family: 'Open Sans';
-    font-size: 11pt;
+    font-family: var(--ra-font-family);
+    font-size: var(--ra-font-size, $ra-font-size);
     margin: 0;
     padding: 0;
     border-collapse: separate;
     border-spacing: 0;
     border: 0 none;
-    color: $ra-color-text;
+    color: var(--ra-color-text, $ra-color-text-default);
 }
 
 tr {
@@ -35,24 +44,24 @@ tr {
 td {
     margin: 0;
     padding: 0;
-    color: $ra-color-text;
+    color: var(--ra-color-text, $ra-color-text-default);
 }
 
 /* width */
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
-    scroll-behavior: smooth !important;
+    -webkit-appearance: none;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: white;
+    background: transparent;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: #888888;
     border-radius: 3px !important;
 }
 
@@ -66,7 +75,7 @@ input.form-control {
 }
 
 .form-control:focus {
-    border-color: $ra-color-actor-selectable;
+    border-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(6, 179, 187, 0.6);
 }
 
@@ -93,7 +102,7 @@ input[readonly].form-control {
 input[type=text].form-control,
 input[type=password].form-control,
 input[type=number].form-control {
-    font-size: 11pt;
+    font-size: var(--ra-font-size, $ra-font-size);
     height: 32px;
     padding-top: 0px;
     padding-left: 5px;
@@ -102,11 +111,11 @@ input[type=number].form-control {
 }
 
 textarea.form-control {
-    font-size: 11pt;
+    font-size: var(--ra-font-size, $ra-font-size);
 }
 
 select.form-control {
-    font-size: 11pt;
+    font-size: var(--ra-font-size, $ra-font-size);
     height: 32px;
     padding: 0px;
     padding-left: 2px;
@@ -122,7 +131,7 @@ select.form-control {
     content: "WHOOPS! "
 }
 
-@media (max-width: 600px) {
+/*@media (max-width: 600px) {
 
     body {
         font-size: 12pt;
@@ -145,4 +154,4 @@ select.form-control {
     select.form-control {
         font-size: 12pt;
     }
-}
+}*/

@@ -1,4 +1,9 @@
-﻿.ra-badge {
+﻿.ra-fullsize {
+    width: 100%;
+    height: 100%;
+}
+
+.ra-badge {
     font-size: 9pt;
 }
 
@@ -216,7 +221,7 @@
 }
 
 .ra-font-sm {
-    font-size: 9pt;
+    font-size: 82%;
 }
 
 .ra-font-bold {
@@ -249,10 +254,10 @@
 }
 
 .ra-border {
-    border: 1px solid $ra-color-content-border;
+    border: 1px solid var(--ra-color-content-border, $ra-color-content-border-default);
 }
 
 .ra-banner {
-    background-color: $ra-color-actor-selectable;
+    background-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
     color: white;
 }

@@ -1,10 +1,10 @@
 ﻿a {
-    color: $ra-color-actor-selectable;
+    color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
     text-decoration: none;
 }
 
 a:hover {
-    color: $ra-color-actor-hover;
+    color: var(--ra-color-actor-hover, $ra-color-actor-hover-default);
     text-decoration: underline;
 }
 
@@ -75,73 +75,73 @@ a:hover {
 
 .ra-btn-theme {
     color: #fff;
-    background-color: $ra-color-actor-selectable;
-    border-color: $ra-color-actor-selectable;
+    background-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
+    border-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
 }
 
 .ra-btn-theme:hover {
     color: #fff;
-    background-color: $ra-color-actor-hover;
-    border-color: $ra-color-actor-hover-border;
+    background-color: var(--ra-color-actor-hover, $ra-color-actor-hover-default);
+    border-color: var(--ra-color-actor-hover-border, var(--ra-color-actor-hover, $ra-color-actor-hover-default)-border-default);
 }
 
 .ra-btn-theme:focus, .ra-btn-theme.focus {
-    box-shadow: 0 0 0 0.2rem rgba($ra-color-actor-selectable, 0.5);
+    box-shadow: 0 0 0 0.2rem RGBA(var(--ra-color-actor-selectable, $ra-color-actor-selectable-default), 0.5);
 }
 
 .ra-btn-theme.disabled, .ra-btn-theme:disabled {
     color: #fff;
-    background-color: $ra-color-actor-selectable;
-    border-color: $ra-color-actor-selectable;
+    background-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
+    border-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
 }
 
 .ra-btn-theme:not(:disabled):not(.disabled):active, .ra-btn-theme:not(:disabled):not(.disabled).active,
 .show > .ra-btn-theme.dropdown-toggle {
     color: #fff;
-    background-color: $ra-color-actor-disabled;
-    border-color: $ra-color-actor-disabled-border;
+    background-color: var(--ra-color-actor-disabled, $ra-color-actor-disabled-default);
+    border-color: var(--ra-color-actor-disabled-border, var(--ra-color-actor-disabled, $ra-color-actor-disabled-default)-border-default);
 }
 
 .ra-btn-theme:not(:disabled):not(.disabled):active:focus, .ra-btn-theme:not(:disabled):not(.disabled).active:focus,
 .show > .ra-btn-theme.dropdown-toggle:focus {
-    box-shadow: 0 0 0 0.2rem rgba($ra-color-actor-selectable, 0.5);
+    box-shadow: 0 0 0 0.2rem RGBA(var(--ra-color-actor-selectable, $ra-color-actor-selectable-default), 0.5);
 }
 
 .ra-btn-outline-theme {
-    color: $ra-color-actor-selectable;
-    border-color: $ra-color-actor-selectable;
+    color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
+    border-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
 }
 
 .ra-btn-outline-theme:hover {
     color: #fff;
-    background-color: $ra-color-actor-selectable;
-    border-color: $ra-color-actor-selectable;
+    background-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
+    border-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
 }
 
 .ra-btn-outline-theme:focus, .ra-btn-outline-theme.focus {
-    box-shadow: 0 0 0 0.2rem rgba($ra-color-actor-selectable, 0.5);
+    box-shadow: 0 0 0 0.2rem RGBA(var(--ra-color-actor-selectable, $ra-color-actor-selectable-default), 0.5);
 }
 
 .ra-btn-outline-theme.disabled, .ra-btn-outline-theme:disabled {
-    color: $ra-color-actor-selectable;
+    color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
     background-color: transparent;
 }
 
 .ra-btn-outline-theme:not(:disabled):not(.disabled):active, .ra-btn-outline-theme:not(:disabled):not(.disabled).active,
 .show > .ra-btn-outline-theme.dropdown-toggle {
     color: #fff;
-    background-color: $ra-color-actor-selectable;
-    border-color: $ra-color-actor-selectable;
+    background-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
+    border-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
 }
 
 .ra-btn-outline-theme:not(:disabled):not(.disabled):active:focus, .ra-btn-outline-theme:not(:disabled):not(.disabled).active:focus,
 .show > .ra-btn-outline-theme.dropdown-toggle:focus {
-    box-shadow: 0 0 0 0.2rem rgba($ra-color-actor-selectable, 0.5);
+    box-shadow: 0 0 0 0.2rem RGBA(var(--ra-color-actor-selectable, $ra-color-actor-selectable-default), 0.5);
 }
 
 .pretty input:checked ~ .state.ra-p-theme label:after,
 .pretty.p-toggle .state.ra-p-theme label:after {
-    background-color: $ra-color-actor-selectable !important;
+    background-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default) !important;
 }
 
 .pretty input:checked ~ .state.ra-p-theme .icon,
@@ -154,7 +154,7 @@ a:hover {
 
 .pretty input:checked ~ .state.ra-p-theme-o label:before,
 .pretty.p-toggle .state.ra-p-theme-o label:before {
-    border-color: $ra-color-actor-selectable;
+    border-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
 }
 
 .pretty input:checked ~ .state.ra-p-theme-o label:after,
@@ -168,23 +168,23 @@ a:hover {
 .pretty.p-toggle .state.ra-p-theme-o .icon,
 .pretty.p-toggle .state.ra-p-theme-o .svg,
 .pretty.p-toggle .state.ra-p-theme-o svg {
-    color: $ra-color-actor-selectable;
-    stroke: $ra-color-actor-selectable;
+    color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
+    stroke: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
 }
 
 .pretty.p-default:not(.p-fill) input:checked ~ .state.ra-p-theme-o label:after {
-    background-color: $ra-color-actor-selectable !important;
+    background-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default) !important;
 }
 
 .pretty.p-switch input:checked ~ .state.ra-p-theme:before {
-    border-color: $ra-color-actor-selectable;
+    border-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
 }
 
 .pretty.p-switch.p-fill input:checked ~ .state.ra-p-theme:before {
-    background-color: $ra-color-actor-selectable !important;
+    background-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default) !important;
 }
 
 .pretty.p-switch.p-slim input:checked ~ .state.ra-p-theme:before {
-    border-color: $ra-color-actor-selectable;
-    background-color: $ra-color-actor-selectable !important;
+    border-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
+    background-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default) !important;
 }

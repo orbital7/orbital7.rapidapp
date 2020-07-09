@@ -5,7 +5,7 @@
 .ra-propertyblock-field-label {
     font-weight: bold;
     margin-bottom: 1px;
-    font-size: 8pt;
+    font-size: 73%;
     text-transform: uppercase;
 }
 
@@ -23,13 +23,13 @@
 
 .ra-validation-error {
     font-weight: bold;
-    font-size: 7pt;
+    font-size: 64%;
     color: red;
 }
 
 .ra-description-info {
     font-style: italic;
-    font-size: 7pt;
+    font-size: 64%;
 }
 
 table.ra-propertyblock-table tr td {
@@ -42,9 +42,9 @@ table.ra-propertyblock-table tr td {
 table.ra-propertyblock-table tr th {
     padding-right: 40px;
     vertical-align: top;
-    border-bottom: 1px solid $ra-color-text;
-    color: $ra-color-actor-selectable;
+    border-bottom: 1px solid var(--ra-color-text, $ra-color-text-default);
+    color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
     padding-bottom: 5px;
-    font-size: 11pt;
+    font-size: var(--ra-font-size, $ra-font-size);
     font-weight: normal;
 }

@@ -52,15 +52,15 @@ function raHideSidebar(sidebarSelector) {
     $(sidebarSelector).removeClass("ra-layout-sidebar-visible");
 }
 
-function raShowLoading(element, fullHeight) {
+function raShowLoading(element, fullSize) {
 
-    var useFullHeight = true;
-    if (fullHeight === "undefined" || fullHeight === false)
-        useFullHeight = false;
+    var useFullSize = true;
+    if (fullSize === "undefined" || fullSize === false)
+        useFullSize = false;
 
     var html = "<table class='ra-loading-table";
-    if (useFullHeight)
-        html += " ra-fullheight";
+    if (useFullSize)
+        html += " ";    //ra-fullsize
     html += "'><tr><td class='ra-loading-table-cell'><img style='width: 100px;' src='/orbital7-rapidapp/dist/images/spinners/ra-spinner-lg.gif' /></td></tr></table>";
 
     $(element).html(html);

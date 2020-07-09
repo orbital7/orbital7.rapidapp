@@ -1,20 +1,4 @@
-﻿function raSetFullHeight(id) {
-
-    if (id) {
-        setContainerFullHeight($("#" + id));
-    }
-}
-
-function setContainerFullHeight(container) {
-
-    var parent = container.parent();
-    var topOffset = container.position().top - parent.position().top + 50;  // JVE: This +50 fixes the current issues with data grids not showing the last row when used in tab sets.
-    container.css("height", "calc(100% - " + topOffset + "px + " +
-        parent.css("padding-top") + ")");
-
-}
-
-function raLoadAjaxContent(contentUrl, destination) {
+﻿function raLoadAjaxContent(contentUrl, destination) {
 
     if (contentUrl) {
 
@@ -60,7 +44,6 @@ function raUpdateAjaxContentSection(contentKey, updatedContentUrl) {
     }
 
     raLoadAjaxContent(url, section);
-
 }
 
 function loadTaskbarItem(
@@ -100,22 +83,20 @@ function loadPagePanel(contentUrl) {
     var pagePanel = $("#ra-pagePanel");
     pagePanel.attr("data-content-url", contentUrl);
     raLoadAjaxContent(contentUrl, pagePanel);
-
 }
 
-function raRefreshPagePanel() {
+function raRefreshPagePanel(updatedContentUrl) {
 
     var pagePanel = $("#ra-pagePanel");
+
+    if (updatedContentUrl)
+        pagePanel.attr("data-content-url", updatedContentUrl);
+
     var contentUrl = pagePanel.attr("data-content-url");
     raLoadAjaxContent(contentUrl, pagePanel);
-
 }
 
 function raUpdateBindings() {
-
-    $(".ra-fullheight").each(function () {
-        setContainerFullHeight($(this));
-    });
 
     //$.validator.unobtrusive.parse(tabContent.find("form"));
 

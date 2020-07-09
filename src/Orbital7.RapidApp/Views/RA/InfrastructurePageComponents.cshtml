@@ -1,6 +1,4 @@
-﻿@model Orbital7.RapidApp.Models.InfrastructurePageComponentsModel
-
-<div id="ra-dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ra-dialog-title">
+﻿<div id="ra-dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ra-dialog-title">
     <div id="ra-dialog-modal" class="modal-dialog" role="document">
         <div id="ra-dialog-modal-content" class="modal-content">
             <div class="modal-header">
@@ -31,14 +29,5 @@
                     buttonId: "ra-dialog-actionbutton")
             </div>
         </div>
-    </div>
-</div>
-
-<div class="ra-layout-minimum-size">
-    <div class="ra-layout-minimum-size-title">
-        @this.Model.LayoutMinimumSizeTitle
-    </div>
-    <div class="ra-layout-minimum-size-message">
-        @Html.Raw(this.Model.LayoutMinimumSizeMessageHtml)
     </div>
 </div>

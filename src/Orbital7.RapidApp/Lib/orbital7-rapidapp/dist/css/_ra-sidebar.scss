@@ -4,11 +4,11 @@
 
 .ra-layout-sidebar {
     height: 100%;
+    z-index: 99;
 }
 
 .ra-layout-sectionbar {
     height: 100vh;
-    background-color: $ra-color-sectionbar;
     padding-left: 5px;
     padding-right: 5px;
     min-width: 86px;

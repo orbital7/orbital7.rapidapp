@@ -1,5 +1,9 @@
-﻿table.ra-datagrid-table {
-    border: 1px solid $ra-color-border;
+﻿$ra-color-datagrid-heading-default: #F3F2F3;
+$ra-color-datagrid-row-default: #FBFAFB;
+$ra-color-datagrid-row-selected-default: #BDD6EB;
+
+table.ra-datagrid-table {
+    border: 1px solid var(--ra-color-datagrid-border, #E1E1E1);
     padding: 0px;
     margin: 0px;
     height: 100%;
@@ -10,7 +14,7 @@
 }
 
 table.ra-datagrid-table thead tr th {
-    background-color: $ra-color-datagrid-heading;
+    background-color: var(--ra-color-datagrid-heading, $ra-color-datagrid-heading-default);
     text-align: left;
     user-select: none;
     position: sticky;
@@ -43,7 +47,7 @@ tr.ra-datagrid-row {
 }
 
 tr.ra-datagrid-row-alt {
-    background-color: $ra-color-datagrid-row;
+    background-color: var(--ra-color-datagrid-row, $ra-color-datagrid-row-default);
 }
 
 tr.ra-datagrid-row-selectable {
@@ -51,11 +55,11 @@ tr.ra-datagrid-row-selectable {
 }
 
 tr.ra-datagrid-row-selected {
-    background-color: $ra-color-datagrid-row-selected;
+    background-color: var(--ra-color-datagrid-row-selected, $ra-color-datagrid-row-selected-default);
 }
 
 tr.ra-datagrid-row > td, th.ra-datagrid-cell-header, td.ra-datagrid-cell-footer {
-    border-bottom: 1px solid $ra-color-datagrid-heading;
+    border-bottom: 1px solid var(--ra-color-datagrid-heading, $ra-color-datagrid-heading-default);
 }
 
 thead tr th:first-child.ra-datagrid-cell-header div,

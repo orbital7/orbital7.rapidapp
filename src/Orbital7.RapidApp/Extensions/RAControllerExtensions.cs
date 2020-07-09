@@ -75,7 +75,7 @@ namespace Microsoft.AspNetCore.Mvc
         public static IActionResult RAPartialViewContentFrame(
             this Controller controller,
             string contentUrl,
-            string containerClass = "ra-fullheight",
+            string containerClass = "ra-fullsize",
             string containerStyle = null,
             string frameClass = null,
             string frameStyle = null,

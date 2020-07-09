@@ -1,5 +1,5 @@
 ﻿.ra-toolbar {
-    background-color: $ra-color-content-border;
+    background-color: var(--ra-color-content-border, $ra-color-content-border-default);
     min-height: 40px !important;
     padding-left: 8px !important;
     padding-top: 0px !important;

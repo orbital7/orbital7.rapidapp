@@ -48,7 +48,7 @@ namespace Orbital7.RapidApp.Models
                     break;
 
                 case RATaskbarItemType.LoadPagePanel:
-                    this.Action = "loadPagePanel('" + action + "');";
+                    this.Action = $"loadPagePanel({(action.StartsWith("'") ? action : "'" + action + "'")});";
                     break;
             }
         }

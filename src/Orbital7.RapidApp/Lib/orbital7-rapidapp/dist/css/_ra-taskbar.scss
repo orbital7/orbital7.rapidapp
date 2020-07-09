@@ -5,7 +5,7 @@
 .ra-taskbar-item {
     font-weight: normal;
     margin-bottom: 5px;
-    color: $ra-color-text;
+    color: var(--ra-color-text, $ra-color-text-default);
     padding: 3px;
 }
 
@@ -14,12 +14,12 @@
 }
 
 .ra-taskbar-item-selectable:hover {
-    background-color: $ra-color-actor-hover;
+    background-color: var(--ra-color-actor-hover, $ra-color-actor-hover-default);
     color: white;
 }
 
 .ra-taskbar-item-selected {
     font-weight: bold;
-    background-color: $ra-color-actor-selectable;
+    background-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
     color: white;
 }

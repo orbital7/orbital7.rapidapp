@@ -8,13 +8,13 @@ $switch-height-sm: calc(#{$input-height-sm} * .8) !default;
 $switch-height-lg: calc(#{$input-height-lg} * .8) !default;
 $switch-border-radius: $switch-height !default;
 $switch-bg: $custom-control-indicator-bg !default;
-$switch-checked-bg: $ra-color-actor-selectable !default; /*map-get($theme-colors, 'primary') !default;*/
+$switch-checked-bg: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default) !default; /*map-get($theme-colors, 'primary') !default;*/
 $switch-disabled-bg: $custom-control-indicator-disabled-bg !default;
 $switch-disabled-color: #868e96 !default; /*$custom-control-description-disabled-color*/
 $switch-thumb-bg: $white !default;
 $switch-thumb-border-radius: 50% !default;
 $switch-thumb-padding: 2px !default;
-$switch-focus-box-shadow: 0 0 0 $input-btn-focus-width rgba($ra-color-actor-selectable, .25); /*0 0 0 $input-btn-focus-width rgba(map-get($theme-colors, 'primary'), .25);*/
+$switch-focus-box-shadow: 0 0 0 $input-btn-focus-width RGBA(var(--ra-color-actor-selectable, $ra-color-actor-selectable-default), .25); /*0 0 0 $input-btn-focus-width rgba(map-get($theme-colors, 'primary'), .25);*/
 $switch-transition: .2s all !default;
 
 .switch {

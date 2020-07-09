@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Orbital7.RapidApp Sample Web App" />
@@ -15,10 +15,10 @@
 <body>
 
     <div class="ra-container ra-container-horizontal">
-        <table class="ra-layout-sidebar" style="margin-right: 10px;">
+        <table class="ra-layout-sidebar">
             <tr>
-                <td class="ra-layout-sectionbar">
-                    <table style="width: 100%; height: 100%;">
+                <td class="ra-layout-sectionbar" style="background-color: #1F2631;">
+                    <table class="ra-fullsize">
                         <tr>
                             <td style="text-align: center; vertical-align: top;">
                                 <div class="ra-margin-top-sm">
@@ -73,9 +73,9 @@
             </tr>
         </table>
 
-        <div class="ra-container ra-container-vertical" style="margin-left: 10px; margin-right: 10px;" onmousedown="raHideSidebar();">
+        <div class="ra-container ra-container-vertical" style="padding: 15px;" onmousedown="raHideSidebar();">
 
-            <table style="width: 100%;">
+            @*<table style="width: 100%;">
                 <tr>
                     <td class="ra-layout-sidebar-toggle-button" style="height: 38px; width: 56px; vertical-align: middle; text-align: left;">
                         <button type="button"
@@ -91,9 +91,37 @@
                         Right
                     </td>
                 </tr>
+            </table>*@
+
+            <table class="ra-headertable">
+                <tr>
+                    <td class="ra-layout-sidebar-toggle-button ra-headertable-cell-sidebarbutton">
+                        <button type="button"
+                                class="btn btn-outline-secondary"
+                                onclick="raToggleSidebar()">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </td>
+                    <td class="ra-headertable-cell-titlebar">
+                        @if (IsSectionDefined("header"))
+                        {
+                            @RenderSection("header")
+                        }
+                        else
+                        {
+                            <text>Header</text>
+                        }
+                    </td>
+                    <td class="ra-headertable-cell-logo">
+                        <a href="/Index">
+                            <img src="~/images/Orbital7.png"
+                                 style="max-height: 30px;" />
+                        </a>
+                    </td>
+                </tr>
             </table>
 
-            <div class="ra-container" style="margin-top: 20px; margin-bottom: 10px;">
+            <div class="ra-container ra-container-vertical">
                 @RenderBody()
             </div>
 

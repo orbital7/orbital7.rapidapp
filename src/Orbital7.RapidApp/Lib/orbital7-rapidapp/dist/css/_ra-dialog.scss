@@ -1,5 +1,5 @@
 ﻿.modal-content {
-    background-color: $ra-color-background !important;
+    background-color: var(--ra-color-dialog-background, white) !important;
 }
 
 #ra-dialog-modal {

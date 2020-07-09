@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
+    <Content Remove="compilerconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +20,7 @@
 
   <ItemGroup>
     <None Include="bundleconfig.json" />
+    <None Include="compilerconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,10 +40,16 @@
     <None Update="Lib\orbital7-rapidapp\dist\css\bootstrap4Switches.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Lib\orbital7-rapidapp\dist\css\orbital7-rapidapp.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Lib\orbital7-rapidapp\dist\css\orbital7-rapidapp.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Lib\orbital7-rapidapp\dist\css\signaturePad.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Lib\orbital7-rapidapp\dist\css\_ra-all.scss">
+    <None Update="Lib\orbital7-rapidapp\dist\css\orbital7-rapidapp.scss">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Lib\orbital7-rapidapp\dist\css\_ra-buttons.scss">
@@ -90,9 +98,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Lib\orbital7-rapidapp\dist\css\_ra-toolbar.scss">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Lib\orbital7-rapidapp\dist\images\ra-tabs-background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Lib\orbital7-rapidapp\dist\images\spinners\ra-spinner-lg.gif">

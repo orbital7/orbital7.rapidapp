@@ -11,19 +11,9 @@ namespace Microsoft.AspNetCore.Mvc
     public static partial class RAHtmlHelperExtensions
     {
         public static async Task<IHtmlContent> RAInfrastructurePageComponentsAsync(
-            this IHtmlHelper htmlHelper,
-            string layoutMinimumSizeTitle = "Whoops!",
-            string layoutMinimumSizeMessageHtml = 
-                "Please <span class='ra-font-bold'>rotate</span> your device or " +
-                "<span class='ra-font-bold'>resize</span> your browser window")
+            this IHtmlHelper htmlHelper)
         {
-            var model = new InfrastructurePageComponentsModel()
-            {
-                LayoutMinimumSizeTitle = layoutMinimumSizeTitle,
-                LayoutMinimumSizeMessageHtml = layoutMinimumSizeMessageHtml,
-            };
-
-            return await htmlHelper.PartialAsync("~/Views/RA/InfrastructurePageComponents.cshtml", model);
+            return await htmlHelper.PartialAsync("~/Views/RA/InfrastructurePageComponents.cshtml");
         }
 
         public static async Task<IHtmlContent> RAInfrastructureScriptsAsync(

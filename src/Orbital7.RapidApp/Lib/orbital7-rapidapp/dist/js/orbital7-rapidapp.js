@@ -1,19 +1,3 @@
-function raSetFullHeight(id) {
-
-    if (id) {
-        setContainerFullHeight($("#" + id));
-    }
-}
-
-function setContainerFullHeight(container) {
-
-    var parent = container.parent();
-    var topOffset = container.position().top - parent.position().top + 50;  // JVE: This +50 fixes the current issues with data grids not showing the last row when used in tab sets.
-    container.css("height", "calc(100% - " + topOffset + "px + " +
-        parent.css("padding-top") + ")");
-
-}
-
 function raLoadAjaxContent(contentUrl, destination) {
 
     if (contentUrl) {
@@ -60,7 +44,6 @@ function raUpdateAjaxContentSection(contentKey, updatedContentUrl) {
     }
 
     raLoadAjaxContent(url, section);
-
 }
 
 function loadTaskbarItem(
@@ -100,22 +83,20 @@ function loadPagePanel(contentUrl) {
     var pagePanel = $("#ra-pagePanel");
     pagePanel.attr("data-content-url", contentUrl);
     raLoadAjaxContent(contentUrl, pagePanel);
-
 }
 
-function raRefreshPagePanel() {
+function raRefreshPagePanel(updatedContentUrl) {
 
     var pagePanel = $("#ra-pagePanel");
+
+    if (updatedContentUrl)
+        pagePanel.attr("data-content-url", updatedContentUrl);
+
     var contentUrl = pagePanel.attr("data-content-url");
     raLoadAjaxContent(contentUrl, pagePanel);
-
 }
 
 function raUpdateBindings() {
-
-    $(".ra-fullheight").each(function () {
-        setContainerFullHeight($(this));
-    });
 
     //$.validator.unobtrusive.parse(tabContent.find("form"));
 
@@ -902,15 +883,15 @@ function raHideSidebar(sidebarSelector) {
     $(sidebarSelector).removeClass("ra-layout-sidebar-visible");
 }
 
-function raShowLoading(element, fullHeight) {
+function raShowLoading(element, fullSize) {
 
-    var useFullHeight = true;
-    if (fullHeight === "undefined" || fullHeight === false)
-        useFullHeight = false;
+    var useFullSize = true;
+    if (fullSize === "undefined" || fullSize === false)
+        useFullSize = false;
 
     var html = "<table class='ra-loading-table";
-    if (useFullHeight)
-        html += " ra-fullheight";
+    if (useFullSize)
+        html += " ";    //ra-fullsize
     html += "'><tr><td class='ra-loading-table-cell'><img style='width: 100px;' src='/orbital7-rapidapp/dist/images/spinners/ra-spinner-lg.gif' /></td></tr></table>";
 
     $(element).html(html);

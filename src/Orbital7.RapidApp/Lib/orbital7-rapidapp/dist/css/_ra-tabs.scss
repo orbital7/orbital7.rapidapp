@@ -1,13 +1,24 @@
-﻿.ra-tabs-header {
-    background-image: url(/orbital7-rapidapp/dist/images/ra-tabs-background.png);
+﻿$ra-color-tabs-header-background-default: #FBFAFB;
+
+.ra-tabs-header {
     text-align: center;
-    min-height: 48px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.ra-tabs-header-background {
+    width: 100%;
+    background-color: var(--ra-color-content-border, $ra-color-content-border-default);
+    height: 1px;
+    top: 18px;
+    position: absolute;
+    z-index: -1;
 }
 
 .ra-tab-header {
-    border: 1px solid $ra-color-content-border;
-    color: $ra-color-text;
-    background-color: $ra-color-datagrid-row;
+    border: 1px solid var(--ra-color-content-border, $ra-color-content-border-default);
+    color: var(--ra-color-text, $ra-color-text-default);
+    background-color: var(--ra-color-tabs-header-background, $ra-color-tabs-header-background-default);
     padding: 7px;
     display: inline-block;
     margin: 0px;
@@ -15,15 +26,15 @@
 }
 
 .ra-tab-header:hover {
-    border: 1px solid $ra-color-actor-hover;
-    color: $ra-color-actor-hover;
+    border: 1px solid var(--ra-color-actor-hover, $ra-color-actor-hover-default);
+    color: var(--ra-color-actor-hover, $ra-color-actor-hover-default);
     cursor: pointer;
 }
 
 .ra-tab-header-selected {
     color: white;
-    border: 1px solid $ra-color-actor-selectable;
-    background-color: $ra-color-actor-selectable;
+    border: 1px solid var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
+    background-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
     padding: 7px;
     display: inline-block;
     margin: 0px;
