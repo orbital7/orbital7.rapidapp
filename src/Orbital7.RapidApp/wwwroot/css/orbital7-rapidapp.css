@@ -35,22 +35,23 @@ td {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
   -webkit-appearance: none; }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: transparent; }
+  background: white; }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888888;
-  border-radius: 3px !important; }
+  background: #999999;
+  border-radius: 5px !important;
+  border: 2px solid white; }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #4C4C4C; }
+  background: #737373; }
 
 input.form-control {
   background-color: white !important; }
@@ -167,7 +168,6 @@ select.form-control {
   width: 210px;
   height: 100vh;
   display: block;
-  overflow-y: auto;
   background-color: #F2F4F8; }
 
 @media (max-width: 768px) {
@@ -197,18 +197,18 @@ select.form-control {
     flex: 1;
 }*/
 .ra-container-scrollable-x {
-  padding-bottom: 10px;
-  overflow-x: auto; }
+  /*padding-bottom: 10px;
+    overflow-x: auto;*/ }
 
 .ra-container-scrollable-y {
-  padding-right: 10px;
-  overflow-y: auto; }
+  /*padding-right: 10px;
+    overflow-y: auto;*/ }
 
 .ra-container-scrollable-both {
-  padding-right: 10px;
-  padding-bottom: 10px;
-  overflow-x: auto;
-  overflow-y: auto; }
+  /*padding-right: 10px;
+    padding-bottom: 10px;
+    overflow-x: auto;
+    overflow-y: auto;*/ }
 
 .ra-tabs-header {
   text-align: center;
@@ -273,7 +273,9 @@ table.ra-datagrid-table {
   height: 100%;
   display: block;
   border-collapse: collapse;
-  background-color: white;
+  background-color: white; }
+
+table.ra-datagrid-table-scroll {
   overflow-y: scroll !important; }
 
 table.ra-datagrid-table thead tr th {

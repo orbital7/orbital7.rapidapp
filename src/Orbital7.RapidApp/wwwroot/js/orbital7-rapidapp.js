@@ -108,6 +108,30 @@ function raUpdateBindings() {
     //    autoclose: true
     //});
 
+    $(".ra-container-scrollable-x").overlayScrollbars({
+        overflowBehavior: {
+            x: "scroll",
+            y: "hidden"
+        },
+        paddingAbsolute: true
+    });
+
+    $(".ra-container-scrollable-y").overlayScrollbars({
+        overflowBehavior: {
+            x: "hidden",
+            y: "scroll"
+        },
+        paddingAbsolute: true
+    });
+
+    $(".ra-container-scrollable-both").overlayScrollbars({
+        overflowBehavior: {
+            x: "scroll",
+            y: "scroll"
+        },
+        paddingAbsolute: true
+    });
+
     $("input").keypress(function (e) {
         if (e.which === 13) {
 
@@ -892,13 +916,13 @@ function raShowLoading(element, fullSize) {
     var html = "<table class='ra-loading-table";
     if (useFullSize)
         html += " ";    //ra-fullsize
-    html += "'><tr><td class='ra-loading-table-cell'><img style='width: 100px;' src='/orbital7-rapidapp/dist/images/spinners/ra-spinner-lg.gif' /></td></tr></table>";
+    html += "'><tr><td class='ra-loading-table-cell'><img style='width: 100px;' src='/images/ra-spinner-lg.gif' /></td></tr></table>";
 
     $(element).html(html);
 }
 
 function getLoadingDiv() {
-    return "<div style='text-align: center;'><img style='width: 100px;' src='/orbital7-rapidapp/dist/images/spinners/ra-spinner-lg.gif' /></div>";
+    return "<div style='text-align: center;'><img style='width: 100px;' src='/images/ra-spinner-lg.gif' /></div>";
 }
 
 function raDropdownValueExists(dropdown, targetValue) {

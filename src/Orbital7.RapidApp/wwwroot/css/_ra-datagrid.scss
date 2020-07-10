@@ -10,6 +10,9 @@ table.ra-datagrid-table {
     display: block;
     border-collapse: collapse;
     background-color: white;
+}
+
+table.ra-datagrid-table-scroll {
     overflow-y: scroll !important;
 }
 

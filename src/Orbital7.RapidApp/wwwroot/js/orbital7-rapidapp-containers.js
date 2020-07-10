@@ -108,6 +108,30 @@ function raUpdateBindings() {
     //    autoclose: true
     //});
 
+    $(".ra-container-scrollable-x").overlayScrollbars({
+        overflowBehavior: {
+            x: "scroll",
+            y: "hidden"
+        },
+        paddingAbsolute: true
+    });
+
+    $(".ra-container-scrollable-y").overlayScrollbars({
+        overflowBehavior: {
+            x: "hidden",
+            y: "scroll"
+        },
+        paddingAbsolute: true
+    });
+
+    $(".ra-container-scrollable-both").overlayScrollbars({
+        overflowBehavior: {
+            x: "scroll",
+            y: "scroll"
+        },
+        paddingAbsolute: true
+    });
+
     $("input").keypress(function (e) {
         if (e.which === 13) {
 

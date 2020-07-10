@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using UAParser;
 
 namespace Microsoft.AspNetCore.Mvc
 {
@@ -29,9 +30,22 @@ namespace Microsoft.AspNetCore.Mvc
         {
             var tableId = Guid.NewGuid().ToString().Replace("-", "");
 
+            var userAgent = htmlHelper.ViewContext.HttpContext.Request.Headers["User-Agent"];
+            string uaString = Convert.ToString(userAgent[0]);
+            var uaParser = Parser.GetDefault();
+            var clientInfo = uaParser.Parse(uaString);
+
+            // Safari on iPhone/iPad/Mac can use Overlay Scrollbars to scroll (important
+            // as intrinsic scrollbars are hidden on iPhone/iPad), but non-Safari browsers won't
+            // show the sticky headers on long down scroll, so we want to use intrinsic scrollbars instead.
+            var scrollClass = clientInfo.ToString().Contains("Safari") ?
+                "ra-container-scrollable-both" :
+                "ra-datagrid-table-scroll";
+
             var content = new HtmlContentBuilder();
-            content.AppendFormat("<table id='{0}' class='ra-datagrid-table {1} {2}' style='{3}'>", 
-                tableId, 
+            content.AppendFormat("<table id='{0}' class='ra-datagrid-table {1} {2} {3}' style='{4}'>", 
+                tableId,
+                scrollClass,
                 sortable ? "sort" : null,
                 tableClass,
                 tableStyle);

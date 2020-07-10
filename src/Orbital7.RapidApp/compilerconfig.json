@@ -1,6 +1,6 @@
 ﻿[
   {
-    "outputFile": "Lib/orbital7-rapidapp/dist/css/orbital7-rapidapp.css",
-    "inputFile": "Lib/orbital7-rapidapp/dist/css/orbital7-rapidapp.scss"
+    "outputFile": "wwwroot/css/orbital7-rapidapp.css",
+    "inputFile": "wwwroot/css/orbital7-rapidapp.scss"
   }
 ]

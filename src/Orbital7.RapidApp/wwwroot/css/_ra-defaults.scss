@@ -49,25 +49,26 @@ td {
 
 /* width */
 ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 10px;
+    height: 10px;
     -webkit-appearance: none;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: transparent;
+    background: white;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #888888;
-    border-radius: 3px !important;
+    background: #999999;
+    border-radius: 5px !important;
+    border: 2px solid white;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #4C4C4C;
+    background: #737373;
 }
 
 input.form-control {
