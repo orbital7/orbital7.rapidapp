@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
-using Orbital7.Extensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +19,20 @@ namespace Microsoft.AspNetCore.Mvc
         RadioButton,
 
         Number,
+
+        Boolean,
+
+        Date,
+
+        PhoneNumber,
+
+        Email,
+
+        ZipCode,
+
+        Text,
+
+        TextMultiLine,
     }
 
     public static partial class RAHtmlHelperExtensions
@@ -151,7 +164,8 @@ namespace Microsoft.AspNetCore.Mvc
                     content.AppendHtml(htmlHelper.DropDownListFor(expression, selectList, selectListOptionLabel, attributes));
                 }
             }
-            else if (modelExplorer.ModelType == typeof(bool))
+            else if (modelExplorer.ModelType == typeof(bool) || 
+                (editorTypeOverride.HasValue && editorTypeOverride.Value == RAEditorType.Boolean))
             {
                 const string TRUE = "Yes";
                 const string FALSE = "No";
@@ -164,7 +178,8 @@ namespace Microsoft.AspNetCore.Mvc
                     (bool)modelExplorer.Model ? attributes["data-checked"].ToString() : attributes["data-unchecked"].ToString(), null));
                 content.AppendHtml("</span></div>");
             }
-            else if (modelExplorer.ModelType == typeof(DateTime) || modelExplorer.ModelType == typeof(DateTime?))
+            else if (modelExplorer.ModelType == typeof(DateTime) || modelExplorer.ModelType == typeof(DateTime?) ||
+                (editorTypeOverride.HasValue && editorTypeOverride.Value == RAEditorType.Date))
             {
                 var value = String.Empty;
                 if (modelExplorer.ModelType == typeof(DateTime))
@@ -179,7 +194,8 @@ namespace Microsoft.AspNetCore.Mvc
                 attributes.AddIfMissing("type", "date");
                 content.AppendHtml(htmlHelper.TextBoxFor(expression, value, attributes));
             }
-            else if (modelExplorer.ModelType.IsNumeric())
+            else if (modelExplorer.ModelType.IsNumeric() || 
+                (editorTypeOverride.HasValue && editorTypeOverride == RAEditorType.Number))
             {
                 attributes.AddIfMissing("type", "number");
                 if (modelExplorer.ModelType == typeof(decimal) || modelExplorer.ModelType == typeof(decimal?))
@@ -189,19 +205,22 @@ namespace Microsoft.AspNetCore.Mvc
                 }
                 content.AppendHtml(htmlHelper.TextBoxFor(expression, attributes));
             }
-            else if (dataTypeAttribute?.DataType == DataType.PostalCode || zipCodeAttribute != null)
+            else if (dataTypeAttribute?.DataType == DataType.PostalCode || zipCodeAttribute != null ||
+                (editorTypeOverride.HasValue && editorTypeOverride.Value == RAEditorType.ZipCode))
             {
                 attributes.AddIfMissing("type", "number");
                 attributes.AddIfMissing("max", false ? "999999999" : "99999");    // TODO: Handle full Zip Code.
                 content.AppendHtml(htmlHelper.TextBoxFor(expression, attributes));
             }
-            else if (dataTypeAttribute?.DataType == DataType.PhoneNumber || expression.HasAttribute(typeof(PhoneAttribute)))
+            else if (dataTypeAttribute?.DataType == DataType.PhoneNumber || expression.HasAttribute(typeof(PhoneAttribute)) 
+                || (editorTypeOverride.HasValue && editorTypeOverride.Value == RAEditorType.PhoneNumber))
             {
                 attributes.AddIfMissing("type", "number");
                 attributes.AddIfMissing("max", "9999999999");
                 content.AppendHtml(htmlHelper.TextBoxFor(expression, attributes));
             }
-            else if (dataTypeAttribute?.DataType == DataType.EmailAddress || expression.HasAttribute(typeof(EmailAddressAttribute)))
+            else if (dataTypeAttribute?.DataType == DataType.EmailAddress || expression.HasAttribute(typeof(EmailAddressAttribute)) ||
+                (editorTypeOverride.HasValue && editorTypeOverride.Value == RAEditorType.Email))
             {
                 attributes.AddIfMissing("type", "email");
                 content.AppendHtml(htmlHelper.TextBoxFor(expression, attributes));
@@ -217,7 +236,8 @@ namespace Microsoft.AspNetCore.Mvc
                 {
                     content.AppendHtml(htmlHelper.FileFor(expression, attributes));
                 }
-                else if (dataTypeAttribute?.DataType == DataType.MultilineText)
+                else if (dataTypeAttribute?.DataType == DataType.MultilineText ||
+                    (editorTypeOverride.HasValue && editorTypeOverride.Value == RAEditorType.TextMultiLine))
                 {
                     //attributes.AddOrAppendToExisting("class", "ra-container-scrollable-y");   // JVE: Does not appear to work correctly.
                     attributes.AddIfMissing("rows", 4);

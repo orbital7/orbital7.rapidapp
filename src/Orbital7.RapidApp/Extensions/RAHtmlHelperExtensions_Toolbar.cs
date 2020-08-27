@@ -10,8 +10,10 @@ namespace Microsoft.AspNetCore.Mvc
 {
     public static partial class RAHtmlHelperExtensions
     {
-        public static TagCloser RABeginToolbar(this IHtmlHelper htmlHelper,
-            string toolbarClass = null, string toolbarStyle = null)
+        public static TagCloser RABeginToolbar(
+            this IHtmlHelper htmlHelper,
+            string toolbarClass = null, 
+            string toolbarStyle = null)
         {
             var content = new HtmlContentBuilder();
 
@@ -24,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc
             return new TagCloser(htmlHelper, "</form></nav>");
         }
 
-        public static TagCloser RABeginToolbarMultiSelectedRowEditor(this IHtmlHelper htmlHelper)
+        public static TagCloser RABeginToolbarMultiSelectedRowEditor(
+            this IHtmlHelper htmlHelper)
         {
             var content = new HtmlContentBuilder();
             content.AppendHtml("</div>");   // Close off the primary form group from RABeginToolbar.
@@ -33,9 +36,14 @@ namespace Microsoft.AspNetCore.Mvc
             return new TagCloser(htmlHelper, "");
         }
 
-        public static IHtmlContent RAToolbarEditorFor<TModel, TProperty>(this IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, TProperty>> expression, object htmlAttributes = null, SelectList selectList = null,
-            RAEditorType? editorTypeOverride = null, string displayLabel = null, string displayLabelClass = null,
+        public static IHtmlContent RAToolbarEditorFor<TModel, TProperty>(
+            this IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression, 
+            object htmlAttributes = null, 
+            SelectList selectList = null,
+            RAEditorType? editorTypeOverride = null, 
+            string displayLabel = null, 
+            string displayLabelClass = null,
             string selectListOptionLabel = null)
         {
             var modelExplorer = htmlHelper.GetModelExplorer(expression);
@@ -63,13 +71,16 @@ namespace Microsoft.AspNetCore.Mvc
             object htmlAttributes = null,
             string navigateToUrl = null,
             string buttonClass = "btn-secondary",
-            string buttonStyle = null)
+            string buttonStyle = null,
+            bool newWindow = false)
         {
+            var action = newWindow ? "newWindowTo" : "navigateTo";
+
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
             attributes.AddButtonAttributes(buttonClass, buttonStyle);
             attributes.AddToolbarButtonAttributes();
             if (!String.IsNullOrEmpty(navigateToUrl))
-                attributes.AddOrAppendToExisting("onmouseup", String.Format("navigateTo('{0}')", navigateToUrl), "; ");
+                attributes.AddOrAppendToExisting("onmouseup", $"{action}('{navigateToUrl}');");
 
             return attributes.ToButton(buttonText);
         }
@@ -86,13 +97,25 @@ namespace Microsoft.AspNetCore.Mvc
             bool showCancelButton = true, 
             string cancelButtonCaption = "Cancel",
             string buttonClass = "btn-secondary",
-            string buttonStyle = null)
+            string buttonStyle = null,
+            RAModalDialogSize dialogSize = RAModalDialogSize.Medium)
         {
             var attributes = HtmlHelperHelper.ToAttributesDictionary(htmlAttributes);
             attributes.AddToolbarButtonAttributes();
 
-            return htmlHelper.RAShowModalDialogButton(buttonText, contentUrl, returnUrl, attributes, dialogTitle, showActionButton,
-                actionButtonCaption, showCancelButton, cancelButtonCaption, buttonClass, buttonStyle);
+            return htmlHelper.RAShowModalDialogButton(
+                buttonText, 
+                contentUrl, 
+                returnUrl, 
+                attributes, 
+                dialogTitle, 
+                showActionButton,
+                actionButtonCaption, 
+                showCancelButton, 
+                cancelButtonCaption, 
+                buttonClass, 
+                buttonStyle, 
+                dialogSize);
         }
 
         private static void AddToolbarButtonAttributes(

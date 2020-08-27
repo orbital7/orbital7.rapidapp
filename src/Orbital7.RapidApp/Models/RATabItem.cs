@@ -7,21 +7,26 @@ namespace Orbital7.RapidApp.Models
 {
     public class RATabItem
     {
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
-        public string PartialViewUrl { get; set; }
+        public string PartialViewUrl { get; private set; }
 
-        public bool IsVisible { get; set; }
+        public bool IsVisible { get; private set; }
 
-        public int Index { get; internal set; }
+        public int Index { get; private set; }
 
-        public int WidthPercent { get; set; }
+        public int WidthPercent { get; internal set; }
 
-        public RATabItem(string name, string partialViewUrl, bool isVisible = true)
+        public RATabItem(
+            string name, 
+            string partialViewUrl,
+            int tabIndex,
+            bool isVisible = true)
         {
             this.Name = name;
             this.PartialViewUrl = partialViewUrl;
             this.IsVisible = isVisible;
+            this.Index = tabIndex;
         }
 
         public override string ToString()
