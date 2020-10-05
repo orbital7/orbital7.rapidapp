@@ -265,3 +265,12 @@
     background-color: var(--ra-color-actor-selectable, $ra-color-actor-selectable-default);
     color: white;
 }
+
+.ra-color-swatch {
+    display: inline-block;
+    width: 30px;
+    height: 10px;
+    border: 1px solid var(--ra-color-content-border, $ra-color-content-border-default);
+    margin-right: 5px;
+    box-sizing: border-box;
+}

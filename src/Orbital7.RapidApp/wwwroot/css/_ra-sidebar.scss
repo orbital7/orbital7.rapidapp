@@ -9,13 +9,26 @@
 
 .ra-layout-sectionbar {
     height: 100vh;
-    padding-left: 5px;
-    padding-right: 5px;
     min-width: 86px;
 }
 
 .ra-sectionbar-divider {
     border-top: 2px solid gray;
+}
+
+.ra-sectionbar-item {
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 12px;
+    color: white;
+    display: block;
+}
+
+.ra-sectionbar-item:hover {
+    background-color: var(--ra-color-actor-hover);
+    color: white;
+    text-decoration: none;
 }
 
 .ra-layout-taskbar {

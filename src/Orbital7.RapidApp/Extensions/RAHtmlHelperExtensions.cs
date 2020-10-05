@@ -102,8 +102,13 @@ namespace Microsoft.AspNetCore.Mvc
             return content;
         }
 
-        private static string GetValueDisplayHtml<TModel>(this IHtmlHelper<TModel> htmlHelper, object value,
-            string valueNull = "-", string valueUrl = null, string valueOverride = null, string fieldName = null)
+        private static string GetValueDisplayHtml<TModel>(
+            this IHtmlHelper<TModel> htmlHelper, 
+            object value,
+            string valueNull = "-", 
+            string valueUrl = null, 
+            string valueOverride = null, 
+            string fieldName = null)
         {
             var html = valueOverride;
 
@@ -179,6 +184,10 @@ namespace Microsoft.AspNetCore.Mvc
                 else if (value is string && !String.IsNullOrEmpty(fieldName) && fieldName.ToUpper().EndsWith("PHONENUMBER"))
                 {
                     html = value?.ToString().FormatAsPhoneNumber();
+                }
+                else if (value is string && !String.IsNullOrEmpty(fieldName) && fieldName.ToUpper().EndsWith("COLOR"))
+                {
+                    html = $"<div class='ra-color-swatch' style='background-color: #{value}'></div>#{value}";
                 }
 
                 if (!String.IsNullOrEmpty(valueUrl))

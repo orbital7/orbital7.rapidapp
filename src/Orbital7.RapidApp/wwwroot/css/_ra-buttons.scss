@@ -82,7 +82,7 @@ a:hover {
 .ra-btn-theme:hover {
     color: #fff;
     background-color: var(--ra-color-actor-hover, $ra-color-actor-hover-default);
-    border-color: var(--ra-color-actor-hover-border, var(--ra-color-actor-hover, $ra-color-actor-hover-default)-border-default);
+    border-color: var(--ra-color-actor-hover, $ra-color-actor-hover-default);
 }
 
 .ra-btn-theme:focus, .ra-btn-theme.focus {
@@ -99,7 +99,7 @@ a:hover {
 .show > .ra-btn-theme.dropdown-toggle {
     color: #fff;
     background-color: var(--ra-color-actor-disabled, $ra-color-actor-disabled-default);
-    border-color: var(--ra-color-actor-disabled-border, var(--ra-color-actor-disabled, $ra-color-actor-disabled-default)-border-default);
+    border-color: var(--ra-color-actor-disabled, $ra-color-actor-disabled-default);
 }
 
 .ra-btn-theme:not(:disabled):not(.disabled):active:focus, .ra-btn-theme:not(:disabled):not(.disabled).active:focus,

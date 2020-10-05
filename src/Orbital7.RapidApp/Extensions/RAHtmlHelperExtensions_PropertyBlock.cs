@@ -83,15 +83,21 @@ namespace Microsoft.AspNetCore.Mvc
             string displayValueUrl = null, 
             string displayValueClass = null, 
             string displayValueStyle = null, 
-            string displayLabel = null)
+            string displayLabel = null,
+            string fieldNameOverride = null)
         {
             var modelExplorer = htmlHelper.GetModelExplorer(expression);
 
             var content = new HtmlContentBuilder();
             content.AppendPropertyBlockDisplayHtmlStart(String.IsNullOrEmpty(displayLabel) ? modelExplorer.GetPropertyDisplayName() : displayLabel,
                 displayValueClass, displayValueStyle);
-            content.AppendHtml(htmlHelper.GetValueDisplayHtml(modelExplorer.Model, displayValueNull, displayValueUrl, displayValueOverride,
-                modelExplorer.Metadata.PropertyName));
+            content.AppendHtml(
+                htmlHelper.GetValueDisplayHtml(
+                    modelExplorer.Model, 
+                    displayValueNull, 
+                    displayValueUrl, 
+                    displayValueOverride,
+                    fieldNameOverride ?? modelExplorer.Metadata.PropertyName));
             content.AppendHtml(GetPropertyBlockDisplayHtmlEnd());
             return content;
         }
