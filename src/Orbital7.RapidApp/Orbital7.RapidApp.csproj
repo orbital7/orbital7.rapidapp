@@ -101,9 +101,9 @@
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
-    <PackageReference Include="Orbital7.Extensions" Version="2.2.11" />
+    <PackageReference Include="Orbital7.Extensions" Version="2.2.12" />
     <PackageReference Include="Orbital7.Extensions.AspNetCore" Version="3.1.1" />
-    <PackageReference Include="Orbital7.Extensions.Attributes" Version="2.2.5" />
+    <PackageReference Include="Orbital7.Extensions.Attributes" Version="2.2.6" />
     <PackageReference Include="UAParser" Version="3.1.44" />
   </ItemGroup>
 

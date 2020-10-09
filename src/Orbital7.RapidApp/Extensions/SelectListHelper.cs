@@ -55,23 +55,11 @@ namespace Microsoft.AspNetCore.Mvc
                 for (double j = 0; j <= 0.75; j += 0.25)
                 {
                     var time = i + j;
-                    list.Add(new SerializableTuple<double, string>(time, time.ToTimeX()));
+                    list.Add(new SerializableTuple<double, string>(time, time.ToTime()));
                 }
             }
 
             return list.ToSelectList();
-        }
-
-        // TODO: Move to Orbital7; consolidate with other instance of this method; remove X.
-        public static string ToTimeX(
-            this double value,
-            bool includeLeadingZero = false)
-        {
-            var format = includeLeadingZero ? "hh:mm tt" : "h:mm tt";
-
-            var iPart = (int)value;
-            var dPart = value - iPart;
-            return new DateTime(2000, 1, 1, iPart, (int)Math.Round(60 * dPart, 2), 0).ToString(format);
         }
     }
 }
