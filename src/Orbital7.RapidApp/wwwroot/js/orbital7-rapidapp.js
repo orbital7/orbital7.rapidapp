@@ -610,6 +610,8 @@ function raShowModalDialog(
     var size = "med";
     if (dialogSize === "full")
         size = "full";
+    else if (dialogSize === "extralarge")
+        size = "xl";
     else if (dialogSize === "large")
         size = "lg";
     else if (dialogSize === "medium")
@@ -619,6 +621,7 @@ function raShowModalDialog(
     $("#ra-dialog-modal").removeClass("ra-dialog-modal-sm")
         .removeClass("ra-dialog-modal-med")
         .removeClass("ra-dialog-modal-lg")
+        .removeClass("ra-dialog-modal-xl")
         .removeClass("ra-dialog-modal-full")
         .addClass("ra-dialog-modal-" + size);
 
@@ -937,47 +940,4 @@ function raDropdownValueExists(dropdown, targetValue) {
     });
 
     return exists;
-}
-
-function raUpdateAjaxDropdowns(dropdownsSelector, url, optionLabel, whenDone) {
-
-    var dropdowns = $(dropdownsSelector);
-
-    // TODO: This only works for a single dropdown; need to make this work with multiple dropdowns.
-    var selected = dropdowns.val();
-
-    dropdowns.each(function () {
-        $(this).html("<option value=''>Loading...</option>");
-    });
-
-    $.ajax({
-        url: url,
-        dataType: 'json',
-        cache: false,
-        success: function (data, status, jqXHR) {
-
-            var options = "";
-            if (optionLabel)
-                options += "<option value=''>" + optionLabel + "</option>";
-
-            $.each(data, function (i, item) {
-                options += "<option value='" + item.item1 + "'>" + item.item2 + "</option>";
-            });
-
-            dropdowns.each(function () {
-
-                var dropdown = $(this);
-                dropdown.html(options);
-
-                if (selected)
-                    dropdown.val(selected).attr("selected", true).siblings("option").removeAttr("selected");
-            });
-
-            whenDone();
-
-        },
-        error: function (xhr) {
-            alert("Error updating dropdowns content");
-        }
-    });
 }

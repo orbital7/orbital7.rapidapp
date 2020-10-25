@@ -214,21 +214,46 @@ namespace Microsoft.AspNetCore.Mvc
             return new TagCloser(htmlHelper, "</td>");
         }
 
-        public static IHtmlContent RADataGridBodyCell<TModel>(this IHtmlHelper<TModel> htmlHelper, object cellValue,
-            string cellValueNull = "-", string cellValueUrl = null, string cellClass = null, string cellStyle = null, 
+        public static IHtmlContent RADataGridBodyCell<TModel>(
+            this IHtmlHelper<TModel> htmlHelper, 
+            object cellValue,
+            string cellValueNull = "-", 
+            string cellValueUrl = null, 
+            string cellClass = null, 
+            string cellStyle = null, 
             string fieldName = null)
         {
-            string cellAlignmentStyle = GetValueCellAlignmentClass(cellValue);
-            return new HtmlString(String.Format("<td class='ra-datagrid-cell {0} {1}' style='{2}'>{3}</td>", cellAlignmentStyle,
-                cellClass, cellStyle, GetValueDisplayHtml(htmlHelper, cellValue, cellValueNull, cellValueUrl, fieldName: fieldName)));
+            var cellAlignmentStyle = GetValueCellAlignmentClass(cellValue);
+            return new HtmlString(
+                String.Format("<td class='ra-datagrid-cell {0} {1}' style='{2}'>{3}</td>", 
+                cellAlignmentStyle,
+                cellClass, 
+                cellStyle, 
+                GetValueDisplayHtml(
+                    htmlHelper, 
+                    cellValue, 
+                    cellValueNull, 
+                    cellValueUrl, 
+                    fieldName: fieldName)));
         }
 
-        public static IHtmlContent RADataGridBodyCellFor<TModel, TProperty>(this IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, TProperty>> expression, string cellValueNull = "-", string cellValueUrl = null,
-            string cellClass = null, string cellStyle = null)
+        public static IHtmlContent RADataGridBodyCellFor<TModel, TProperty>(
+            this IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression, 
+            string cellValueNull = "-", 
+            string cellValueUrl = null,
+            string cellClass = null, 
+            string cellStyle = null)
         {
             var modelExplorer = htmlHelper.GetModelExplorer(expression);
-            return RADataGridBodyCell(htmlHelper, modelExplorer.Model, cellValueNull, cellValueUrl, cellClass, cellStyle, 
+
+            return RADataGridBodyCell(
+                htmlHelper, 
+                modelExplorer.Model, 
+                cellValueNull, 
+                cellValueUrl, 
+                cellClass, 
+                cellStyle, 
                 modelExplorer.Metadata.PropertyName);
         }
 

@@ -13,6 +13,7 @@ namespace Microsoft.AspNetCore.Mvc
         Small,
         Medium,
         Large,
+        ExtraLarge,
         Full,
     }
 

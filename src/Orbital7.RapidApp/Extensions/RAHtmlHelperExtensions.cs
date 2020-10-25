@@ -203,8 +203,17 @@ namespace Microsoft.AspNetCore.Mvc
 
             if (value != null)
             {
-                if (value is int || value is decimal || value is double)
+                if (value is int ||
+                    value is int? ||
+                    value is long ||
+                    value is long? ||
+                    value is decimal ||
+                    value is decimal? ||
+                    value is double || 
+                    value is double?)
+                {
                     classname = "ra-align-right";
+                }
             }
 
             return classname;

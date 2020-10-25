@@ -45,6 +45,17 @@ table.ra-datagrid-table thead th:last-child {
     border-right: none;
 }
 
+tr.ra-datagrid-row-heading1 {
+    background-color: dimgray;
+    color: white;
+    font-weight: bold;
+}
+
+tr.ra-datagrid-row-heading2 {
+    background-color: slategray;
+    font-weight: bold;
+}
+
 tr.ra-datagrid-row {
     background-color: white;
 }
@@ -72,4 +83,15 @@ tfoot tr td:first-child.ra-datagrid-cell-footer div {
 
 sup.ra-datagrid-sortaria {
     font-size: 6pt;
+}
+
+.ra-datagrid-row-heading1 {
+    background-color: dimgray;
+    font-weight: bold;
+    color: white;
+}
+
+.ra-datagrid-row-heading2 {
+    font-weight: bold;
+    background-color: lightgray;
 }

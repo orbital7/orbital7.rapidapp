@@ -36,6 +36,11 @@ String.prototype.toPhoneNumber = function () {
     }
 };
 
+function forceInputNumeric() {
+    var $input = $(this);
+    $input.val($input.val().replace(/[^\d]+/g, ''));
+}
+
 function hasValue(value) {
 
     return value && value !== undefined && value !== null;
@@ -128,8 +133,56 @@ function navigateTo(url) {
     window.location.href = url;
 }
 
+function replaceWindowTo(url) {
+    window.location.replace(url);
+}
+
 function newWindowTo(url) {
     window.open(url, '_blank');
+}
+
+
+function updateAjaxDropdowns(dropdownsSelector, url, optionLabel, whenDone) {
+
+    var dropdowns = $(dropdownsSelector);
+
+    // TODO: This only works for a single dropdown; need to make this work with multiple dropdowns.
+    var selected = dropdowns.val();
+
+    dropdowns.each(function () {
+        $(this).html("<option value=''>Loading...</option>");
+    });
+
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        cache: false,
+        success: function (data, status, jqXHR) {
+
+            var options = "";
+            if (optionLabel)
+                options += "<option value=''>" + optionLabel + "</option>";
+
+            $.each(data, function (i, item) {
+                options += "<option value='" + item.item1 + "'>" + item.item2 + "</option>";
+            });
+
+            dropdowns.each(function () {
+
+                var dropdown = $(this);
+                dropdown.html(options);
+
+                if (selected)
+                    dropdown.val(selected).attr("selected", true).siblings("option").removeAttr("selected");
+            });
+
+            whenDone();
+
+        },
+        error: function (xhr) {
+            alert("Error updating dropdowns content");
+        }
+    });
 }
 
 (function ($) {

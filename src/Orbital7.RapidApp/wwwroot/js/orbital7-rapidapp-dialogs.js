@@ -65,6 +65,8 @@ function raShowModalDialog(
     var size = "med";
     if (dialogSize === "full")
         size = "full";
+    else if (dialogSize === "extralarge")
+        size = "xl";
     else if (dialogSize === "large")
         size = "lg";
     else if (dialogSize === "medium")
@@ -74,6 +76,7 @@ function raShowModalDialog(
     $("#ra-dialog-modal").removeClass("ra-dialog-modal-sm")
         .removeClass("ra-dialog-modal-med")
         .removeClass("ra-dialog-modal-lg")
+        .removeClass("ra-dialog-modal-xl")
         .removeClass("ra-dialog-modal-full")
         .addClass("ra-dialog-modal-" + size);
 

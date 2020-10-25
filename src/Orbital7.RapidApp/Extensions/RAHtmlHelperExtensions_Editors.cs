@@ -208,15 +208,15 @@ namespace Microsoft.AspNetCore.Mvc
             else if (dataTypeAttribute?.DataType == DataType.PostalCode || zipCodeAttribute != null ||
                 (editorTypeOverride.HasValue && editorTypeOverride.Value == RAEditorType.ZipCode))
             {
-                attributes.AddIfMissing("type", "number");
-                attributes.AddIfMissing("max", false ? "999999999" : "99999");    // TODO: Handle full Zip Code.
+                attributes.AddIfMissing("inputmode", "numeric");
+                attributes.AddIfMissing("pattern", "[0-9]*");
                 content.AppendHtml(htmlHelper.TextBoxFor(expression, attributes));
             }
             else if (dataTypeAttribute?.DataType == DataType.PhoneNumber || expression.HasAttribute(typeof(PhoneAttribute)) 
                 || (editorTypeOverride.HasValue && editorTypeOverride.Value == RAEditorType.PhoneNumber))
             {
-                attributes.AddIfMissing("type", "number");
-                attributes.AddIfMissing("max", "9999999999");
+                attributes.AddIfMissing("inputmode", "numeric");
+                attributes.AddIfMissing("pattern", "[0-9]*");
                 content.AppendHtml(htmlHelper.TextBoxFor(expression, attributes));
             }
             else if (dataTypeAttribute?.DataType == DataType.EmailAddress || expression.HasAttribute(typeof(EmailAddressAttribute)) ||
