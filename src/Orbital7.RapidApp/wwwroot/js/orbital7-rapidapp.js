@@ -666,7 +666,8 @@ function raShowModalDialog(
     dialog.modal({
         backdrop: "static",
         keyboard: showCancelButton,
-        show: true
+        show: true,
+        focus: false
     });
 
     // Asychronously load content.
