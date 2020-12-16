@@ -156,7 +156,6 @@ function updateAjaxDropdowns(dropdownsSelector, url, optionLabel, whenDone) {
 
     // TODO: This only works for a single dropdown; need to make this work with multiple dropdowns.
     var selected = dropdowns.val();
-
     dropdowns.each(function () {
         $(this).html("<option value=''>Loading...</option>");
     });

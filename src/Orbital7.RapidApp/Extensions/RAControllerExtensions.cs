@@ -20,6 +20,13 @@ namespace Microsoft.AspNetCore.Mvc
             return controller.Content(String.Format("window.location.href = '{0}';", url));
         }
 
+        public static IActionResult RASuccessReplaceWindowTo(
+            this Controller controller,
+            string url)
+        {
+            return controller.Content($"window.location.replace('{url}');");
+        }
+
         public static IActionResult RASuccessReloadPage(this Controller controller)
         {
             return controller.Content("window.location.reload();");

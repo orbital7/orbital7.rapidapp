@@ -55,3 +55,9 @@ table.ra-propertyblock-table tr th {
     font-size: var(--ra-font-size, $ra-font-size);
     font-weight: normal;
 }
+
+.ra-propertyblock-iframe {
+    width: 100%;
+    height: 300px;
+    border: 1px solid var(--ra-color-content-border, $ra-color-content-border-default);
+}

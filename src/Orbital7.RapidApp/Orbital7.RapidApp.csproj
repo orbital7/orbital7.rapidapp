@@ -47,7 +47,6 @@
     <Content Remove="wwwroot\js\orbital7-rapidapp-dynamictable.js" />
     <Content Remove="wwwroot\js\orbital7-rapidapp-resume.js" />
     <Content Remove="wwwroot\js\orbital7-rapidapp-templates.js" />
-    <Content Remove="wwwroot\js\orbital7-rapidapp-touch.js" />
     <Content Remove="wwwroot\js\orbital7-rapidapp-ux.js" />
   </ItemGroup>
 
@@ -94,7 +93,6 @@
     <None Include="wwwroot\js\orbital7-rapidapp-dynamictable.js" />
     <None Include="wwwroot\js\orbital7-rapidapp-resume.js" />
     <None Include="wwwroot\js\orbital7-rapidapp-templates.js" />
-    <None Include="wwwroot\js\orbital7-rapidapp-touch.js" />
     <None Include="wwwroot\js\orbital7-rapidapp-ux.js" />
   </ItemGroup>
 

@@ -598,7 +598,7 @@ function raShowModalDialog(
     cancelButtonCaption,
     dialogSize,
     source) {
-
+    
     // Ready the dialog.
     _raBeforeModalDialogSubmit = beforeModalDialogSubmit;
     _raBeforeModalDialogClose = beforeModalDialogClose;
@@ -837,7 +837,7 @@ $(document).ready(function () {
 function raAddDynamicTableRow(tableId, ajaxUrl) {
 
     var tableBody = $("#" + tableId);
-
+    
     $.get(ajaxUrl).done(function (html) {
         tableBody.append($(html));
         raUpdateBindings();

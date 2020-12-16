@@ -13,6 +13,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Microsoft.AspNetCore.Mvc
 {
@@ -183,11 +184,16 @@ namespace Microsoft.AspNetCore.Mvc
                 }
                 else if (value is string && !String.IsNullOrEmpty(fieldName) && fieldName.ToUpper().EndsWith("PHONENUMBER"))
                 {
-                    html = value?.ToString().FormatAsPhoneNumber();
+                    html = value?.ToString().FormatAsPhoneNumber(PhoneNumberFormat.DashesOnly);
                 }
                 else if (value is string && !String.IsNullOrEmpty(fieldName) && fieldName.ToUpper().EndsWith("COLOR"))
                 {
                     html = $"<div class='ra-color-swatch' style='background-color: #{value}'></div>#{value}";
+                }
+                else if (value is string && !String.IsNullOrEmpty(fieldName) && fieldName.ToUpper().EndsWith("HTML"))
+                {
+                    html = $"<iframe class=\"ra-propertyblock-iframe\" frameborder=\"0\" " +
+                        $"srcdoc=\"{HttpUtility.HtmlEncode(value)}\"></iframe>";
                 }
 
                 if (!String.IsNullOrEmpty(valueUrl))

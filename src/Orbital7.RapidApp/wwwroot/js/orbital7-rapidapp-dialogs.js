@@ -53,7 +53,7 @@ function raShowModalDialog(
     cancelButtonCaption,
     dialogSize,
     source) {
-
+    
     // Ready the dialog.
     _raBeforeModalDialogSubmit = beforeModalDialogSubmit;
     _raBeforeModalDialogClose = beforeModalDialogClose;

@@ -1,7 +1,7 @@
 ﻿function raAddDynamicTableRow(tableId, ajaxUrl) {
 
     var tableBody = $("#" + tableId);
-
+    
     $.get(ajaxUrl).done(function (html) {
         tableBody.append($(html));
         raUpdateBindings();

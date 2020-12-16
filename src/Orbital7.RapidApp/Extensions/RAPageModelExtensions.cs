@@ -24,7 +24,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             this PageModel pageModel, 
             string url)
         {
-            return pageModel.Content(string.Format("window.location.href = '{0}';", url));
+            return pageModel.Content($"window.location.href = '{url}';");
+        }
+
+        public static IActionResult RASuccessReplaceWindowTo(
+            this PageModel pageModel,
+            string url)
+        {
+            return pageModel.Content($"window.location.replace('{url}');");
         }
 
         public static IActionResult RASuccessReloadPage(
