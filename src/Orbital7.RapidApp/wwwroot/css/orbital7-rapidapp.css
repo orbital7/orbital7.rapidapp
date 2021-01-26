@@ -293,20 +293,29 @@ table.ra-datagrid-table thead tr th {
   position: sticky;
   top: 0; }
 
+table.ra-datagrid-table tfoot tr td {
+  background-color: var(--ra-color-datagrid-heading, #F3F2F3);
+  text-align: left;
+  position: sticky;
+  bottom: 0;
+  font-weight: bold; }
+
 table.sort thead tr th {
   cursor: pointer; }
 
 .ra-datagrid-notsortable {
   cursor: default !important; }
 
+table.ra-datagrid-table thead th,
 table.ra-datagrid-table tbody td,
-table.ra-datagrid-table thead th {
+table.ra-datagrid-table tfoot td {
   padding: 10px;
   margin: 0px;
   vertical-align: middle; }
 
+table.ra-datagrid-table thead th:last-child,
 table.ra-datagrid-table tbody td:last-child,
-table.ra-datagrid-table thead th:last-child {
+table.ra-datagrid-table tfoot td:last-child {
   border-right: none; }
 
 tr.ra-datagrid-row-heading1 {

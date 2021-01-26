@@ -186,13 +186,19 @@ namespace Microsoft.AspNetCore.Mvc
                     value = ((DateTime)modelExplorer.Model).ToString("yyyy-MM-dd");
                 else if (modelExplorer.ModelType == typeof(DateTime?))
                     value = ((DateTime?)modelExplorer.Model)?.ToString("yyyy-MM-dd");
-
+                attributes.Add("Value", value);
                 //attributes.AddOrAppendToExisting("class", "ra-behavior-datepicker ra-clickable");
                 if (isToolbar)
                     attributes.AddOrAppendToExisting("class", "ra-toolbar-datepicker");
                 //attributes.AddIfMissing("readonly", "true");
                 attributes.AddIfMissing("type", "date");
-                content.AppendHtml(htmlHelper.TextBoxFor(expression, value, attributes));
+
+                // TODO: We really just need to format the date property in TextBoxFor, 
+                // but supplying the format doesn't appear to be working.
+                var temp = htmlHelper.TextBoxFor(expression, attributes).GetString();
+                var temp2 = temp.FindFirstBetween("value=\"", "\"");
+                temp = temp.Replace(temp2, value);
+                content.AppendHtml(temp);
             }
             else if (modelExplorer.ModelType.IsNumeric() || 
                 (editorTypeOverride.HasValue && editorTypeOverride == RAEditorType.Number))
@@ -253,6 +259,16 @@ namespace Microsoft.AspNetCore.Mvc
             }
 
             return content;
+        }
+
+        public static string GetString(
+            this IHtmlContent content)
+        {
+            using (var writer = new System.IO.StringWriter())
+            {
+                content.WriteTo(writer, System.Text.Encodings.Web.HtmlEncoder.Default);
+                return writer.ToString();
+            }
         }
     }
 }

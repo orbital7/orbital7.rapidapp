@@ -149,6 +149,14 @@ function newWindowTo(url) {
     window.open(url, '_blank');
 }
 
+function copyToClipboard(text) {
+
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val(text).select();
+    document.execCommand("copy");
+    $temp.remove();
+}
 
 function updateAjaxDropdowns(dropdownsSelector, url, optionLabel, whenDone) {
 
@@ -178,9 +186,10 @@ function updateAjaxDropdowns(dropdownsSelector, url, optionLabel, whenDone) {
 
                 var dropdown = $(this);
                 dropdown.html(options);
-
                 if (selected)
                     dropdown.val(selected).attr("selected", true).siblings("option").removeAttr("selected");
+                if (!dropdown.val() && !optionLabel)
+                    dropdown.val(dropdown.find("option:first").val());
             });
 
             whenDone();

@@ -237,6 +237,29 @@ namespace Microsoft.AspNetCore.Mvc
                     fieldName: fieldName)));
         }
 
+        public static IHtmlContent RADataGridFooterCell<TModel>(
+            this IHtmlHelper<TModel> htmlHelper,
+            object cellValue,
+            string cellValueNull = "-",
+            string cellValueUrl = null,
+            string cellClass = null,
+            string cellStyle = null,
+            string fieldName = null)
+        {
+            var cellAlignmentStyle = GetValueCellAlignmentClass(cellValue);
+            return new HtmlString(
+                String.Format("<td class='ra-datagrid-cell-footer {0} {1}' style='{2}'>{3}</td>",
+                cellAlignmentStyle,
+                cellClass,
+                cellStyle,
+                GetValueDisplayHtml(
+                    htmlHelper,
+                    cellValue,
+                    cellValueNull,
+                    cellValueUrl,
+                    fieldName: fieldName)));
+        }
+
         public static IHtmlContent RADataGridBodyCellFor<TModel, TProperty>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> expression, 
@@ -254,6 +277,26 @@ namespace Microsoft.AspNetCore.Mvc
                 cellValueUrl, 
                 cellClass, 
                 cellStyle, 
+                modelExplorer.Metadata.PropertyName);
+        }
+
+        public static IHtmlContent RADataGridFooterCellFor<TModel, TProperty>(
+            this IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            string cellValueNull = "-",
+            string cellValueUrl = null,
+            string cellClass = null,
+            string cellStyle = null)
+        {
+            var modelExplorer = htmlHelper.GetModelExplorer(expression);
+
+            return RADataGridFooterCell(
+                htmlHelper,
+                modelExplorer.Model,
+                cellValueNull,
+                cellValueUrl,
+                cellClass,
+                cellStyle,
                 modelExplorer.Metadata.PropertyName);
         }
 
