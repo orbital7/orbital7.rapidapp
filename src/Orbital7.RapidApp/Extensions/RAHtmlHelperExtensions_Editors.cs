@@ -197,7 +197,8 @@ namespace Microsoft.AspNetCore.Mvc
                 // but supplying the format doesn't appear to be working.
                 var temp = htmlHelper.TextBoxFor(expression, attributes).GetString();
                 var temp2 = temp.FindFirstBetween("value=\"", "\"");
-                temp = temp.Replace(temp2, value);
+                if (temp2.HasText() && value.HasText())
+                    temp = temp.Replace(temp2, value);
                 content.AppendHtml(temp);
             }
             else if (modelExplorer.ModelType.IsNumeric() || 

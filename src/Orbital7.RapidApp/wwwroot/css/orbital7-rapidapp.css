@@ -419,9 +419,9 @@ button.ra-toolbar-button {
 select.ra-toolbar-dropdown {
   margin-right: 9px !important; }
 
-input[type=text].ra-toolbar-datepicker {
+input[type=date].ra-toolbar-datepicker {
   margin-right: 9px !important;
-  width: 100px !important;
+  width: 175px !important;
   height: 32px !important; }
 
 a {
