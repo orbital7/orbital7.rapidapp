@@ -57,6 +57,16 @@ namespace Microsoft.AspNetCore.Mvc
             return list.ToSelectList();
         }
 
+        public static SelectList CreateTempSelectList(
+            double? selectedId)
+        {
+            var list = new List<SerializableTuple<double, string>>();
+            if (selectedId.HasValue)
+                list.Add(new SerializableTuple<double, string>(selectedId.Value, null));
+
+            return list.ToSelectList();
+        }
+
         public static SelectList CreateHourSelectList(
             int startHour = 0,
             int endHour = 23)

@@ -161,7 +161,6 @@ namespace Microsoft.AspNetCore.Mvc
                 cellClass, cellStyle, sortable, sortMethod, isSortDefault, sortDirection);
         }
 
-
         public static TagCloser RABeginDataGridHeadingCell(
             this IHtmlHelper htmlHelper, 
             string cellClass = null, 
