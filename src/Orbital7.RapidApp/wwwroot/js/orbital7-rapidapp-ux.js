@@ -85,13 +85,13 @@ function raDropdownValueExists(dropdown, targetValue) {
 }
 
 function onInputCurrency(event) {
-    let target = event.target
-    if (isNaN(target.valueAsNumber)) target.value = ''
+    let target = event.target;
+    if (isNaN(target.valueAsNumber)) target.value = '';
     if (target.value.includes('e')) {
-        target.value = target.value.replaceAll('e','')
+        target.value = target.value.replaceAll('e', '');
     }
-    let parts = target.value.split('.')
+    let parts = target.value.split('.');
     if (parts.length == 2 && parts[1].length > 2) {
-        event.target.value = `${parts[0]}.${parts[1].substring(0, 2)}`
+        event.target.value = `${parts[0]}.${parts[1].substring(0, 2)}`;
     }
 }
