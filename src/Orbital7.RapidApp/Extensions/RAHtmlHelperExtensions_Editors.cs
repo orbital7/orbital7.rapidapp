@@ -209,6 +209,7 @@ namespace Microsoft.AspNetCore.Mvc
                 {
                     attributes.AddIfMissing("placeholder", "0.00");
                     attributes.AddIfMissing("min", "0");
+                    attributes.AddIfMissing("oninput", "onInputCurrency(event)");
                 }
                 content.AppendHtml(htmlHelper.TextBoxFor(expression, attributes));
             }
