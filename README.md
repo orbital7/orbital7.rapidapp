@@ -1,1 +1,1 @@
-Orbital7 RapidApp has been officially archived and replaced with a .NET Blazor 8 implmentation, which is now contained in [Orbital7.Extensions.AspNetCore](https://github.com/orbital7/orbital7.extensions).
+ASP.NET Core 9 Framework for rapidly constructing Blazor web applications
