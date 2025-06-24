@@ -1,0 +1,88 @@
+﻿@if (_activeTab != null && !_activeTab.IsVisible)
+{
+    _activeTab = this.VisibleTabs.FirstOrDefault();
+}
+
+<div class="btn-group @this.HeaderClass" role="group">
+
+    @foreach (RATabPage tabPage in this.VisibleTabs)
+    {
+        <button type="button"
+                class="btn @GetButtonClass(tabPage)"
+                @onclick="@(() => ActivatePage(tabPage))">
+            @tabPage.Text
+        </button>
+    }
+
+</div>
+
+<div class="ra-flex-container-scrollable-wrapper ra-tabsview-content @this.Class">
+    <CascadingValue Value="this">
+        @ChildContent
+    </CascadingValue>
+</div>
+
+@code {
+
+    private List<RATabPage> _tabs = new List<RATabPage>();
+    private RATabPage? _activeTab { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public RATabsViewRenderMode RenderMode { get; set; } = RATabsViewRenderMode.Dynamic;
+
+    [Parameter]
+    public string? HeaderClass { get; set; }
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    public RATabPage? ActiveTab => _activeTab;
+
+    private List<RATabPage> VisibleTabs => _tabs.Where(x => x.IsVisible).ToList();
+
+    internal void AddPage(
+        RATabPage tabPage)
+    {
+        _tabs.Add(tabPage);
+
+        if (_tabs.Count == 1)
+        {
+            _activeTab = tabPage;
+        }
+        StateHasChanged();
+    }
+
+    public async Task SelectAsync(
+        string tabId)
+    {
+        var tab = _tabs
+            .Where(x => x.ID == tabId)
+            .FirstOrDefault();
+
+        if (tab != null)
+        {
+            _activeTab = tab;
+            await this.InvokeAsync(StateHasChanged);
+        }
+        else
+        {
+            throw new Exception($"Tab ID {tabId} was not found");
+        }
+    }
+
+    private string GetButtonClass(
+        RATabPage page)
+    {
+        return page == _activeTab ? "btn-primary" : "btn-secondary";
+    }
+
+    private void ActivatePage(
+        RATabPage page)
+    {
+        _activeTab = page;
+    }
+
+}

@@ -1,128 +1,69 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-    <AssemblyVersion>3.1.0.0</AssemblyVersion>
-    <FileVersion>3.0.0.0</FileVersion>
-    <Version>3.1.0</Version>
+    <TargetFramework>net9.0</TargetFramework>
+	<LangVersion>latest</LangVersion>
+	<ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Version>9.0.0</Version>
+	<AssemblyVersion>9.0.0.0</AssemblyVersion>
+    <FileVersion>9.0.0.0</FileVersion>
+    <Description>ASP.NET Core 9 Framework for rapidly constructing Blazor web applications</Description>
     <Authors>Josh van Eikeren</Authors>
     <Company>Orbital7</Company>
-    <Description>ASP.NET Core 3.1 RapidApp Framework</Description>
-    <Copyright>Copyright © 2017-2020 Orbital7</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/orbital7/orbital7.rapidapp</PackageProjectUrl>
-    <PackageIcon>Orbital7.png</PackageIcon>
+    <Copyright>Copyright © 2012-2025 Orbital7</Copyright>
+    <PackageProjectUrl>https://github.com/orbital7/orbital7.extensions</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>Orbital7.png</PackageIcon>
+	<PackageReadmeFile>Readme.md</PackageReadmeFile>
+	<RepositoryUrl>https://github.com/orbital7/orbital7.extensions</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+	<AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Remove="bundleconfig.json" />
-    <Content Remove="compilerconfig.json" />
-    <Content Remove="wwwroot\css\bootstrap4Switches.scss" />
-    <Content Remove="wwwroot\css\orbital7-rapidapp.scss" />
-    <Content Remove="wwwroot\css\_functions.scss" />
-    <Content Remove="wwwroot\css\_ra-buttons.scss" />
-    <Content Remove="wwwroot\css\_ra-containers.scss" />
-    <Content Remove="wwwroot\css\_ra-content.scss" />
-    <Content Remove="wwwroot\css\_ra-dashboard.scss" />
-    <Content Remove="wwwroot\css\_ra-datagrid.scss" />
-    <Content Remove="wwwroot\css\_ra-defaults.scss" />
-    <Content Remove="wwwroot\css\_ra-dialog.scss" />
-    <Content Remove="wwwroot\css\_ra-dynamictable.scss" />
-    <Content Remove="wwwroot\css\_ra-header.scss" />
-    <Content Remove="wwwroot\css\_ra-mixins.scss" />
-    <Content Remove="wwwroot\css\_ra-propertyblocks.scss" />
-    <Content Remove="wwwroot\css\_ra-reports.scss" />
-    <Content Remove="wwwroot\css\_ra-sidebar.scss" />
-    <Content Remove="wwwroot\css\_ra-statictable.scss" />
-    <Content Remove="wwwroot\css\_ra-tabs.scss" />
-    <Content Remove="wwwroot\css\_ra-taskbar.scss" />
-    <Content Remove="wwwroot\css\_ra-toolbar.scss" />
-    <Content Remove="wwwroot\css\_variables.scss" />
-    <Content Remove="wwwroot\js\orbital7-rapidapp-containers.js" />
-    <Content Remove="wwwroot\js\orbital7-rapidapp-datagrid.js" />
-    <Content Remove="wwwroot\js\orbital7-rapidapp-dialogs.js" />
-    <Content Remove="wwwroot\js\orbital7-rapidapp-documentready.js" />
-    <Content Remove="wwwroot\js\orbital7-rapidapp-dynamictable.js" />
-    <Content Remove="wwwroot\js\orbital7-rapidapp-resume.js" />
-    <Content Remove="wwwroot\js\orbital7-rapidapp-templates.js" />
-    <Content Remove="wwwroot\js\orbital7-rapidapp-ux.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="bundleconfig.json" />
-  </ItemGroup>
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="bundleconfig.json" />
-    <None Include="compilerconfig.json" />
-    <None Include="Orbital7.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="wwwroot\css\bootstrap4Switches.scss" />
-    <None Include="wwwroot\css\orbital7-rapidapp.scss" />
-    <None Include="wwwroot\css\_functions.scss" />
-    <None Include="wwwroot\css\_ra-buttons.scss" />
-    <None Include="wwwroot\css\_ra-containers.scss" />
-    <None Include="wwwroot\css\_ra-content.scss" />
-    <None Include="wwwroot\css\_ra-dashboard.scss" />
-    <None Include="wwwroot\css\_ra-datagrid.scss" />
-    <None Include="wwwroot\css\_ra-defaults.scss" />
-    <None Include="wwwroot\css\_ra-dialog.scss" />
-    <None Include="wwwroot\css\_ra-dynamictable.scss" />
-    <None Include="wwwroot\css\_ra-header.scss" />
-    <None Include="wwwroot\css\_ra-mixins.scss" />
-    <None Include="wwwroot\css\_ra-propertyblocks.scss" />
-    <None Include="wwwroot\css\_ra-reports.scss" />
-    <None Include="wwwroot\css\_ra-sidebar.scss" />
-    <None Include="wwwroot\css\_ra-statictable.scss" />
-    <None Include="wwwroot\css\_ra-tabs.scss" />
-    <None Include="wwwroot\css\_ra-taskbar.scss" />
-    <None Include="wwwroot\css\_ra-toolbar.scss" />
-    <None Include="wwwroot\css\_variables.scss" />
-    <None Include="wwwroot\js\orbital7-rapidapp-containers.js" />
-    <None Include="wwwroot\js\orbital7-rapidapp-datagrid.js" />
-    <None Include="wwwroot\js\orbital7-rapidapp-dialogs.js" />
-    <None Include="wwwroot\js\orbital7-rapidapp-documentready.js" />
-    <None Include="wwwroot\js\orbital7-rapidapp-dynamictable.js" />
-    <None Include="wwwroot\js\orbital7-rapidapp-resume.js" />
-    <None Include="wwwroot\js\orbital7-rapidapp-templates.js" />
-    <None Include="wwwroot\js\orbital7-rapidapp-ux.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
-    <PackageReference Include="Orbital7.Extensions" Version="2.2.14" />
-    <PackageReference Include="Orbital7.Extensions.AspNetCore" Version="3.1.2" />
-    <PackageReference Include="Orbital7.Extensions.Attributes" Version="2.2.6" />
-    <PackageReference Include="UAParser" Version="3.1.44" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="Lib\orbital7-rapidapp\dist\js\orbital7-rapidapp-dialogs.js" />
-    <TypeScriptCompile Include="Lib\orbital7-rapidapp\dist\js\orbital7-rapidapp-ux.js" />
-  </ItemGroup>
-
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptTarget>ES5</TypeScriptTarget>
-    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
-    <TypeScriptModuleKind />
-    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
-    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
-    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
-    <TypeScriptOutFile>Lib\orbital7-rapidapp\dist\js\orbital7-rapidapp-all.js</TypeScriptOutFile>
-    <TypeScriptOutDir />
-    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
-    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
-    <TypeScriptSourceMap>True</TypeScriptSourceMap>
-    <TypeScriptMapRoot />
-    <TypeScriptSourceRoot />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\bin\release\</OutputPath>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\bin\debug\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<None Include="..\..\Orbital7.png">
+      <Pack>True</Pack>
+	  <PackagePath>/</PackagePath>
+	 </None>
+  </ItemGroup>
+	
+  <ItemGroup>
+	<None Include="Readme.md">
+      <Pack>True</Pack>
+	  <PackagePath>/</PackagePath>
+	 </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Components\RADialogForm.razor.css" CssScope="ra-dialog" />
+    <None Update="Components\RADialogMessage.razor.css" CssScope="ra-dialog" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazored.Modal" Version="7.3.1" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.6" />
+	<PackageReference Include="Orbital7.Extensions" Version="9.0.18" />
+  </ItemGroup>
+
 </Project>
