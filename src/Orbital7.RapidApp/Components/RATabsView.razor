@@ -3,7 +3,9 @@
     _activeTab = this.VisibleTabs.FirstOrDefault();
 }
 
-<div class="btn-group @this.HeaderClass" role="group">
+<div class="btn-group @this.HeaderClass" 
+     style="@this.HeaderStyle" 
+     role="group">
 
     @foreach (RATabPage tabPage in this.VisibleTabs)
     {
@@ -16,7 +18,8 @@
 
 </div>
 
-<div class="ra-flex-container-scrollable-wrapper ra-tabsview-content @this.Class">
+<div class="ra-flex-container-scrollable-wrapper ra-tabsview-content @this.Class"
+     style="@this.Style">
     <CascadingValue Value="this">
         @ChildContent
     </CascadingValue>
@@ -37,7 +40,13 @@
     public string? HeaderClass { get; set; }
 
     [Parameter]
+    public string? HeaderStyle { get; set;  }
+
+    [Parameter]
     public string? Class { get; set; }
+
+    [Parameter]
+    public string? Style { get; set; }
 
     public RATabPage? ActiveTab => _activeTab;
 
