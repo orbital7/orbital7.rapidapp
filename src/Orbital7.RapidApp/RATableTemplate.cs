@@ -28,10 +28,11 @@ public class RATableTemplate
     }
 
     public static RATableTemplate<PropertyValue> CreateForPropertyValue(
-        string namesHeader = "Property",
+        string? namesHeader = "Property",
         bool sortByNames = true,
         bool isNamesSortable = true,
-        bool isValuesSortable = true)
+        bool isValuesSortable = true,
+        string? valueClass = null)
     {
         return new RATableTemplate<PropertyValue>(
             [
@@ -45,7 +46,8 @@ public class RATableTemplate
                     sortBy: !sortByNames && isValuesSortable,
                     isSortable: isValuesSortable,
                     cellHorizontalAlignment: RATableViewCellHorizontalAlignment.Right,
-                    headerCellHorizontalAlignment: RATableViewCellHorizontalAlignment.Right),
+                    headerCellHorizontalAlignment: RATableViewCellHorizontalAlignment.Right,
+                    cellClass: valueClass),
             ],
             isSortable: isNamesSortable || isValuesSortable);
     }
