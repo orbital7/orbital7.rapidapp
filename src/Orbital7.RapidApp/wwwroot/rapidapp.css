@@ -112,8 +112,28 @@ div.ra-toolbar {
     flex-direction: row;
     gap: 8px;
     align-items: center;
+    /* margin-top: 20px; */
     margin-bottom: 20px;
+    background-color: var(--bs-tertiary-bg);
+    padding: 6px;
 }
+
+    div.ra-toolbar:first-child {
+        /* margin-top: 0px; */
+    }
+
+div.ra-toolbar div.ra-toolbar-label {
+    line-height: 1rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+    div.ra-toolbar div.ra-toolbar-label:not(:first-child) {
+        line-height: 1rem;
+        font-size: 0.8rem;
+        font-weight: bold;
+        margin-left: 10px;
+    }
 
 div.ra-buttonbar {
     display: flex;
@@ -156,13 +176,13 @@ td.ra-tableview-badgecell > div > div.badge {
         margin-left: 8px;
     }
 
-div.ra-tableview-monospace-cells table tbody tr td:not(.ra-tableview-badgecell) {
+div.ra-tableview-monospace-cells table tbody tr td:not(.ra-tableview-badgecell):not(.ra-tableview-segment-row-header-cell) {
     font-family: var(--bs-font-monospace);
-}
+} 
 
 td.ra-tableview-monospace-cell {
     font-family: var(--bs-font-monospace);
-}
+} 
 
 button.ra-btn-img {
     margin: 0;
@@ -171,40 +191,41 @@ button.ra-btn-img {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-}
+} 
 
     button.ra-btn-img svg {
         width: 28px;
         height: 28px;
         padding: 4px;
-    }
+    } 
 
     button.ra-btn-img span {
         padding-right: 4px;
         font-size: 0.85em;
-    }
-
+    } 
+    
     button.ra-btn-img.dropdown-toggle {
         display: inline-flex;
         align-items: center;
         vertical-align: middle; /* helps with inline alignment */
         gap: 3px; /* Reduce gap between SVG and caret */
         padding-right: 4px;
+    } 
+    
+    button.ra-btn-img.dropdown-toggle svg {
+        padding: 4px 0px 4px 4px;
+    } 
+    
+    button.ra-btn-img.dropdown-toggle::after {
+        margin-left: 0px !important; /* or 0 for no gap */
+    } 
+    
+    div.ra-buttonbar button.ra-btn-img svg {
+        width: 22px;
+        height: 22px;
+        padding: 3px;
     }
 
-        button.ra-btn-img.dropdown-toggle svg {
-            padding: 4px 0px 4px 4px;
-        }
-
-        button.ra-btn-img.dropdown-toggle::after {
-            margin-left: 0px !important; /* or 0 for no gap */
-        }
-
-div.ra-buttonbar button.ra-btn-img svg {
-    width: 22px;
-    height: 22px;
-    padding: 3px;
-}
 
 /* Override Blazored Modal defaults and set additional values. This 
    must be done here and cannot be done in CSS isolation.
@@ -212,7 +233,5 @@ div.ra-buttonbar button.ra-btn-img svg {
 div.blazored-modal {
     background-color: var(--bs-body-bg) !important;
     border: 1px solid var(--bs-border-color) !important;
-}
-
-h3.bm-title {
+} h3.bm-title {
 }

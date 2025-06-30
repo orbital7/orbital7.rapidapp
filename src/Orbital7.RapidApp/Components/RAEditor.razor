@@ -7,14 +7,14 @@
     {
         @if (this.ButtonText.HasText() && this.OnButtonClick != null)
         {
-            <div class="input-group">
+            <div class="input-group @this.VisibilityClass @this.Class"
+                 style="@this.Style">
                 <InputSelect id="@this.Id"
                              Value="@this.Value"
                              ValueChanged="@this.ValueChanged"
                              ValueExpression="@this.ValueExpression"
                              disabled="@(!this.IsEnabled)"
-                             class="@($"form-select form-select-sm {this.VisibilityClass} {this.Class}")"
-                             style="@this.Style">
+                             class="@($"form-select form-select-sm")">
                     <RAInputSelectOptions SelectList="@_selectList" />
                 </InputSelect>
                 <button type="button"
@@ -43,14 +43,15 @@
                          Name="@this.Id"
                          Value="@this.Value"
                          ValueChanged="@this.ValueChanged"
-                         ValueExpression="@this.ValueExpression">
+                         ValueExpression="@this.ValueExpression"
+                         class="@this.Class"
+                         style="@this.Style">
             @if (_selectList != null)
             {
                 foreach (var item in _selectList)
                 {
                     var itemId = GuidFactory.ToShortString(Guid.NewGuid());
-                    <div class="form-check @this.VisibilityClass @this.Class"
-                         style="@this.Style">
+                    <div class="form-check @this.VisibilityClass">
                         <InputRadio id="@itemId"
                                     Name="@this.Id"
                                     Value="@item.Value"
@@ -172,7 +173,8 @@
     {
         @if (this.ButtonText.HasText() && this.OnButtonClick != null)
         {
-            <div class="input-group">
+            <div class="input-group @this.VisibilityClass @this.Class"
+                 style="@this.Style">
                 <RAInputText id="@this.Id"
                              type="@(this.EditorType == RAEditorType.Password ? "password" : "text")"
                              Value="@this.Value"
@@ -181,8 +183,7 @@
                              disabled="@(!this.IsEnabled)"
                              readonly="@this.IsReadOnly"
                              placeholder="@this.Placeholder"
-                             class="@($"form-control form-control-sm {this.VisibilityClass} {this.Class}")"
-                             style="@this.Style" />
+                             class="@($"form-control form-control-sm")" />
                 <button type="button" 
                         class="btn btn-sm @this.ButtonClass"
                         @onclick="@this.OnButtonClick">

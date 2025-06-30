@@ -68,7 +68,7 @@
                                 if (this.SegmentStyle == RATableViewSegmentStyle.Header)
                                 {
                                     <tr class="ra-tableview-segment-row-header">
-                                        <td colspan="@this.Template.Columns.Count">
+                                        <td class="ra-tableview-segment-row-header-cell" colspan="@this.Template.Columns.Count">
                                             @segment.HeaderText
                                         </td>
                                     </tr>
@@ -229,7 +229,6 @@
     private DisplayValueOptions GetDisplayValueOptions(
         RATableTemplate<TItem>.Column<TItem> column)
     {
-
         var builder = this.ServiceProvider
             .GetRequiredService<DisplayValueOptionsBuilder>();
 

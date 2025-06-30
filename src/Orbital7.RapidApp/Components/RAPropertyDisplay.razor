@@ -1,5 +1,6 @@
 ﻿@typeparam TValue
 @inject TimeConverter TimeConverter
+@inject DisplayValueOptionsBuilder DisplayValueOptionsBuilder
 
 <RAPropertyLabel For="@this.For"
                  Value="@this.Label"
@@ -58,10 +59,7 @@ else
     public Func<TValue, Task<string>>? GetDisplayValue { get; set; }
 
     [Parameter]
-    public Action<DisplayValueOptions>? ConfigureDisplayValueOptions { get; set; }
-
-    [Parameter]
-    public DisplayValueOptions? DisplayValueOptions { get; set; }
+    public Action<DisplayValueOptionsBuilder>? ConfigureDisplayValueOptions { get; set; }
 
     protected async override Task OnParametersSetAsync()
     {
@@ -83,19 +81,15 @@ else
                 }
                 else
                 {
-                    if (this.DisplayValueOptions == null)
-                    {
-                        this.DisplayValueOptions = new();
-                        this.ConfigureDisplayValueOptions?.Invoke(this.DisplayValueOptions);
-                    }
-
                     var memberInfo = this.For.Body.GetMemberInfo();
                     if (memberInfo != null)
-                    { 
+                    {
+                        this.ConfigureDisplayValueOptions?.Invoke(this.DisplayValueOptionsBuilder);
+
                         _displayValue = memberInfo.GetDisplayValue(
                             value,
                             this.TimeConverter,
-                            this.DisplayValueOptions);
+                            options: this.DisplayValueOptionsBuilder.Build());
                     }
             }
             }

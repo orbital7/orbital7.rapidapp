@@ -60,12 +60,17 @@ table.ra-tableview tbody tr.ra-tableview-indented-row td:first-child {
 
 table.ra-tableview tbody tr.ra-tableview-segment-row-header {
     background-color: var(--bs-border-color);
-    font-weight: bold;
-    text-transform: uppercase;
 }
 
     table.ra-tableview tbody tr.ra-tableview-segment-row-header:hover {
         cursor: revert;
+    }
+
+    table.ra-tableview tbody tr.ra-tableview-segment-row-header td.ra-tableview-segment-row-header-cell {
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        padding-left: 13px;
     }
 
 table.ra-tableview tbody tr.ra-tableview-segment-row-divider {
