@@ -1,17 +1,11 @@
 ﻿@inject TimeConverter TimeConverter
+@inject DisplayValueOptionsBuilder DisplayValueOptionsBuilder
 @implements IDisposable
 
 <span class="text-nowrap">
     @if (this.Value.HasValue)
     {
-        @if (!this.DateTimeFormat.HasText())
-        {
-            @GetDateTime(this.Value.Value).ToDefaultDateTimeString()
-        }
-        else
-        {
-            @GetDateTime(this.Value.Value).ToString(this.DateTimeFormat)
-        }
+        @GetDateTimeString(this.Value.Value)
     }
     else
     {
@@ -28,10 +22,7 @@
     public string? DefaultValue { get; set; } = "-";
 
     [Parameter]
-    public string? DateTimeFormat { get; set; }
-
-    [Parameter]
-    public string? TimeZoneId { get; set; }
+    public DisplayValueOptions? DisplayValueOptions { get; set; }
 
     protected override void OnInitialized()
     {
@@ -50,16 +41,24 @@
         _ = InvokeAsync(StateHasChanged);
     }
 
-    private DateTime GetDateTime(
+    private string GetDateTimeString(
         DateTime value)
     {
-        if (this.TimeZoneId.HasText())
+        var options = 
+            this.DisplayValueOptions ??
+            this.DisplayValueOptionsBuilder.Build();
+
+        var dateTime = options.TimeZoneId.HasText() ?
+            this.TimeConverter.ToDateTime(value, options.TimeZoneId) :
+            this.TimeConverter.ToLocalDateTime(value);
+
+        if (options.DateTimeFormat.HasText())
         {
-            return this.TimeConverter.ToDateTime(value, this.TimeZoneId);
+            return dateTime.ToString(options.DateTimeFormat);
         }
         else
         {
-            return this.TimeConverter.ToLocalDateTime(value);
+            return dateTime.ToDefaultDateTimeString();
         }
     }
 }

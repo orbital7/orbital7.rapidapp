@@ -13,12 +13,12 @@
                              ValueChanged="@this.ValueChanged"
                              ValueExpression="@this.ValueExpression"
                              disabled="@(!this.IsEnabled)"
-                             class="@($"form-select {this.VisibilityClass} {this.Class}")"
+                             class="@($"form-select form-select-sm {this.VisibilityClass} {this.Class}")"
                              style="@this.Style">
                     <RAInputSelectOptions SelectList="@_selectList" />
                 </InputSelect>
                 <button type="button"
-                        class="btn @this.ButtonClass"
+                        class="btn btn-sm @this.ButtonClass"
                         @onclick="@this.OnButtonClick">
                     @this.ButtonText
                 </button>
@@ -31,7 +31,7 @@
                          ValueChanged="@this.ValueChanged"
                          ValueExpression="@this.ValueExpression"
                          disabled="@(!this.IsEnabled)"
-                         class="@($"form-select {this.VisibilityClass} {this.Class}")"
+                         class="@($"form-select form-select-sm {this.VisibilityClass} {this.Class}")"
                          style="@this.Style">
                 <RAInputSelectOptions SelectList="@_selectList" />
             </InputSelect>
@@ -50,14 +50,14 @@
                 {
                     var itemId = GuidFactory.ToShortString(Guid.NewGuid());
                     <div class="form-check @this.VisibilityClass @this.Class"
-                    style="@this.Style">
+                         style="@this.Style">
                         <InputRadio id="@itemId"
-                        Name="@this.Id"
-                        Value="@item.Value"
-                        disabled="@(!this.IsEnabled)"
-                        class="form-check-input" />
+                                    Name="@this.Id"
+                                    Value="@item.Value"
+                                    disabled="@(!this.IsEnabled)"
+                                    class="form-check-input form-check-input-sm" />
                         <label class="form-check-label"
-                        for="@itemId">
+                               for="@itemId">
                             @item.Name
                         </label>
                     </div>
@@ -92,7 +92,7 @@
                                  ValueExpression="@this.ValueExpression"
                                  role="switch"
                                  disabled="@(!this.IsEnabled)"
-                                 class="form-check-input" />
+                                 class="form-check-input form-check-input-sm" />
                                  @this.SwitchText
             </label>
         </div>
@@ -127,7 +127,7 @@
                                  ValueChanged="this.ValueChanged"
                                  ValueExpression="@this.ValueExpression"
                                  disabled="@(!this.IsEnabled)"
-                                 class="form-check-input" />
+                                 class="form-check-input form-check-input-sm" />
                                  @this.ChildContent
             </label>
         </div>
@@ -141,7 +141,7 @@
                      disabled="@(!this.IsEnabled)"
                      readonly="@this.IsReadOnly"
                      placeholder="@this.Placeholder"
-                     class="@($"form-control {this.VisibilityClass} {this.Class}")"
+                     class="@($"form-control form-control-sm {this.VisibilityClass} {this.Class}")"
                      style="@this.Style" />
     }
     else if (this.EditorType == RAEditorType.Date)
@@ -152,7 +152,7 @@
                    ValueExpression="@this.ValueExpression"
                    disabled="@(!this.IsEnabled)"
                    readonly="@this.IsReadOnly"
-                   class="@($"form-control {this.VisibilityClass} {this.Class}")"
+                   class="@($"form-control form-control-sm {this.VisibilityClass} {this.Class}")"
                    style="@this.Style" />
     }
     else if (this.EditorType == RAEditorType.TextMultiLine)
@@ -164,7 +164,7 @@
                          disabled="@(!this.IsEnabled)"
                          readonly="@this.IsReadOnly"
                          placeholder="@this.Placeholder"
-                         class="@($"form-control {this.VisibilityClass} {this.Class}")"
+                         class="@($"form-control form-control-sm {this.VisibilityClass} {this.Class}")"
                          style="@this.Style" />
     }
 
@@ -181,10 +181,10 @@
                              disabled="@(!this.IsEnabled)"
                              readonly="@this.IsReadOnly"
                              placeholder="@this.Placeholder"
-                             class="@($"form-control {this.VisibilityClass} {this.Class}")"
+                             class="@($"form-control form-control-sm {this.VisibilityClass} {this.Class}")"
                              style="@this.Style" />
                 <button type="button" 
-                        class="btn @this.ButtonClass"
+                        class="btn btn-sm @this.ButtonClass"
                         @onclick="@this.OnButtonClick">
                     @this.ButtonText
                 </button>
@@ -200,7 +200,7 @@
                          disabled="@(!this.IsEnabled)"
                          readonly="@this.IsReadOnly"
                          placeholder="@this.Placeholder"
-                         class="@($"form-control {this.VisibilityClass} {this.Class}")"
+                         class="@($"form-control form-control-sm {this.VisibilityClass} {this.Class}")"
                          style="@this.Style" />
         }
     }

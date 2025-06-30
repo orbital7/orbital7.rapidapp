@@ -62,9 +62,11 @@ public class RATableTemplate<TEntity> :
 
     public Action<RATableViewSegment<TEntity>, TEntity>? OnRowSelected { get; init; }
 
-    public bool HasFooter => Columns.Count > 0 &&
-        (Columns.Any(x => x.GetFooterCellValue != null) ||
-         Columns.Any(x => x.GetFooterCellContent != null));
+    public Action<DisplayValueOptionsBuilder>? ConfigureDisplayValueOptions { get; set; }
+
+    public bool HasFooter => this.Columns.Count > 0 &&
+        (this.Columns.Any(x => x.GetFooterCellValue != null) ||
+         this.Columns.Any(x => x.GetFooterCellContent != null));
 
     public bool IsSortable => 
         (!IsSortableOverride.HasValue || IsSortableOverride.Value) && HasSortableColumn() ||
@@ -73,12 +75,13 @@ public class RATableTemplate<TEntity> :
     public RATableTemplate(
         List<Column<TEntity>> columns,
         Action<RATableViewSegment<TEntity>, TEntity>? onRowSelected = null,
+        Action<DisplayValueOptionsBuilder>? configureDisplayValueOptions = null,
         bool? isSortable = null)
     {
-        Columns = columns;
-        OnRowSelected = onRowSelected;
-
-        IsSortableOverride = isSortable;
+        this.Columns = columns;
+        this.OnRowSelected = onRowSelected;
+        this.ConfigureDisplayValueOptions = configureDisplayValueOptions;
+        this.IsSortableOverride = isSortable;
     }
 
     public IDictionary<int, TEntity>? GetSortedItems(
@@ -255,9 +258,7 @@ public class RATableTemplate<TEntity> :
 
         public Func<RATableViewFooterData<TItem>, string>? GetFooterCellClass { get; set; }
 
-        public DisplayValueOptions? DisplayValueOptions { get; set; }
-
-        public Action<Column<TItem>, DisplayValueOptions>? ConfigureDisplayValueOptions { get; set; }
+        public Action<Column<TItem>, DisplayValueOptionsBuilder>? ConfigureDisplayValueOptions { get; set; }
 
         public string? DefaultValue { get; set; } = "-";
 
@@ -319,16 +320,6 @@ public class RATableTemplate<TEntity> :
             CellClass = cellClass;
         }
 
-        [MemberNotNull(nameof(DisplayValueOptions))]
-        internal void EnsureDisplayValueOptions()
-        {
-            if (DisplayValueOptions == null)
-            {
-                DisplayValueOptions = new DisplayValueOptions();
-                ConfigureDisplayValueOptions?.Invoke(this, DisplayValueOptions);
-            }
-        }
-
         internal bool CanBeSorted(
             bool? templateIsSortableOverride)
         {
@@ -343,20 +334,22 @@ public class RATableTemplate<TEntity> :
 
         internal string? GetItemDisplayValue(
             TItem item,
-            TimeConverter timeConverter)
+            TimeConverter timeConverter,
+            DisplayValueOptions options)
         {
             var value = GetForValue(item);
-            return GetDisplayValue(value, timeConverter);
+            return GetDisplayValue(value, timeConverter, options);
         }
 
         internal string? GetDisplayValue(
             object? value,
-            TimeConverter timeConverter)
+            TimeConverter timeConverter,
+            DisplayValueOptions options)
         {
             var displayValue = value.GetDisplayValue(
                 timeConverter,
                 propertyName: _memberInfo?.Name,
-                options: DisplayValueOptions);
+                options: options);
 
             if (!displayValue.HasText())
             {

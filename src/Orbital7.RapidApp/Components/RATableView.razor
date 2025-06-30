@@ -1,4 +1,5 @@
 ﻿@typeparam TItem
+@inject IServiceProvider ServiceProvider
 @inject TimeConverter TimeConverter
 
 @if (this.Template != null)
@@ -95,6 +96,8 @@
 
                                         @foreach (var column in this.Template.Columns)
                                         {
+                                            var displayValueOptions = GetDisplayValueOptions(column);
+
                                             <td class="@GetCellClass(column, segment, item)"
                                                 style="@GetCellStyle(column, segment, item)">
 
@@ -103,7 +106,8 @@
                                                     <a href=""
                                                        @onclick="() => column.OnCellUrlClicked(column, segment, item)"
                                                        @onclick:preventDefault="true">
-                                                        <RATableViewCellContents Column="column" 
+                                                        <RATableViewCellContents DisplayValueOptions="displayValueOptions" 
+                                                                                 Column="column"
                                                                                  Segment="segment"
                                                                                  Index="index"
                                                                                  Item="item" />
@@ -112,7 +116,8 @@
                                                 else if (column.GetCellUrl != null)
                                                 {
                                                     <a href="@column.GetCellUrl(column, segment, item)">
-                                                        <RATableViewCellContents Column="column"
+                                                        <RATableViewCellContents DisplayValueOptions="displayValueOptions"
+                                                                                 Column="column"
                                                                                  Segment="segment"
                                                                                  Index="index"
                                                                                  Item="item" />
@@ -120,7 +125,8 @@
                                                 }
                                                 else
                                                 {
-                                                    <RATableViewCellContents Column="column"
+                                                    <RATableViewCellContents DisplayValueOptions="displayValueOptions"
+                                                                             Column="column"
                                                                              Segment="segment"
                                                                              Index="index"
                                                                              Item="item" />
@@ -156,11 +162,10 @@
                                     }
                                     else if (column.GetFooterCellValue != null)
                                     {
-                                        column.EnsureDisplayValueOptions();
-
                                         @column.GetDisplayValue(
                                             column.GetFooterCellValue(footerCellData), 
-                                            this.TimeConverter)
+                                            this.TimeConverter,
+                                            GetDisplayValueOptions(column))
                                     }
                                 </td>
                             }
@@ -220,6 +225,24 @@
 
     [Parameter]
     public string? Style { get; set; }
+
+    private DisplayValueOptions GetDisplayValueOptions(
+        RATableTemplate<TItem>.Column<TItem> column)
+    {
+
+        var builder = this.ServiceProvider
+            .GetRequiredService<DisplayValueOptionsBuilder>();
+
+        // Let the template configure first.
+        this.Template?.ConfigureDisplayValueOptions?.Invoke(builder);
+
+        // Then let the column configure.
+        column.ConfigureDisplayValueOptions?.Invoke(
+            column,
+            builder);
+
+        return builder.Build();
+    }
 
     private string GetTableWrapperClass()
     {
