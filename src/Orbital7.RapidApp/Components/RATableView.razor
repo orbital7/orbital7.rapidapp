@@ -251,6 +251,10 @@
         {
             classes += "ra-scrollable-y ra-flex-nostretch ";
         }
+        else if (!this.IsScrollableVertically)
+        {
+            classes += "ra-flex-nocollapse ";
+        }
 
         return classes.Trim();
     }

@@ -78,6 +78,10 @@
     align-self: flex-start;
 }
 
+.ra-flex-nocollapse {
+    flex-shrink: 0;
+}
+
 .ra-scrollable-x {
     overflow-x: auto;
 }
