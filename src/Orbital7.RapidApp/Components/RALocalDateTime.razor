@@ -48,13 +48,13 @@
             this.DisplayValueOptions ??
             this.DisplayValueOptionsBuilder.Build();
 
-        var dateTime = options.TimeZoneId.HasText() ?
-            this.TimeConverter.ToDateTime(value, options.TimeZoneId) :
+        var dateTime = options.ForDateTimeUseTimeZoneId.HasText() ?
+            this.TimeConverter.ToDateTime(value, options.ForDateTimeUseTimeZoneId) :
             this.TimeConverter.ToLocalDateTime(value);
 
-        if (options.DateTimeFormat.HasText())
+        if (options.ForDateTimeUseFormat.HasText())
         {
-            return dateTime.ToString(options.DateTimeFormat);
+            return dateTime.ToString(options.ForDateTimeUseFormat);
         }
         else
         {

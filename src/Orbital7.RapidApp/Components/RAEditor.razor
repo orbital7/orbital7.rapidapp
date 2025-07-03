@@ -5,7 +5,7 @@
 {
     @if (this.EditorType == RAEditorType.SelectList)
     {
-        @if (this.ButtonText.HasText() && this.OnButtonClick != null)
+        @if (this.OnButtonClick != null)
         {
             <div class="input-group @this.VisibilityClass @this.Class"
                  style="@this.Style">
@@ -20,7 +20,14 @@
                 <button type="button"
                         class="btn btn-sm @this.ButtonClass"
                         @onclick="@this.OnButtonClick">
-                    @this.ButtonText
+                    @if (this.ButtonContent != null)
+                    {
+                        @this.ButtonContent
+                    }
+                    else
+                    {
+                        @this.ButtonText
+                    }
                 </button>
             </div>
         }
@@ -171,7 +178,7 @@
 
     else if (this.EditorType.UsesInputTextEditor())
     {
-        @if (this.ButtonText.HasText() && this.OnButtonClick != null)
+        @if (this.OnButtonClick != null)
         {
             <div class="input-group @this.VisibilityClass @this.Class"
                  style="@this.Style">
@@ -187,7 +194,14 @@
                 <button type="button" 
                         class="btn btn-sm @this.ButtonClass"
                         @onclick="@this.OnButtonClick">
-                    @this.ButtonText
+                    @if (this.ButtonContent != null)
+                    {
+                        @this.ButtonContent
+                    }
+                    else
+                    {
+                        @this.ButtonText
+                    }
                 </button>
             </div>
         }
@@ -247,6 +261,9 @@
 
     [Parameter]
     public string? ButtonText { get; set; }
+
+    [Parameter]
+    public RenderFragment? ButtonContent { get; set; }
 
     [Parameter]
     public string? ButtonClass { get; set; } = "btn-outline-secondary";
