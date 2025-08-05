@@ -57,9 +57,9 @@
   <ItemGroup>
     <PackageReference Include="Blazored.Modal" Version="7.3.1" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.7" />
-	<PackageReference Include="Orbital7.Extensions" Version="9.0.21" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.8" />
+	<PackageReference Include="Orbital7.Extensions" Version="9.0.22" />
   </ItemGroup>
 
 </Project>
