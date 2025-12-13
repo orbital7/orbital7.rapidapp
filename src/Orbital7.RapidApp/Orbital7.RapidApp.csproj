@@ -5,9 +5,9 @@
 	<LangVersion>latest</LangVersion>
 	<ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>10.0.0</Version>
-	<AssemblyVersion>10.0.0.0</AssemblyVersion>
-    <FileVersion>10.0.0.0</FileVersion>
+    <Version>10.0.1</Version>
+	<AssemblyVersion>10.0.1.0</AssemblyVersion>
+    <FileVersion>10.0.1.0</FileVersion>
     <Description>ASP.NET Core 10 Framework for rapidly constructing Blazor web applications</Description>
     <Authors>Josh van Eikeren</Authors>
     <Company>Orbital7</Company>
@@ -57,9 +57,9 @@
   <ItemGroup>
     <PackageReference Include="Blazored.Modal" Version="7.3.1" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="10.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.0" />
-	<PackageReference Include="Orbital7.Extensions" Version="10.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="10.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.1" />
+	<PackageReference Include="Orbital7.Extensions" Version="10.0.1" />
   </ItemGroup>
 
 </Project>
