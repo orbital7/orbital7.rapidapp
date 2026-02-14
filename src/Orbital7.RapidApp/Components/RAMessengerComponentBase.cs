@@ -1,13 +1,15 @@
-﻿namespace Glacier.TradingPlatform.UI;
+﻿namespace Orbital7.RapidApp.Components;
 
 public abstract class RAMessengerComponentBase :
-    ComponentBase, IDisposable
+    RADisposableComponentBase
 {
     [Inject]
     protected IMessenger? Messenger { get; init; }
 
-    public void Dispose()
+    protected override ValueTask DisposeAsyncCore()
     {
         this.Messenger?.UnregisterAll(this);
+
+        return base.DisposeAsyncCore();
     }
 }
