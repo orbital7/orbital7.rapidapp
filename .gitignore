@@ -253,6 +253,9 @@ paket-files/
 .idea/
 *.sln.iml
 
+# MacOS
+.DS_Store
+
 # CodeRush
 .cr/
 
