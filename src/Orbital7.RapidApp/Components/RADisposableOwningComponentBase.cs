@@ -8,6 +8,44 @@ public abstract class RADisposableOwningComponentBase<TService> :
 
     protected CancellationToken CancellationToken => _tokenSource.Token;
 
+    [Inject]
+    public IRADisposableComponentExceptionHandler? ExceptionHandler { get; init; }
+
+    protected sealed override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await OnInitializedAsyncCore();
+        }
+        catch (OperationCanceledException)
+        {
+            // Do nothing.
+        }
+        catch (Exception ex)
+        {
+            try
+            {
+                await OnInitializedAsyncException(ex);
+            }
+            catch { }
+        }
+    }
+
+    protected virtual Task OnInitializedAsyncCore()
+    {
+        return Task.CompletedTask;
+    }
+
+    protected virtual async Task OnInitializedAsyncException(
+        Exception ex)
+    {
+        if (this.ExceptionHandler != null)
+        {
+            //await DispatchExceptionAsync(ex);
+            await this.ExceptionHandler.OnExceptionAsync(ex);
+        }
+    }
+
     protected override ValueTask DisposeAsyncCore()
     {
         // Dispose of the cancellation token source to signal cancellation
