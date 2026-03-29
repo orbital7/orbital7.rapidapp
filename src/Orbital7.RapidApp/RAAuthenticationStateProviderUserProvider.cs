@@ -2,20 +2,19 @@
 
 namespace Orbital7.RapidApp;
 
-public class RAAuthenticationStateProviderUserProvider :
+public class RAAuthenticationStateProviderUserProvider(
+    AuthenticationStateProvider authenticationStateProvider) :
     IUserProvider
 {
-    private readonly AuthenticationStateProvider _authenticationStateProvider;
+    private readonly AuthenticationStateProvider _authenticationStateProvider = 
+        authenticationStateProvider;
 
-    public RAAuthenticationStateProviderUserProvider(
-        AuthenticationStateProvider authenticationStateProvider)
+    public async Task<string?> GetCurrentUserIdAsync(
+        CancellationToken cancellationToken = default)
     {
-        _authenticationStateProvider = authenticationStateProvider;
-    }
+        var state = await _authenticationStateProvider
+            .GetAuthenticationStateAsync();
 
-    public async Task<string?> GetCurrentUserIdAsync()
-    {
-        var state = await _authenticationStateProvider.GetAuthenticationStateAsync();
         return state?.User.GetUserId<string>();
     }
 }
