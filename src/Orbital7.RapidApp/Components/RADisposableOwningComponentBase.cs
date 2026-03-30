@@ -9,12 +9,18 @@ public abstract class RADisposableOwningComponentBase<TService> :
     protected CancellationToken CancellationToken => _tokenSource.Token;
 
     [Inject]
-    public IRADisposableComponentExceptionHandler? ExceptionHandler { get; init; }
+    public IServiceProvider? ServiceProvider { get; init; }
+
+    // Optionally injectable.
+    public IRADisposableComponentExceptionHandler? ExceptionHandler { get; set; }
 
     protected sealed override async Task OnInitializedAsync()
     {
         try
         {
+            this.ExceptionHandler =
+                this.ServiceProvider?.GetService<IRADisposableComponentExceptionHandler>();
+
             await OnInitializedAsyncCore();
         }
         catch (OperationCanceledException)

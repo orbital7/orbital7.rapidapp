@@ -48,6 +48,7 @@ public abstract class RADisposableComponentBase :
     {
         if (this.ExceptionHandler != null)
         {
+            //await DispatchExceptionAsync(ex);
             await this.ExceptionHandler.OnExceptionAsync(ex);
         }
     }
